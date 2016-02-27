@@ -1,0 +1,64 @@
+.code-content {
+    margin: 20px 10px;    
+    .code-content-btn-group {
+        &:after{
+            display: table;
+            content: " ";
+            clear: both;
+        }
+        .share-script-input,.btn{
+            float: left;
+        }
+        .share-script-input{
+            font-family: inherit;
+            height: 30px;
+            width: 250px;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+            padding: 3px 5px;
+            cursor: text;
+            border:1px solid @themeLight;
+            background-color: #fff;
+            color: #666;
+        }
+        .btn{
+            line-height: 0;
+            height: 30px;
+            vertical-align: top;
+            border:0;
+            border-radius: 0;
+            background-color: #fff;
+            color: @themeLight;
+            &:hover{
+                background-color: @themeLight;
+                color: #fff;
+            }          
+        }
+        .code-png{
+            border:1px solid @themeLight;
+        }
+        .share-qq-btn{
+            border-top:1px solid @themeLight;
+            border-bottom:1px solid @themeLight;
+            border-right: 1px solid @themeLight; 
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px; 
+            border-left: 1px solid @themeLight;  
+        }        
+        .copy,.share-sina-btn{
+            border-top:1px solid @themeLight;
+            border-bottom:1px solid @themeLight;
+        }
+    }
+    .code-content-text{
+        margin-top: 10px;
+        border: 1px solid #B3B3B3;     
+        pre{
+            font-family: Consolas,'Microsoft YaHei';
+            font-size: 14px;
+            box-sizing: content-box;
+            margin: 5px 0;
+            line-height: 1.5;
+        }
+    }
+}

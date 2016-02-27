@@ -1,0 +1,9 @@
+{
+    "mongoURL": "mongodb://tosone:8541539655@127.0.0.1:27017/CodeShare",
+    "userPwdSalt": "8541539655",
+    "mail_api_key": "XgoRiLLGYAPLRdnx",
+    "mail_api_user": "tosone",
+    "ACCESS_KEY": "cIwkggzjgQA6wWAQw0pGt3N97452rBctOaxV5TG1",
+    "SECRET_KEY": "yXN59L0e1BZoj_oHqw9uWVJ9-J6Lk0Ntp_1PGwWi",
+    "codepaging": 20
+}

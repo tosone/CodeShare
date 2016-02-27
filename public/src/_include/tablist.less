@@ -1,0 +1,28 @@
+.panel { border-color: #ddd; box-shadow: 0 1px 1px rgba(0, 0, 0, .05); background-color: #fff; border: 1px solid #999; border-radius: 0;
+    &:before, &:after { display: table; content: " "; }
+
+    .panel-heading { font-size: 1.8em; line-height: 2.3; padding-left: 10px; color: #333; background-color: #ffffff; border-bottom: 1px solid #999;
+        span { padding: 0 10px; display: inline-block; cursor: pointer; }
+        span:hover { background-color: #DEDEDE; }
+        .active { background-color: #DEDEDE; }
+    }
+
+    .panel-body { padding: 0;
+        & > div:not(:first-child), .classify-code .classify-code-list ul:not(:first-child) { display: none; }
+
+        .list-group {
+            .list-group-item { cursor: pointer; font-size: 1.4em; color: #333; position: relative; display: block; padding: 10px 15px; margin-bottom: -1px; background-color: #fff; border: 1px solid #ddd;
+                span { color: #888; }
+                .label_num { padding: 0px 6px; color: #fff !important; margin-right: 5px; }
+                .label_num_1 { background-color: #FD8C84; }
+                .label_num_2 { background-color: #7FD75A; }
+                .label_num_3 { background-color: #60C4FD; }
+                .label_num_n { background-color: #999999; }
+            }
+        }
+        .code-type { background-color: #DEDEDE; }
+        .code-type span { color: #333; padding: 0 10px; cursor: pointer; font-size: 16px; line-height: 2.0; display: inline-block; }
+        .code-type span:hover { background-color: #A0A0A0; color: #fff; }
+        .code-type span.active { background-color: #A0A0A0; color: #fff; }
+    }
+}

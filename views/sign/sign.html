@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title><%=title%></title>
+    <% include ../conponents/head.html %>
+    <!-- build:css css/sign.css -->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+    <!-- endbuild -->
+</head>
+
+<body>
+    <% include ../conponents/menu.html %>
+    <div class="container" style='margin-top:0px;'>
+        <div class="panel panel-default">
+            <div class="panel-heading">注册</div>
+            <div class="panel-body">
+                <form class="form-horizontal form_login" role="form" id="sign_form">
+                    <div class="form-group {{ id_divClass }}" id="id">
+                        <label class="col-md-2 col-sm-2 control-label">用户名：</label>
+                        <div class="col-md-6 col-sm-6">
+                            <input class="form-control" type="text" placeholder="登录名，必须独一无二(必填)" v-model="id_value">
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <div class="alert alert-{{ id_class }} {{ id_hide }}" role="alert">{{ id_message }}</div>
+                        </div>
+                    </div>
+                    <div class="form-group {{ pwd_divClass }}" id="pwd">
+                        <label class="col-md-2 col-sm-2 control-label">密码：</label>
+                        <div class="col-md-6 col-sm-6">
+                            <input class="form-control" type="password" placeholder="密码(必填)" v-model="pwd_value">
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <div class="alert alert-{{ pwd_class }} {{ pwd_hide }}" role="alert">{{ pwd_message }}</div>
+                        </div>
+                    </div>
+                    <div class="form-group {{ pwd_p_divClass }}" id="pwd_p">
+                        <label class="col-md-2 col-sm-2 control-label">确认密码：</label>
+                        <div class="col-md-6 col-sm-6">
+                            <input class="form-control" type="password" placeholder="密码(必填)" v-model="pwd_p_value">
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <div class="alert alert-{{ pwd_p_class }} {{ pwd_p_hide }}" role="alert">{{ pwd_p_message }}</div>
+                        </div>
+                    </div>
+                    <div class="form-group {{ email_divClass }}" id="email">
+                        <label class="col-md-2 col-sm-2 control-label">Email：</label>
+                        <div class="col-md-6 col-sm-6">
+                            <input class="form-control" type="text" placeholder="找回密码(必选)" v-model="email_value">
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <div class="alert alert-{{ email_class }} {{ email_hide }}" role="alert">{{ email_message }}</div>
+                        </div>
+                    </div>
+                    <div class="form-group {{ tel_divClass }}" id="tel">
+                        <label class="col-md-2 col-sm-2 control-label">Tel：</label>
+                        <div class="col-md-6 col-sm-6">
+                            <input class="form-control" type="text" placeholder="电话(可选)" v-model="tel_value">
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <div class="alert alert-{{ tel_class }} {{ tel_hide }}" role="alert">{{ tel_message }}</div>
+                        </div>
+                    </div>
+                    <div class="form-group {{ qq_divClass }}" id="qq">
+                        <label class="col-md-2 col-sm-2 control-label">QQ：</label>
+                        <div class="col-md-6 col-sm-6">
+                            <input class="form-control" type="text" placeholder="QQ(可选)" v-model="qq_value">
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <div class="alert alert-{{ qq_class }} {{ qq_hide }}" role="alert">{{ qq_message }}</div>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:0;">
+                        <div class="col-md-8 col-sm-8">
+                            <button class="btn btn-info pull-right" type="button" v-on:click="submit">注册</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="panel-footer">
+                <a href="javascript:void(0);">用户注意事项</a>
+            </div>
+        </div>
+    </div>
+    <% include ../conponents/modalDialog.html %>
+    <!-- build:js js/sign.js -->
+    <script type="text/javascript" src="/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/javascripts/md5.min.js"></script>
+    <script type="text/javascript" src="/javascripts/vue.js"></script>
+    <script type="text/javascript" src="/javascripts/sign/sign.js"></script>
+    <!-- endbuild -->
+</body>
+
+</html>

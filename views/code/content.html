@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title><%=title%></title>
+    <link rel="stylesheet" type="text/css" href="/src/style.css">
+</head>
+
+<body>
+    <% include ../conponents/menu.html %>
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="pull-right">
+                <button class="btn btn-theme" style="margin-top:5px;margin-right:8px;">赞：250</button>
+            </div>
+            <div class="panel-heading"><span class="active">Code Snippet</span><span>History</span></div>
+            <div class="panel-body">
+                <div class="code-content">
+                    <div class="code-content-btn-group">
+                        <input type="text" class="share-script-input" id="input" value="sdfsdf" disabled>
+                        <button class="btn copy" id="copy" data-clipboard-target="#input">Copy</button>
+                        <button class="btn code-png">Png</button>
+                        <button class="btn share-sina-btn">分享至Sina微博</button>
+                        <button class="btn share-qq-btn">分享至QQ空间</button>
+                    </div>
+                    <div class="code-content-text">
+                        <pre style="height:84px" id="codeText">var editor = ace.edit("codeText");
+editor.session.setMode("ace/mode/javascript");
+editor.setTheme("ace/theme/github克拉克");//实得分
+editor.$blockScrolling = Infinity;</pre>
+                    </div>
+                    <div class="comment">
+                        <a class="btn btn-theme" href="javascript:void(0);" id="addComment">添加新的评论</a>
+                        <div class="comment-div">
+                            <div class="comment-wrap">
+                                <div><a href="###" class="comment-user">阿斯顿</a><span class="comment-user-timestamp">2015/12/12 12:45:52</span>:</div>
+                                <div class="comment-content">今天是个好天气，今天是个好天气，今天是个好天气，今天是个好天气，今天是个好天气，今天是个好天气，今天是个好天气，今天是个好天气，今天是个好天气，今天是个好天气，今天是个好天气，今天是个好天气，今天是个好天气，今天是个好天气，今天是个好天气，今天是个好天气，今天是个好天气，今天是个好天气，今天是个好天气，今天是个好天气，今天是个好天气，今天是个好天气，今天是个好天气，今天是个好天气，</div>
+                                <div class="comment-footer">
+                                    <a href="javascript:void(0);" class="comment-footer-reply">回复</a>
+                                    <a href="javascript:void(0);" class="comment-footer-delete">删除</a>
+                                </div>
+                            </div>
+                            <div class="comment-wrap">
+                                <div><a href="###" class="comment-user">阿斯顿</a><span class="comment-user-timestamp">2015/12/12 12:45:52</span>:</div>
+                                <div class="comment-content">今天是个好天气，今天是个好天气，今天是个好天气，今天是个好天气，</div>
+                                <div class="comment-footer">
+                                    <a href="javascript:void(0);" class="comment-footer-reply">回复</a>
+                                    <a href="javascript:void(0);" class="comment-footer-delete">删除</a>
+                                </div>
+                            </div>
+                            <div class="comment-wrap">
+                                <div><a href="###" class="comment-user">阿斯顿</a><span class="comment-user-timestamp">2015/12/12 12:45:52</span>:</div>
+                                <div class="comment-content">今天是个好天气，今天是个好天气，今天是个好天气，今天是个好天气，</div>
+                                <div class="comment-footer">
+                                    <a href="javascript:void(0);" class="comment-footer-reply">回复</a>
+                                    <a href="javascript:void(0);" class="comment-footer-delete">删除</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comment-div">
+                            <div class="comment-wrap">
+                                <div><a href="###" class="comment-user">阿斯顿</a><span class="comment-user-timestamp">2015/12/12 12:45:52</span>:</div>
+                                <div class="comment-content">今天是个好天气，今天是个好天气，今天是个好天气，今天是个好天气，</div>
+                                <div class="comment-footer">
+                                    <a href="javascript:void(0);" class="comment-footer-reply">回复</a>
+                                    <a href="javascript:void(0);" class="comment-footer-delete">删除</a>
+                                </div>
+                            </div>
+                            <div class="comment-wrap">
+                                <div><a href="###" class="comment-user">阿斯顿</a><span class="comment-user-timestamp">2015/12/12 12:45:52</span>:</div>
+                                <div class="comment-content">今天是个好天气，今天是个好天气，今天是个好天气，今天是个好天气，</div>
+                                <div class="comment-footer">
+                                    <a href="javascript:void(0);" class="comment-footer-reply">回复</a>
+                                    <a href="javascript:void(0);" class="comment-footer-delete">删除</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+        <% include ../conponents/footer.html %>
+    </div>
+    <% include ../conponents/modalDialog.html %>
+    <!-- build:js js/addcode.js -->
+    <script type="text/javascript" src="/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/javascripts/jquery.tagsinput.js"></script>
+    <script type="text/javascript" src="/javascripts/ace/ace.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/javascripts/clipboard.min.js" charset="utf-8"></script>
+    <!-- endbuild -->
+    <script>
+        var clipboard = new Clipboard('#copy');
+        var editor = ace.edit("codeText");
+        editor.session.setMode("ace/mode/javascript");
+        editor.setTheme("ace/theme/github");
+        editor.setOptions({
+            readOnly: true
+        });
+        editor.$blockScrolling = Infinity;
+        $("#addComment").click(function(){
+            $("#modalDialog").modal('show');
+            $("#modalDialog .modal-title").html("添加评论");
+            $("#modalDialog .modal-body").html("<textarea placeholder='请输入评论内容' class='form-control'></textarea>");
+            $("#modalDialog .modal-footer").html("<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">取消</button>&nbsp;&nbsp;&nbsp;<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" onclick=\"window.location.href='http://baidu.com'\">确认</button>");
+         });
+    </script>
+</body>
+
+</html>

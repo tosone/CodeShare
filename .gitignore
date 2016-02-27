@@ -1,0 +1,5 @@
+﻿/node_modules/*
+!/node_modules/*.js
+!routes/node_modules
+*.log
+.idea

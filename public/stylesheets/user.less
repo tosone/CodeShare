@@ -1,0 +1,50 @@
+.list-group-item.active,
+.list-group-item.active:focus,
+.list-group-item.active:hover {
+    border-color: @nav-background-color;
+    background-image: none;
+    background-repeat: repeat-x;
+    text-shadow: 0 -1px 0 #286090;
+}
+
+.list-group-item.active,
+.list-group-item.active:focus,
+.list-group-item.active:hover {
+    z-index: 2;
+    color: #fff;
+    background-color: @nav-background-color;
+}
+
+.user-info-list a {
+    text-align: center;
+}
+
+#head_face {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+    background-color: #fff;
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+
+.userinfo label {
+    font-size: 16px;
+}
+
+.userinfo .form-group p>a {
+    font-size: 16px;
+}
+.file_input{
+    position:absolute;
+    filter:alpha(opacity=0);
+    opacity:0;
+    display: none;
+}
+#crop_face{
+    width: 200px;
+    height: auto;
+}

@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title><%=title%></title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+    <script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+    <script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
+</head>
+<body>
+    <% include admin_modal_menu.html %>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading blog_title_head">博客访客统计<span class="pull-right"><a href="###">详细...</a></span></div>
+                    <div class="panel-body blog_list">
+                        <ul class="list-group blog_title_list">
+                            <li class="list-group-item">今日访客：888</li>
+                            <li class="list-group-item">本周访客：888</li>
+                            <li class="list-group-item">本月访客：888</li>
+                            <li class="list-group-item">本年访客：888</li>
+                            <li class="list-group-item">总访客：888</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <table class="table admin_blog_list">
+                    <thead>
+                        <tr><td class="admin_blog_list_title">标题</td><td>查看</td><td>评论</td><td>赞</td><td>操作</td></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="admin_blog_list_title"><a href="###">[2015/12/12] 大学生创业大赛</a></td>
+                            <td>2000</td>
+                            <td>200</td>
+                            <td>500</td>
+                            <td><a href="###">置顶</a>&nbsp;&nbsp;<a href="###">删除</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
