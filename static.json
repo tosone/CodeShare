@@ -1,9 +1,5 @@
 {
-    "jquery": "/base/js/jquery.js",
-    "ace": "/base/ace/ace.js",
-    "mail_api_key": "XgoRiLLGYAPLRdnx",
-    "mail_api_user": "tosone",
-    "ACCESS_KEY": "cIwkggzjgQA6wWAQw0pGt3N97452rBctOaxV5TG1",
-    "SECRET_KEY": "yXN59L0e1BZoj_oHqw9uWVJ9-J6Lk0Ntp_1PGwWi",
-    "codepaging": 20
+  "jquery": "http://cdn.bootcss.com/jquery/2.2.1/jquery.min.js",
+  "vue": "http://cdn.bootcss.com/vue/1.0.16/vue.min.js",
+  "lodash": "cdn.bootcss.com/lodash.js/4.5.1/lodash.min.js"
 }
