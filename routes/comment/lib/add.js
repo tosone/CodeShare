@@ -3,12 +3,14 @@ var CommentModel = require('model/comment');
 var mongoose = require('mongoose');
 var config = require('webconfig.js');
 var util = require('util/Function');
+
 module.exports = function(req, res, next) {
-    var comment = request.query.comment; //评论内容
-    var codeID = req.query.codeID; //评论对象的ID
-    var commentDivID = req.query.commentDivID; //评论块的ID
-    var isFirst = req.query.isFirst ? true : false;
-    var replyTo = req.query.replyTo;
+    var comment = req.body.comment; //评论内容
+    var codeID = req.body.codeID; //评论对象的ID
+    var isFirst = req.body.isFirst ? true : false;
+    var commentDivID = isFirst ? req.body.commentDivID : util.uuid(); //评论块的ID
+
+    var replyTo = req.body.replyTo;
     if (req.session.name) {
         mongoose.connect(config.mongoURL, function() {
             new CommentModel({
@@ -16,7 +18,7 @@ module.exports = function(req, res, next) {
                 codeID: codeID,
                 commentDivID: commentDivID,
                 isFirst: isFirst,
-                replyTo: req.query.replyTo,
+                replyTo: req.body.replyTo,
                 uid: req.session.uid,
                 content: comment
             }).save(function() {
