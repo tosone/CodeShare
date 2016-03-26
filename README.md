@@ -3,7 +3,6 @@
 ### 部署说明
 
 - `Gulp --gulpfile init.js`
-- `Gulp --gulpfile init.js`
 
 ### 项目开发说明
 

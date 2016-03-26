@@ -1,5 +1,7 @@
 {
     "mongoURL": "mongodb://tosone:8541539655@127.0.0.1:27017/CodeShare",
+    "cookieSecret": "8541539655",
+    "cookieMaxAge": 1209600,
     "userPwdSalt": "8541539655",
     "mail_api_key": "XgoRiLLGYAPLRdnx",
     "mail_api_user": "tosone",
