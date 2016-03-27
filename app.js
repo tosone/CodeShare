@@ -12,6 +12,7 @@ const morgan = require('morgan');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const config = require('webconfig.js');
+const mongoose = require('mongoose');
 app.use(session({
     store: new MongoStore({
         url: config.mongoURL,
@@ -30,7 +31,7 @@ app.use(session({
     rolling: true,
     unset: "destroy"
 }));
-require('./routes/routes')(app)
+mongoose.connect(config.mongoURL);
 app.use(morgan('dev'));
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(bodyParser.json());
@@ -41,6 +42,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.html', ejs.__express);
 app.set('view engine', 'html');
+require('./models').forEach((model) => {
+    model(mongoose);
+});
+app.use((request, response, next) => {
+    this.mongo = mongoose;
+    console.log(this);
+    request.mongo = mongoose;
+    // console.log(mongoose);
+    next();
+});
+require('./routes/routes')(app);
 http.createServer(app).listen(80, function() {
     console.log('Http server listening at http://127.0.0.1:80.');
 });
