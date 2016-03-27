@@ -3,3 +3,4 @@
 !routes/node_modules
 *.log
 .idea
+.code

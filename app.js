@@ -1,18 +1,21 @@
 'use strict';
-const express = require('express');
+const fs = require('fs');
 const ejs = require('ejs');
 const path = require('path');
-const app = express();
 const http = require('http');
 const https = require('https');
-const fs = require('fs');
-const bodyParser = require('body-parser');
-const favicon = require('serve-favicon');
 const morgan = require('morgan');
-const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
-const config = require('webconfig.js');
+const express = require('express');
 const mongoose = require('mongoose');
+const config = require('webconfig.js');
+const favicon = require('serve-favicon');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const MongoStore = require('connect-mongo')(session);
+const library = require('./lib');
+const app = express();
+mongoose.connect(config.mongoURL);
 app.use(session({
     store: new MongoStore({
         url: config.mongoURL,
@@ -31,7 +34,7 @@ app.use(session({
     rolling: true,
     unset: "destroy"
 }));
-mongoose.connect(config.mongoURL);
+app.use(cookieParser());
 app.use(morgan('dev'));
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(bodyParser.json());
@@ -46,10 +49,11 @@ require('./models').forEach((model) => {
     model(mongoose);
 });
 app.use((request, response, next) => {
-    this.mongo = mongoose;
-    console.log(this);
-    request.mongo = mongoose;
-    // console.log(mongoose);
+    request.model = mongoose.models;
+    request.util = library.util;
+    request.qiniu = library.qiniu;
+    request.sendEmail = library.sendEmail(mongoose.models);
+    request.valiableLang = library.valiableLang;
     next();
 });
 require('./routes/routes')(app);

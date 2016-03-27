@@ -4,9 +4,9 @@
   "description": "CodeMangerment",
   "main": "app.js",
   "dependencies": {
-    "body-parser"
-	: "^1.15.0",
+    "body-parser": "^1.15.0",
     "connect-mongo": "^0.8.2",
+    "cookie-parser": "^1.4.1",
     "ejs": "^2.3.4",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
@@ -19,18 +19,15 @@
     "qiniu": "^6.1.8",
     "serve-favicon": "^2.3.0",
     "uuid": "^2.0.1"
-},
-  "devDependencies": {
-},
+  },
+  "devDependencies": {},
   "scripts": {
-    "build"
-	: "gulp default"
-},
+    "build": "gulp default"
+  },
   "repository": {
-    "type"
-	: "git",
+    "type": "git",
     "url": "https://git.coding.net/tosone/CodeShare.git"
-},
+  },
   "keywords": [
     "code",
     "mangerment"

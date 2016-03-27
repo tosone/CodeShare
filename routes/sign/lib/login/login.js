@@ -1,12 +1,10 @@
 "use strict";
-const userModel = require('model/user');
-const mongoose = require('mongoose');
 const config = require('webconfig.js');
 const crypto = require('crypto');
 const _ = require('lodash');
 // 500：数据库有重名   501：注册有错误重试    502：数据不符合要求   200：成功
 module.exports = function(req, res) {
-    const mongo = req.mongo;
+    const model = req.model;
     var uid = req.query.uid,
         pwd = req.query.pwd;
     if (uid.match(/[~=\/*&%#$\\<>]/gi)) {
@@ -14,7 +12,7 @@ module.exports = function(req, res) {
             code: 502
         });
     } else {
-        userModel.findOne({
+        model.user.findOne({
             uid: uid
         }, function(err, val) {
             if (val === null) {
