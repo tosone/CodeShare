@@ -50,7 +50,7 @@
                     <%
                         for(var i in newCode) {
                     %>
-                        <li class="list-group-item">
+                        <li class="list-group-item" data-id="<%=newCode[i]["codeid"]%>">
                             <%=newCode[i]["intro"]%>&nbsp;
                             <span class="small"><%=new Date(newCode[i]["timestamp"]).getTime()%></span>
                             <span class="pull-right title_right">
@@ -120,7 +120,7 @@
                 $("#lang>span").removeClass('active');
                 $("#tags>span").removeClass('active');
             }
-            $.get("/code/welcomecode",function(data){
+            $.get("/code/welcomecode",function(data) {
                 codelistHandler(data);
             });
         });
@@ -138,14 +138,14 @@
             $("#tags>span").text('Tags: All');
             $.get("/code/lang",paramsData,function(data){
                 codelistHandler(data);
-            })
+            });
         });
         $("#tags>ul>li").click(function(){
             currpage = 1;
-            $("#cPage").text(currpage)
+            $("#cPage").text(currpage);
             type="tags";
             paramsData={tag:$(this).data("tag")};
-            if(!$("#tags>span").hasClass("active")){
+            if(!$("#tags>span").hasClass("active")) {
                 $("#tags>span").addClass('active');
                 $("#tags").siblings().removeClass('active');
                 $("#lang>span").removeClass('active');
@@ -155,6 +155,9 @@
             $.get("/code/tags",paramsData,function(data){
                 codelistHandler(data);
             });
+        });
+        $("#codelist>li").click(function(){
+            window.location.href = "/code/content?id=" + $(this).data("id");
         });
         $("#page-home").click(function(){
             if(totalpage == 1)return;

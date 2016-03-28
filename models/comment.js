@@ -2,9 +2,9 @@
 module.exports = (mongoose) => {
     const Schema = mongoose.Schema;
     return mongoose.model("comment", new Schema({
-        commentID: String, //评论的唯一性ID
-        codeID: String, //评论对象的ID，文章或者代码ID
-        commentDivID: String, //评论块的ID
+        commentid: String, //评论的唯一性ID
+        codeid: String, //评论对象的ID，文章或者代码ID
+        divid: String, //评论块的ID
         isFirst: {
             type: Boolean,
             default: false

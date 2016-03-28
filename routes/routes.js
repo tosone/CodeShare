@@ -9,5 +9,6 @@ module.exports = (app) => {
     app.use('/user', require('./user/user'));
     app.use('/code', require('./code'));
     app.use('/test', require('./test'));
-    app.use('/mongo', mongo_express(mongo_express_config))
+    app.use('/comment', require('./comment'));
+    app.use('/mongo', mongo_express(mongo_express_config));
 }

@@ -1,30 +1,26 @@
-var valiableLang = require('util/valiableLang');
-var CommentModel = require('model/comment');
-var mongoose = require('mongoose');
-var config = require('webconfig.js');
-var util = require('util/Function');
-
+'use strict';
 module.exports = function(req, res, next) {
+    const valiableLang = req.valiableLang;
+    const CommentModel = req.model.comment;
+    const util = req.util;
     var comment = req.body.comment; //评论内容
-    var codeID = req.body.codeID; //评论对象的ID
-    var isFirst = req.body.isFirst ? true : false;
-    var commentDivID = isFirst ? req.body.commentDivID : util.uuid(); //评论块的ID
-
-    var replyTo = req.body.replyTo;
+    var codeid = req.body.codeid; //评论对象的ID
+    var isFirst = req.body.isFirst == 'true' ? true : false;
+    var divid = isFirst ? util.uuid() : req.body.divid; //评论块的ID
+    var reply = req.body.reply || "null";
     if (req.session.name) {
-        mongoose.connect(config.mongoURL, function() {
-            new CommentModel({
-                commentID: util.uuid(),
-                codeID: codeID,
-                commentDivID: commentDivID,
-                isFirst: isFirst,
-                replyTo: req.body.replyTo,
-                uid: req.session.uid,
-                content: comment
-            }).save(function() {
-                res.json({
-                    code: 200
-                });
+        new CommentModel({
+            commentid: util.uuid(),
+            codeid: codeid,
+            divid: divid,
+            isFirst: isFirst,
+            reply: reply,
+            uid: req.session.uid,
+            content: comment
+        }).save(function(err) {
+            console.log(err)
+            res.json({
+                code: 200
             });
         });
     } else {

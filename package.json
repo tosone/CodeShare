@@ -12,6 +12,7 @@
     "express-session": "^1.13.0",
     "lodash": "^3.10.1",
     "moment": "^2.11.2",
+    "mongo-express": "^0.30.39",
     "mongoose": "^4.4.5",
     "morgan": "^1.7.0",
     "multer": "^1.1.0",
