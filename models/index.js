@@ -1,8 +1,10 @@
 "use strict";
 module.exports = [
+    require('./user'),
     require('./code'),
     require('./codeLike'),
-    require('./comment'),
-    require('./mailLog'),
-    require('./user')
+    require('./codeComment'),
+    require('./artical'),
+    require('./articalComment'),
+    require('./mailLog')
 ]

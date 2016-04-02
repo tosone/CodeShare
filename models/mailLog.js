@@ -2,9 +2,12 @@
 module.exports = (mongoose) => {
     var Schema = mongoose.Schema;
     return mongoose.model("mailLog", new Schema({
-        user_uuid: String,
-        email: String,
-        isSuccess: {
+        user: [{ type: Schema.Types.ObjectId, ref: 'user' }],
+        content: {
+            type: String,
+            default: ""
+        },
+        success: {
             type: Boolean,
             default: true
         },

@@ -2,10 +2,9 @@
 module.exports = (mongoose) => {
     const Schema = mongoose.Schema;
     return mongoose.model("codeLike", new Schema({
-        codeid: String, //代码片段唯一性id
-        uid: String, //用户ID
-        //时间戳
-        timestamp: {
+        code: [{ type: Schema.Types.ObjectId, ref: 'code' }], //代码片段唯一性id
+        user: [{ type: Schema.Types.ObjectId, ref: 'user' }], //用户ID
+        timestamp: { //时间戳
             type: Date,
             default: Date.now
         }

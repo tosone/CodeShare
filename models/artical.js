@@ -1,25 +1,21 @@
 "use strict";
 
 module.exports = (mongoose) => {
-    const User = mongoose.models.user;
     const Schema = mongoose.Schema;
-    return mongoose.model("code", new Schema({
+    return mongoose.model("artical", new Schema({
         user: [{ type: Schema.Types.ObjectId, ref: 'user' }], //用户ID
         intro: String, //简介
         title: String, //标签
         content: String,
-        //喜欢
-        like: {
+        like: { //喜欢
             type: Number,
             default: 0
         },
-        //查看
-        lookover: {
+        lookover: { //查看
             type: Number,
             default: 0
         },
-        //时间戳
-        timestamp: {
+        timestamp: { //时间戳
             type: Date,
             default: Date.now
         }
