@@ -17,55 +17,15 @@ const server = http.createServer((request, response) => {
     request.on('data', (chunk) => { body += chunk; });
     request.on('end', () => {
         let msg = eval("(" + body + ")");
+        console.log(msg)
         if (msg.token == "8541539655") {
             new Promise((resolve, reject) => {
-                return new Promise((resolve, reject) => {
-                    let spawn = child_process.spawn('pm2', ['stop', 'CodeShare']);
-                    spawn.on('close', () => {
-                        resolve(true);
-                    });
+                let spawn = child_process.spawn('sh', ['./deploy.sh']);
+                spawn.stdout.on('data', (data) => {
+                    console.log('' + data);
                 });
-            }).then(() => {
-                return new Promise((resolve, reject) => {
-                    let spawn = child_process.spawn('git', ['reset', '--hard', 'origin/master']);
-                    spawn.on('close', () => {
-                        resolve(true);
-                    });
-                });
-            }).then(() => {
-                return new Promise((resolve, reject) => {
-                    let spawn = child_process.spawn('git', ['clean', '-f']);
-                    spawn.on('close', () => {
-                        resolve(true);
-                    });
-                });
-            }).then(() => {
-                return new Promise((resolve, reject) => {
-                    let spawn = child_process.spawn('git', ['pull']);
-                    spawn.on('close', () => {
-                        resolve(true);
-                    });
-                });
-            }).then(() => {
-                return new Promise((resolve, reject) => {
-                    let spawn = child_process.spawn('git', ['checkout', 'master']);
-                    spawn.on('close', () => {
-                        resolve(true);
-                    });
-                });
-            }).then(() => {
-                return new Promise((resolve, reject) => {
-                    let spawn = child_process.spawn('cnpm', ['install']);
-                    spawn.on('close', () => {
-                        resolve(true);
-                    });
-                });
-            }).then(() => {
-                return new Promise((resolve, reject) => {
-                    let spawn = child_process.spawn('pm2', ['start', 'app.js', '-i', '0', '--name', 'CodeShare']);
-                    spawn.on('close', () => {
-                        resolve(true);
-                    });
+                spawn.on('close', () => {
+                    resolve(true);
                 });
             }).catch(console.log);
         }
