@@ -1,5 +1,5 @@
 {
-    "mongoURL": "mongodb://tosone:8541539655@127.0.0.1:27017/CodeShare",
+    "mongoURL": "mongodb://sone:8541539655@115.28.87.181:27017/CodeShare",
     "cookieSecret": "8541539655",
     "cookieMaxAge": 1209600,
     "userPwdSalt": "8541539655",
