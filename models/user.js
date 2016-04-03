@@ -2,7 +2,7 @@
 module.exports = (mongoose) => {
     const Schema = mongoose.Schema;
     return mongoose.model("user", new Schema({
-        uid: String, //登录名
+        name: String, //登录名
         pwd: String, //密码
         email: { //邮箱
             email: String,

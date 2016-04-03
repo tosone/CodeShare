@@ -1,29 +1,32 @@
 "use strict";
-var mongoose = require('mongoose');
-var config = require('webconfig.js');
-var UserModel = require('model/user');
-var _ = require('lodash');
-//500：数据库有重名   502：有特殊字符    200：成功
+const mongoose = require('mongoose');
+const config = require('webconfig');
+
 module.exports = function(req, res) {
     const model = req.model;
-    var uid = req.query.uid;
-    if (uid.match(/[~=/*&%#%$\\<>]/gi)) {
+    let name = req.query.name;
+    if (name.match(/[~=/*&%#%$\\<>]/gi)) {
         res.json({
             code: 502
         });
     } else {
-        var userFind = UserModel.find();
-        userFind.where({
-            uid: uid
-        }).exec(function(err, val) {
-            if (_.size(val) == 0) {
+        model.user.findOne({
+            name: name
+        }, (err, val) => {
+            if (err) {
                 res.json({
-                    code: 200
+                    code: 514
                 });
             } else {
-                res.json({
-                    code: 500
-                });
+                if (val) {
+                    res.json({
+                        code: 500
+                    });
+                } else {
+                    res.json({
+                        code: 200
+                    });
+                }
             }
         });
     }

@@ -14,3 +14,9 @@
 - 服务端采用NodeJs配合Express。
 - 云存储采用七牛云存储。
 - 服务器采用阿里云主机。
+
+- Session
+	- id
+	- name
+	- email
+

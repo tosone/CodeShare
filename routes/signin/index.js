@@ -1,12 +1,8 @@
-var express = require('express');
-var router = express.Router();
+'use strict';
+const router = require('express').Router();
 
 router.get('/', require('./lib'));
 router.get('/login', require('./lib/login'));
-router.get('/logout', function(req, res) {
-    req.session.uid = "";
-    req.session.email = "";
-    req.session.name = false;
-    res.redirect('/');
-});
+router.get('/logout', require('./lib/logout'));
+
 module.exports = router;

@@ -1,6 +1,3 @@
-/* global md5 */
-/* global Vue */
-/* global $ */
 "use strict";
 $(function () {
     var idAvailableStat = true,
@@ -44,7 +41,7 @@ $(function () {
                 if (this.id_divClass === "has-success" && this.pwd_divClass === "has-success" && this.pwd_p_divClass === "has-success" && this.email_divClass === "has-success") {
                     var postData = {},
                         _this = this;
-                    postData.uid = _this.id_value;
+                    postData.name = _this.id_value;
                     postData.pwd = md5(_this.pwd_value);
                     postData.email = _this.email_value;
                     postData.tel = "nul";
@@ -53,7 +50,7 @@ $(function () {
                     if (_this.qq_divClass === "has-success") postData.qq = _this.qq_value;
                     if (idAvailableStat) {
                         idAvailableStat = false;
-                        $.get("/sign/userSign", postData, function (data) {
+                        $.get("/signup/userSign", postData, function (data) {
                             idAvailableStat = true;
                             if (data.code == 500) {
                                 $("#modalDialog h4").html("请注意");
@@ -93,8 +90,8 @@ $(function () {
                     var _this = this;
                     if (submitStat) {
                         submitStat = false;
-                        $.get("/sign/avaliableID", {
-                            uid: val
+                        $.get("/signup/avaliableID", {
+                            name: val
                         }, function (data) {
                             submitStat = true;
                             if (data.code == 500) {
