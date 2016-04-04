@@ -48,12 +48,12 @@ app.set('view engine', 'html');
 require('./models').forEach((model) => {
     model(mongoose);
 });
-app.use((request, response, next) => {
-    request.model = mongoose.models;
-    request.util = library.util;
-    request.qiniu = library.qiniu;
-    request.sendEmail = library.sendEmail(mongoose.models);
-    request.valiableLang = library.valiableLang;
+app.use((req, res, next) => {
+    req.model = mongoose.models;
+    req.util = library.util;
+    req.qiniu = library.qiniu;
+    req.sendEmail = library.sendEmail(mongoose.models);
+    req.valiableLang = library.valiableLang;
     next();
 });
 require('./routes')(app);

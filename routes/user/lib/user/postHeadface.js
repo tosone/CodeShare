@@ -1,24 +1,23 @@
-/* global Promise */
-var express = require('express');
-var router = express.Router();
-var qiniu = require('util/Qiniu');
-var util = require('util/Function');
-module.exports = function (req, res, next) {
-    var bucket = 'codeimg', oldname = "a.png", newname = util.uuid + ".png";
+'use strict';
 
-    qiniu.fileInfo(bucket, oldname).then(function (data) {
-        return new Promise(function (resolve, reject) {
-            if (data.error) {
-                resolve(true);
+module.exports = function(req, res) {
+    const User = req.session.user;
+    const qiniu = req.qiniu;
+    const util = req.util;
+    const name = util.uuid() + ".png";
+    qiniu.upFile(bucket, req.body.img, name).then(function() {
+        user.findByIdAndUpdate(req.session.userid, {
+            headFace: name
+        }, (err, val) => {
+            if (err) {
+                res.json({ "code": 500 });
             } else {
-                qiniu.remove(bucket, oldname).then(function () {
-                    resolve(true);
-                });
+                if (val) {
+                    res.json({ "code": 200 });
+                } else {
+                    res.json({ "code": 500 });
+                }
             }
-        });
-    }).then(function () {
-        qiniu.upFile(bucket, req.body.img, newname).then(function () {
-            res.json({ "code": 200 });
         });
     });
 }

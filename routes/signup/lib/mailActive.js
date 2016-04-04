@@ -1,32 +1,38 @@
-var mongoose = require('mongoose');
-var config = require('webconfig.js');
-var UserModel = require('model/user');
-var _ = require('lodash');
+'use strict';
+const mongoose = require('mongoose');
+const config = require('webconfig.js');
+const UserModel = require('model/user');
+const _ = require('lodash');
 module.exports = function(req, res) {
-    var activeStr = req.query.active;
-    var user_uuid = req.session.uid;
-    mongoose.connect(config.mongoURL, function() {
-        var UserMailCheckFind = UserModel.find();
-        UserMailCheckFind.where({
-            uuid: user_uuid
-        }).exec(function(err, val) {
-            if (activeStr == _.first(val).email.activeStr) {
-                UserModel.update({
-                    uuid: user_uuid
-                }, {
-                    email: {
-                        active: true
-                    }
-                }, function() {
-                    res.json({
-                        code: 200
-                    });
+    const User = req.model.user;
+    console.log(req.session.activeString)
+    if (req.session.activeString && req.session.activeString === req.query.active) {
+        User.findByIdAndUpdate(req.session.userid, {
+            email: {
+                email: req.session.email,
+                active: true
+            }
+        }, (err, val) => {
+            if (err) {
+                res.json({
+                    code: 514
                 });
             } else {
-                res.json({
-                    code: 500
-                });
+                if (val) {
+                    res.redirect('/?action=active');
+                    // res.json({
+                    //     code: 200
+                    // });
+                } else {
+                    res.json({
+                        code: 500
+                    });
+                }
             }
-        })
-    });
+        });
+    } else {
+        res.json({
+            code: 500
+        });
+    }
 }

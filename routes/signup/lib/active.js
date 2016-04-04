@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (request, response) => {
-    response.render('sign/mailCheck', {
+    response.render('signup/mailCheck', {
         title: "用户激活",
         user: request.session.name
     });

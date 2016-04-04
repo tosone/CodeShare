@@ -5,7 +5,7 @@ const config = require('webconfig');
 module.exports = function(request, response) {
     const User = request.model.user;
     const util = request.util;
-    const sendEmail = request.sendEmail
+    const sendEmail = request.sendEmail;
     let name = request.query.name,
         pwd = request.query.pwd,
         email = request.query.email,
@@ -45,10 +45,11 @@ module.exports = function(request, response) {
                             response.json({
                                 code: 200
                             });
-                            request.session.id = user._id;
+                            request.session.userid = user._id;
                             request.session.email = email;
                             request.session.name = user.name;
-                            sendEmail(user, email, "active", activeString);
+                            request.session.activeString = activeString;
+                            sendEmail(user._id, email, "active", activeString);
                         });
                     }
                 }

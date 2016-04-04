@@ -3,14 +3,14 @@ const mongoose = require('mongoose');
 const config = require('webconfig');
 
 module.exports = function(req, res) {
-    const model = req.model;
+    const User = req.model.user;
     let name = req.query.name;
     if (name.match(/[~=/*&%#%$\\<>]/gi)) {
         res.json({
             code: 502
         });
     } else {
-        model.user.findOne({
+        User.findOne({
             name: name
         }, (err, val) => {
             if (err) {

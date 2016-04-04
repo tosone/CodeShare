@@ -1,7 +1,6 @@
 "use strict";
 const config = require('webconfig');
 const crypto = require('crypto');
-const _ = require('lodash');
 
 module.exports = function(req, res) {
     const model = req.model;
@@ -19,11 +18,13 @@ module.exports = function(req, res) {
                 res.json({
                     code: 500
                 });
-            } else {             
+            } else {
                 if (val.pwd == crypto.createHmac(config.pwdHmacMethod, config.userPwdSalt).update(pwd).digest('hex')) {
-                    req.session.id = val._id;
+                    req.session.userid = val._id;
                     req.session.email = val.email.email;
                     req.session.name = val.name;
+                    if (!val.email.active) req.session.activeString = val.email.activeString;
+                    if (val.headFace) req.session.headFace = val.headFace;
                     res.json({
                         code: 200
                     });

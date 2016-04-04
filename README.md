@@ -17,6 +17,7 @@
 
 - Session
 	- id
+	- userid
 	- name
 	- email
 
