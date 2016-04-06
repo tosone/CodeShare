@@ -1,28 +1,22 @@
-var valiableType = require('util/valiableLang');
-var mongoose = require("mongoose");
-var CodeModel = require('model/code');
-var config = require('webconfig.js');
-module.exports = function(req, res, next) {
-    if (req.session.name) {
-        require('api/userLanguages')(req.session.uid).then(function(language) {
-            require('api/userTags')(req.session.uid).then(function(tags) {
-                require('api/newCodelist')(req.session.uid, 1).then(function(newCode) {
-                    require('api/pages')('code', {
-                        uid: req.session.uid
-                    }).then(function(page) {
-                        res.render('code/list', {
-                            title: '代码片段列表',
-                            lang: language,
-                            user: req.session.name,
-                            newCode: newCode,
-                            tags: tags,
-                            page: page
-                        });
+'use strict';
+module.exports = function(req, res) {
+    let userid = req.session.userid;
+    let api = req.api;
+    api.userLangs(userid).then(languages => {
+        api.userTags(userid).then(tags => {
+            api.newCodeList(userid, 1).then(newCodes => {
+                api.pages(userid).then(page => {
+                    console.log(newCodes);
+                    res.render('code/list', {
+                        title: '代码片段列表',
+                        lang: languages,
+                        user: req.session.name,
+                        newCode: newCodes,
+                        tags: tags,
+                        page: page
                     });
-                });
-            });
+                })
+            })
         });
-    } else {
-        res.redirect("/");
-    }
+    });    
 }

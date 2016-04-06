@@ -1,14 +1,16 @@
 'use strict';
 
 module.exports = function(req, res) {
-    const User = req.session.user;
+    const User = req.model.user;
     const qiniu = req.qiniu;
     const util = req.util;
     const name = util.uuid() + ".png";
-    qiniu.upFile(bucket, req.body.img, name).then(function() {
-        user.findByIdAndUpdate(req.session.userid, {
+    qiniu.upFile(req.body.img, name).then(function() {
+        console.log("erert")
+        User.findByIdAndUpdate(req.session.userid, {
             headFace: name
         }, (err, val) => {
+            console.log("sdf")
             if (err) {
                 res.json({ "code": 500 });
             } else {

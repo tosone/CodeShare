@@ -1,8 +1,9 @@
-module.exports = function(req, res, next) {
-    require('api/welcomeCodelist')(req.session.uid, req.query.page || 1).then(function(codelist) {
-        require('api/pages')('code', {
-            uid: req.session.uid
-        }).then(function(page) {
+'use strict';
+module.exports = (req, res) => {
+    const userid = req.session.userid;
+    const api = req.api;
+    api.welcomeCode(userid, req.query.page || 1).then((codelist) => {
+        api.pages(userid).then((page) => {
             res.json({
                 codelist: codelist,
                 page: page

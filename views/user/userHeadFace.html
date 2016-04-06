@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title>
+        <%=title%>
+    </title>
+    <!-- build:css css/user/user.css -->
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/croppie.css">
+    <!-- endbuild -->
+    <!-- build:js js/user/user.js -->
+    <script type="text/javascript" src="/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/javascripts/croppie.js"></script>
+    <!-- endbuild -->
+</head>
+
+<body>
+    <% include ../components/menu.html %>
+    <div class="container">
+        <div class="jumbotron">
+            <form class="form-horizontal userinfo">
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <div class="demo-cropper" id="cropper"></div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="thumbnail">
+                            <img src="###" alt="big headface" id="crop_face" class="img-circle">
+                            <div class="caption">
+                                <p>
+                                    <div class="btn-group btn-group-lg" role="group" aria-label="upload">
+                                        <input type="file" id="selectimg" name="selectimg" class="file_input" size="1" />
+                                        <button type="button" class="btn btn-default" onclick="selectimg.click()">选择图片</button>
+                                        <button type="button" class="btn btn-default" id="upload">上传图片</button>
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <% include ../components/footer.html %>
+    </div>
+    <script type="text/javascript">
+        var mc = $('#cropper');
+        mc.croppie({
+            viewport: {
+                width: 250,
+                height: 250,
+                type: 'circle'
+            },
+            mouseWheelZoom: true,
+            boundary: {
+                width: 300,
+                height: 300
+            },
+            update: function (cropper) { 
+                mc.croppie('result', 'canvas').then(function (resp) {
+                    $("#crop_face").attr("src",resp);
+                });
+            }
+        });
+        mc.croppie('bind', '/images/head/example.png');
+        $("#selectimg").change(function(){
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                mc.croppie('bind', {
+                    url: e.target.result
+                });
+            }
+            reader.readAsDataURL(this.files[0]);
+        });
+        $("#upload").click(function(){
+            $.post("/user/headFace",{img:$("#crop_face").attr("src").slice(22)},function(data){
+                console.log(data);
+            });
+        });
+    </script>
+</body>
+
+</html>

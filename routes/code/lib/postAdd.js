@@ -1,14 +1,12 @@
-var valiableType = require('util/valiableLang');
-var mongoose = require('mongoose');
-var config = require('webconfig.js');
-var util = require('util/Function');
-var CodeModel = require('model/code');
+'use strict';
 module.exports = function(req, res, next) {
+    const Code = req.model.code;
+    const valiableLang = req.valiableLang;
     if (req.session.name) {
-        var intro = req.body.intro,
+        let intro = req.body.intro,
             tags = req.body.tags,
             lang = req.body.lang,
-            code = req.body.code;
+            codeContent = req.body.code;
         if (intro.length > 300) {
             res.json({
                 code: 511
@@ -19,7 +17,7 @@ module.exports = function(req, res, next) {
             });
         } else {
             var isvaliableLang = true;
-            for (var i in valiableType) {
+            for (var i in valiableLang) {
                 if (i === lang) {
                     isvaliableLang = false;
                     break;
@@ -30,20 +28,15 @@ module.exports = function(req, res, next) {
                     code: 512
                 });
             } else {
-                mongoose.connect(config.mongoURL, function() {
-                    var png = util.uuid();
-                    new CodeModel({
-                        codeid: util.uuid(),
-                        uid: req.session.uid,
-                        intro: intro,
-                        tags: tags.split(','),
-                        lang: lang,
-                        codecon: code,
-                        png: png
-                    }).save(function() {
-                        res.json({
-                            code: 200
-                        });
+                new Code({
+                    user: req.session.userid,
+                    intro: intro,
+                    tags: tags.split(','),
+                    lang: lang,
+                    content: codeContent
+                }).save(function() {
+                    res.json({
+                        code: 200
                     });
                 });
             }

@@ -19,7 +19,7 @@ module.exports = function(req, res) {
                     code: 500
                 });
             } else {
-                if (val.pwd == crypto.createHmac(config.pwdHmacMethod, config.userPwdSalt).update(pwd).digest('hex')) {
+                if (val && val.pwd == crypto.createHmac(config.pwdHmacMethod, config.userPwdSalt).update(pwd).digest('hex')) {
                     req.session.userid = val._id;
                     req.session.email = val.email.email;
                     req.session.name = val.name;

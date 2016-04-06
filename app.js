@@ -7,15 +7,17 @@ const https = require('https');
 const morgan = require('morgan');
 const express = require('express');
 const mongoose = require('mongoose');
-const config = require('webconfig.js');
 const favicon = require('serve-favicon');
 const bodyParser = require('body-parser');
+const config = require('./webconfig.json');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const MongoStore = require('connect-mongo')(session);
+const api = require('./api');
 const library = require('./lib');
 const app = express();
 mongoose.connect(config.mongoURL);
+require('./models')(mongoose);
 app.use(session({
     store: new MongoStore({
         url: config.mongoURL,
@@ -45,15 +47,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.html', ejs.__express);
 app.set('view engine', 'html');
-require('./models').forEach((model) => {
-    model(mongoose);
-});
 app.use((req, res, next) => {
-    req.model = mongoose.models;
+    req.config = config;
     req.util = library.util;
     req.qiniu = library.qiniu;
-    req.sendEmail = library.sendEmail(mongoose.models);
+    req.model = mongoose.models;
+    req.api = api({
+        util: library.util,
+        model: mongoose.models,
+        config: config,
+        valiableLang: library.valiableLang
+    });
     req.valiableLang = library.valiableLang;
+    req.sendEmail = library.sendEmail(mongoose.models);
     next();
 });
 require('./routes')(app);

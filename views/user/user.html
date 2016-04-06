@@ -6,23 +6,19 @@
     <title>
         <%=title%>
     </title>
-    <!-- build:css css/user/user.css -->
     <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/croppie.css">
-    <!-- endbuild -->
-    <!-- build:js js/user/user.js -->
     <script type="text/javascript" src="/jquery/jquery.js"></script>
     <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
     <script type="text/javascript" src="/javascripts/croppie.js"></script>
-    <!-- endbuild -->
 </head>
 
 <body>
-    <% include ../conponents/menu.html %>
+    <% include ../components/menu.html %>
     <div class="container">
         <div class="row">
-            <% include ./conponents/list.html %>
+            <% include ./components/list.html %>
             <div class="col-md-10">
                 <div class="jumbotron">
                     <form class="form-horizontal userinfo">
@@ -52,11 +48,11 @@
                 </div>
             </div>
         </div>
-        <% include ../conponents/footer.html %>
+        <% include ../components/footer.html %>
     </div>
     <script type="text/javascript">
         $("#head_face").click(function () {
-            window.location.href = "user_headface";
+            window.location.href = "userheadface";
         });
         var mc = $('#cropper-1');
         var inmc = mc.croppie({
@@ -78,7 +74,7 @@
             });
         });
     </script>
-    <% include ./conponents/script.html %>
+    <% include ./components/script.html %>
 </body>
 
 </html>

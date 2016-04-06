@@ -8,7 +8,6 @@ module.exports = (mongoose) => {
         tags: Array, //标签
         lang: String, //类型
         content: String, //代码
-        png: String, //代码截图
         like: { //喜欢
             type: Number,
             default: 0
