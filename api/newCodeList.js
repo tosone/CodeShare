@@ -15,7 +15,6 @@ module.exports = (context) => {
                 .skip((parseInt(page) - 1) * config.codepaging)
                 .limit(config.codepaging)
                 .exec(function(err, val) {
-                    console.log(val)
                     resolve(val);
                 });
         });

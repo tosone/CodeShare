@@ -5,8 +5,7 @@ module.exports = function(req, res) {
     api.userLangs(userid).then(languages => {
         api.userTags(userid).then(tags => {
             api.newCodeList(userid, 1).then(newCodes => {
-                api.pages(userid).then(page => {
-                    console.log(newCodes);
+                api.pages({ user: userid }).then(page => {
                     res.render('code/list', {
                         title: '代码片段列表',
                         lang: languages,
@@ -18,5 +17,5 @@ module.exports = function(req, res) {
                 })
             })
         });
-    });    
+    });
 }

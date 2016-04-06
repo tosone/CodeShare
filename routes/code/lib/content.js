@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(req, res, next) {
+module.exports = function(req, res) {
     const codeid = req.query.id;
     const Code = req.model.code;
     const name = req.session.name;
@@ -11,10 +11,10 @@ module.exports = function(req, res, next) {
             if (err) {
                 res.redirect('/');
             } else {
-                Comment.find({ codeid: codeid }).sort({ timestamp: "asc" }).exec(function(err, comments) {
+                Comment.findById(codeid).sort({ timestamp: "asc" }).exec(function(err, comments) {
                     if (err) {
-                        res.redirect('/');
                         console.log("sadfsd")
+                        res.redirect('/');
                     } else {
                         res.render('code/content', {
                             title: '代码详情 - ' + name,
@@ -22,7 +22,7 @@ module.exports = function(req, res, next) {
                             valiableLang: valiableLang,
                             user: name,
                             codeid: codeid,
-                            comments: comments
+                            comments: comments || []
                         });
                     }
                 });

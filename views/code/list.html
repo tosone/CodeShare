@@ -50,7 +50,7 @@
                     <%
                         for(var i in newCode) {
                     %>
-                        <li class="list-group-item" data-id="<%=newCode[i]["codeid"]%>">
+                        <li class="list-group-item" data-id="<%=newCode[i]["_id"]%>">
                             <%=newCode[i]["intro"]%>&nbsp;
                             <span class="small"><%=new Date(newCode[i]["timestamp"]).getTime()%></span>
                             <span class="pull-right title_right">
@@ -83,8 +83,9 @@
             var $codelist = $("#codelist");
             $codelist.html("");
             var codelist = data.codelist;
+            console.log(codelist)
             for(var i in codelist) {
-                $codelist.append(['<li class="list-group-item">',
+                $codelist.append(['<li class="list-group-item" data-id="'+codelist[i]["_id"]+'">',
                     codelist[i].intro+'&nbsp;',
                     '<span class="small">' + (new Date(codelist[i].timestamp).getTime()).toString() + '</span>',
                     '<span class="pull-right title_right">',
@@ -95,7 +96,13 @@
             }
             $("#tPage").html(data.page);
             totalpage = data.page;
+            $("#codelist>li").click(function(){
+                window.location.href = "/code/content?id=" + $(this).data("id");
+            });
         };
+        $("#codelist>li").click(function(){
+            window.location.href = "/code/content?id=" + $(this).data("id");
+        });
         $("#newcode").click(function(){
             currpage = 1;
             $("#cPage").text(currpage)
@@ -156,9 +163,7 @@
                 codelistHandler(data);
             });
         });
-        $("#codelist>li").click(function(){
-            window.location.href = "/code/content?id=" + $(this).data("id");
-        });
+        
         $("#page-home").click(function(){
             if(totalpage == 1)return;
             if(currpage == 1)return;
