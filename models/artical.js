@@ -3,7 +3,7 @@
 module.exports = (mongoose) => {
     const Schema = mongoose.Schema;
     return mongoose.model("artical", new Schema({
-        user: [{ type: Schema.Types.ObjectId, ref: 'user' }], //用户ID
+        user: { type: Schema.Types.ObjectId, ref: 'user' }, //用户ID
         intro: String, //简介
         title: String, //标签
         content: String,

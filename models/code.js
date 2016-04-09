@@ -3,11 +3,11 @@
 module.exports = (mongoose) => {
     const Schema = mongoose.Schema;
     return mongoose.model("code", new Schema({
-        user: [{ type: Schema.Types.ObjectId, ref: 'user' }], //用户ID
+        user: { type: Schema.Types.ObjectId, ref: 'user' }, //用户ID        
         intro: String, //简介
         tags: Array, //标签
         lang: String, //类型
-        content: String, //代码
+        content: [{ type: Schema.Types.ObjectId, ref: 'codeContent' }], //代码
         like: { //喜欢
             type: Number,
             default: 0

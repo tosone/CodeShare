@@ -1,12 +1,13 @@
 'use strict';
 module.exports = function(req, res) {
     const Code = req.model.code;
+    const CodeContent = req.model.codeContent;
     const valiableLang = req.valiableLang;
     if (req.session.name) {
         let intro = req.body.intro,
             tags = req.body.tags,
             lang = req.body.lang,
-            codeContent = req.body.code,
+            content = req.body.code,
             id = req.body.id;
         if (intro.length > 300) {
             res.json({
@@ -29,19 +30,31 @@ module.exports = function(req, res) {
                     code: 512
                 });
             } else {
+                let icodeContent = new CodeContent({
+                    content: content
+                });
                 Code.findByIdAndUpdate(id, {
                     intro: intro,
                     tags: tags.split(','),
-                    lang: lang,
-                    content: codeContent
-                }, (err) => {
+                    lang: lang
+                }, (err, code) => {
                     if (err) {
+                        console.log(err);
                         res.json({
-                            code: 200
+                            code: 500
                         });
                     } else {
-                        res.json({
-                            code: 200
+                        code.content.push(icodeContent._id);
+                        code.save((err) => {
+                            if (err) {
+                                res.json({
+                                    code: 200
+                                });
+                            } else {
+                                res.json({
+                                    code: 200
+                                });
+                            }
                         });
                     }
                 });

@@ -2,7 +2,7 @@
 module.exports = (mongoose) => {
     var Schema = mongoose.Schema;
     return mongoose.model("mailLog", new Schema({
-        user: [{ type: Schema.Types.ObjectId, ref: 'user' }],
+        user: { type: Schema.Types.ObjectId, ref: 'user' },
         email: String,
         type: {
             type: String,

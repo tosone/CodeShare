@@ -10,8 +10,11 @@ module.exports = function(req, res) {
         Code.findById(codeid)
             .populate({
                 path: 'user',
-                select: 'name _id email',
-                options: { limit: 1 }
+                select: 'name _id email'
+            })
+            .populate({
+                path: 'content',
+                options: { sort: { timestamp: "desc" }, limit: 1 }
             })
             .exec(function(err, code) {
                 if (err) {
@@ -37,7 +40,8 @@ module.exports = function(req, res) {
                                 res.redirect('/');
                             } else {
                                 let isEdit = false;
-                                if (code.user[0]._id == req.session.userid) isEdit = true;
+                                console.log(code)
+                                if (code.user._id == req.session.userid) isEdit = true;
                                 res.render('code/content', {
                                     title: '代码详情 - ' + name,
                                     code: code,

@@ -14,7 +14,7 @@
             <div class="pull-right">
                 <button class="btn btn-theme" style="margin-top:5px;margin-right:8px;" id="codelike">赞：<%=code.like%></button>
             </div>
-            <div class="panel-heading"><span class="active">Code Snippet</span><span>History</span></div>
+            <div class="panel-heading"><span id="codesnippet" class="active">Code Snippet</span><span id="history">History</span></div>
             <div class="panel-body">
                 <div class="code-content">
                     <div class="code-content-btn-group">
@@ -26,7 +26,7 @@
                         <%-isEdit?"<button class=\"btn edit\">编辑</button>":""%>
                     </div>
                     <div class="code-content-text">
-                        <pre style="height:84px" id="codeText"><%=code.content%></pre>
+                        <pre style="height:84px" id="codeText"><%=code.content[0].content%></pre>
                     </div>
                     <div class="comment">
                         <a class="btn btn-theme" href="javascript:void(0);" id="addComment">添加新的评论</a>
@@ -86,115 +86,15 @@
     <!-- endbuild -->
     <script>
         var codeid = "<%=codeid%>";
-        $(".edit").click(function(){
-            window.location.href = "/code/edit?id=" + codeid;
-        })
-        var clipboard = new Clipboard('#copy');
         var editor = ace.edit("codeText");
         editor.session.setMode("ace/mode/<%=code.lang%>");
         editor.setTheme("ace/theme/github");
         editor.setOptions({
             readOnly: true
         });
-        editor.$blockScrolling = Infinity;
-        $(".comment-footer-delete").click(function(){
-            var first = $(this).data("first");
-            var commentid = $(this).data("commentid");
-            var div = $(this).data("div");
-            $.get("/comment/delete",{
-                first:first,
-                commentid:commentid,
-                div:div
-            }, function(data) {
-                if(data.code == 200){
-                    console.log("succ");
-                    window.location.reload();
-                } else {
-                    console.log(data);
-                }
-            })
-        })
-        $("#addComment").click(function(){
-            $("#modalDialog").modal('show');
-            $("#modalDialog .modal-title").html("添加评论");
-            $("#modalDialog .modal-body").html("<textarea placeholder='请输入评论内容' class='form-control'></textarea>");
-            $("#modalDialog .modal-footer").html("<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">取消</button>&nbsp;&nbsp;&nbsp;<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"commit\">确认</button>");
-            $("#commit").bind('click', function() {
-                $.post("/comment/add", {
-                    comment: $("#modalDialog textarea").val(),
-                    isFirst: true,
-                    codeid: codeid
-                },function(data){
-                    if(data.code == 200) {
-                        console.log("succ");
-                        window.location.reload();
-                    } else {
-                        console.log("err");
-                    }
-                })
-            });
-         });
-        $("#shareUrl").val(window.location.protocol + "//" + window.location.host + window.location.pathname + window.location.search);
-        $(".comment-footer-edit").click(function(){
-            $("#modalDialog").modal('show');
-            $("#modalDialog .modal-title").html("修改评论");
-            $("#modalDialog .modal-body").html("<textarea placeholder='请输入评论内容' class='form-control'>"+$(this).data("content")+"</textarea>");
-            $("#modalDialog .modal-footer").html("<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">取消</button>&nbsp;&nbsp;&nbsp;<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"commit\">确认</button>");
-            var commentid = $(this).data("commentid");
-            $("#commit").bind('click', function() {
-                var content = $("#modalDialog textarea").val();
-                $.post("/comment/update", {
-                    commentid: commentid,
-                    content: $("#modalDialog textarea").val()
-                },function(data){
-                    if(data.code == 200) {
-                        console.log("succ");
-                        $("#" + commentid).html(content);
-                    } else {
-                        console.log("err");
-                    }
-                });
-            });
-        });
-        $(".comment-footer-reply").click(function(){
-            $("#modalDialog").modal('show');
-            $("#modalDialog .modal-title").html("回复 "+$(this).data("uid")+" 的评论");
-            $("#modalDialog .modal-body").html("<textarea placeholder='请输入评论内容' class='form-control'></textarea>");
-            $("#modalDialog .modal-footer").html("<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">取消</button>&nbsp;&nbsp;&nbsp;<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"commit\">确认</button>");
-            var divid = $(this).data("divid");
-            var reply = $(this).data("uid");
-            $("#commit").bind('click', function() {
-                var comment = $("#modalDialog textarea").val();
-                $.post("/comment/add", {
-                    comment: comment,
-                    isFirst: false,
-                    codeid: codeid,
-                    divid: divid,
-                    reply: reply
-                }, function(data) {
-                    if(data.code == 200) {
-                        console.log("succ");
-                        window.location.reload();
-                    } else {
-                        console.log("err");
-                    }
-                });
-            });
-        });
-        $("#codelike").click(function(){
-            $.get("/code/like",{
-                id:codeid
-            }, function (data) {
-                if (data.code == 200){
-                    console.log("succ")
-                } else if (data.code == 515){
-                    console.log("点赞过");
-                } else if (data.code == 501){
-                    console.log("未登录");
-                }
-            })
-        });
     </script>
+    <script type="text/javascript" src= "/js/content.js"></script>
+    <script type="text/javascript" src="/js/code.js"></script>
 </body>
 
 </html>

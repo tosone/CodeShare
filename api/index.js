@@ -7,6 +7,7 @@ module.exports = (context) => {
         pages: require('./pages')(context),
         welcomeCode: require('./welcomeCodeList')(context),
         tagCodeList: require('./tagCodeList')(context),
-        langCodeList: require('./langCodeList')(context)
+        langCodeList: require('./langCodeList')(context),
+        codeByVersion: require('./codeByVersion')(context)
     }
 }

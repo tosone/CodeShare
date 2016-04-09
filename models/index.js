@@ -8,4 +8,5 @@ module.exports = (mongoose) => {
     require('./artical')(mongoose)
     require('./articalComment')(mongoose)
     require('./mailLog')(mongoose)
+    require('./codeContent')(mongoose)
 }
