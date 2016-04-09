@@ -3,7 +3,7 @@ var router = require('express').Router();
 router.get('/add', require('./lib/add'));
 router.get('/list', require('./lib/list'));
 router.get('/content', require('./lib/content'));
-// router.get('/menu', require('./lib/menu'));
+router.get('/edit', require('./lib/edit'));
 
 router.get('/like', require('./lib/like'));
 

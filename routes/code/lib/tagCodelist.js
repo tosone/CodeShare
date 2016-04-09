@@ -1,3 +1,4 @@
+'use strict';
 //返回某个标签下的代码列表
 module.exports = function(req, res) {
     const tag = req.query.tag;

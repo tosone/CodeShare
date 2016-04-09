@@ -1,37 +1,33 @@
-var valiableLang = require('util/valiableLang');
-var CommentModel = require('model/comment');
-var mongoose = require('mongoose');
-var config = require('webconfig.js');
-var util = require('util/Function');
+'use strict';
+
 module.exports = function(req, res, next) {
-    var commentID = req.body.commentID; //评论ID
+    var commentid = req.body.commentid;
+    const valiableLang = req.valiableLang;
+    const Comment = req.model.codeComment;
+    let content = req.body.content;
     if (req.session.name) {
-        mongoose.connect(config.mongoURL, function() {
-            CommentModel.where({
-                commentID: commentID
-            }, function(err, val) {
+        if (commentid && content) {
+            Comment.findByIdAndUpdate(commentid, {
+                content: content
+            }, (err) => {
                 if (err) {
-                    console.log("ERROR 514: 判断评论是否存在，数据库查询出错。")
+                    res.json({
+                        code: 500
+                    });
                 } else {
-                    if (_.size(val) == 0) {
-                        res.json({
-                            code: 513
-                        });
-                    } else {
-                        CommentModel.update({
-                            commentID: commentID
-                        }, {
-                                content: req.body.comment
-                            }, function() {
-                                res.json({
-                                    code: 200
-                                })
-                            });
-                    }
+                    res.json({
+                        code: 200
+                    });
                 }
-            })
-        });
+            });
+        } else {
+            res.json({
+                code: 512
+            });
+        }
     } else {
-        res.redirect("/");
+        res.json({
+            code: 501
+        });
     }
 }

@@ -1,5 +1,5 @@
 'use strict';
-module.exports = function(req, res, next) {
+module.exports = function(req, res) {
     const Code = req.model.code;
     const valiableLang = req.valiableLang;
     if (req.session.name) {

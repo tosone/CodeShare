@@ -23,6 +23,7 @@
                         <button class="btn code-png">Png</button>
                         <button class="btn share-sina-btn">分享至Sina微博</button>
                         <button class="btn share-qq-btn">分享至QQ空间</button>
+                        <%-isEdit?"<button class=\"btn edit\">编辑</button>":""%>
                     </div>
                     <div class="code-content-text">
                         <pre style="height:84px" id="codeText"><%=code.content%></pre>
@@ -31,29 +32,29 @@
                         <a class="btn btn-theme" href="javascript:void(0);" id="addComment">添加新的评论</a>
                         <%
                             comments.forEach(function(comment){
-                                if(comment.isFirst) {
+                                if(comment.first) {
                         %>
-                                    <div class="comment-div">
+                                    <div class="comment-div" data-commentwrapdiv="<%=comment._id%>">
                                         <div class="comment-wrap">
-                                            <div><a href="###" class="comment-user"><%=comment.uid%></a><span class="comment-user-timestamp"> (<%=comment.timestamp%>) </span>:</div>
-                                            <div class="comment-content"><%=comment.content%></div>
+                                            <div><a href="<%=comment.user[0]._id%>" class="comment-user"><%=comment.user[0].name%></a><span class="comment-user-timestamp"> (<%=comment.timestamp%>) </span>:</div>
+                                            <div class="comment-content" id="<%=comment._id%>"><%=comment.content%></div>
                                             <div class="comment-footer">
-                                                <a href="javascript:void(0);" class="comment-footer-reply" data-commentid="<%=comment.commentID%>" data-uid="<%=comment.uid%>" data-divid="<%=comment.divid%>">回复</a>
-                                                <a href="javascript:void(0);" class="comment-footer-edit"  data-commentid="<%=comment.commentID%>" data-content="<%=comment.content%>">编辑</a>
-                                                <a href="javascript:void(0);" class="comment-footer-delete" data-commentid="<%=comment.commentID%>">删除</a>
+                                                <a href="javascript:void(0);" class="comment-footer-reply" data-commentid="<%=comment._id%>" data-uid="<%=comment.user[0]._id%>" data-divid="<%=comment.div%>">回复</a>
+                                                <a href="javascript:void(0);" class="comment-footer-edit"  data-commentid="<%=comment._id%>" data-content="<%=comment.content%>">编辑</a>
+                                                <a href="javascript:void(0);" class="comment-footer-delete" data-commentid="<%=comment._id%>" data-first="true" data-div="<%=comment.div%>">删除</a>
                                             </div>
                                         </div>
                         <%
                                     comments.forEach(function(cmt){
-                                        if(cmt.reply != "null" && cmt.divid == comment.divid) {
+                                        if(!cmt.first && cmt.div == comment.div) {
                         %>
-                                            <div class="comment-wrap">
-                                                <div><a href="###" class="comment-user"><%=cmt.uid%></a><span class="comment-user-timestamp"> (<%=cmt.timestamp%>) </span>:</div>
-                                                <div class="comment-content"><%=cmt.content%></div>
+                                            <div class="comment-wrap" data-commentdiv="<%=cmt._id%>">
+                                                <div><a href="<%=cmt.user[0]._id%>" class="comment-user"><%=cmt.user[0].name%></a><span class="comment-user-timestamp"> (<%=cmt.timestamp%>) </span>:</div>
+                                                <div class="comment-content" id="<%=cmt._id%>"><%=cmt.content%></div>
                                                 <div class="comment-footer">
-                                                    <a href="javascript:void(0);" class="comment-footer-reply" data-commentid="<%=cmt.commentID%>" data-uid="<%=cmt.uid%>" data-divid="<%=comment.divid%>">回复</a>
-                                                    <a href="javascript:void(0);" class="comment-footer-edit"  data-commentid="<%=cmt.commentID%>" data-content="<%=cmt.content%>">编辑</a>
-                                                    <a href="javascript:void(0);" class="comment-footer-delete" data-commentid="<%=cmt.commentID%>">删除</a>
+                                                    <a href="javascript:void(0);" class="comment-footer-reply" data-commentid="<%=cmt._id%>" data-uid="<%=cmt.user[0]._id%>" data-divid="<%=comment.div%>">回复</a>
+                                                    <a href="javascript:void(0);" class="comment-footer-edit"  data-commentid="<%=cmt._id%>" data-content="<%=cmt.content%>">编辑</a>
+                                                    <a href="javascript:void(0);" class="comment-footer-delete" data-commentid="<%=cmt._id%>" data-first="false" data-div="<%=cmt.div%>">删除</a>
                                                 </div>
                                             </div>
                         <%                    
@@ -84,6 +85,10 @@
     <script type="text/javascript" src="/javascripts/clipboard.min.js" charset="utf-8"></script>
     <!-- endbuild -->
     <script>
+        var codeid = "<%=codeid%>";
+        $(".edit").click(function(){
+            window.location.href = "/code/edit?id=" + codeid;
+        })
         var clipboard = new Clipboard('#copy');
         var editor = ace.edit("codeText");
         editor.session.setMode("ace/mode/<%=code.lang%>");
@@ -92,7 +97,23 @@
             readOnly: true
         });
         editor.$blockScrolling = Infinity;
-        var codeid = "<%=codeid%>";
+        $(".comment-footer-delete").click(function(){
+            var first = $(this).data("first");
+            var commentid = $(this).data("commentid");
+            var div = $(this).data("div");
+            $.get("/comment/delete",{
+                first:first,
+                commentid:commentid,
+                div:div
+            }, function(data) {
+                if(data.code == 200){
+                    console.log("succ");
+                    window.location.reload();
+                } else {
+                    console.log(data);
+                }
+            })
+        })
         $("#addComment").click(function(){
             $("#modalDialog").modal('show');
             $("#modalDialog .modal-title").html("添加评论");
@@ -106,6 +127,7 @@
                 },function(data){
                     if(data.code == 200) {
                         console.log("succ");
+                        window.location.reload();
                     } else {
                         console.log("err");
                     }
@@ -118,14 +140,16 @@
             $("#modalDialog .modal-title").html("修改评论");
             $("#modalDialog .modal-body").html("<textarea placeholder='请输入评论内容' class='form-control'>"+$(this).data("content")+"</textarea>");
             $("#modalDialog .modal-footer").html("<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">取消</button>&nbsp;&nbsp;&nbsp;<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"commit\">确认</button>");
+            var commentid = $(this).data("commentid");
             $("#commit").bind('click', function() {
-                $.post("/comment/add", {
-                    comment: $("#modalDialog textarea").val(),
-                    isFirst: true,
-                    codeid: codeid
+                var content = $("#modalDialog textarea").val();
+                $.post("/comment/update", {
+                    commentid: commentid,
+                    content: $("#modalDialog textarea").val()
                 },function(data){
                     if(data.code == 200) {
                         console.log("succ");
+                        $("#" + commentid).html(content);
                     } else {
                         console.log("err");
                     }
@@ -140,8 +164,9 @@
             var divid = $(this).data("divid");
             var reply = $(this).data("uid");
             $("#commit").bind('click', function() {
+                var comment = $("#modalDialog textarea").val();
                 $.post("/comment/add", {
-                    comment: $("#modalDialog textarea").val(),
+                    comment: comment,
                     isFirst: false,
                     codeid: codeid,
                     divid: divid,
@@ -149,6 +174,7 @@
                 }, function(data) {
                     if(data.code == 200) {
                         console.log("succ");
+                        window.location.reload();
                     } else {
                         console.log("err");
                     }
@@ -156,7 +182,17 @@
             });
         });
         $("#codelike").click(function(){
-            console.log("asd");
+            $.get("/code/like",{
+                id:codeid
+            }, function (data) {
+                if (data.code == 200){
+                    console.log("succ")
+                } else if (data.code == 515){
+                    console.log("点赞过");
+                } else if (data.code == 501){
+                    console.log("未登录");
+                }
+            })
         });
     </script>
 </body>

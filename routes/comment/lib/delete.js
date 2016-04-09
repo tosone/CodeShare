@@ -1,32 +1,44 @@
-var valiableLang = require('util/valiableLang');
-var CommentModel = require('model/comment');
-var mongoose = require('mongoose');
-var config = require('webconfig.js');
-var util = require('util/Function');
-module.exports = function(req, res, next) {
-    var commentID = request.query.commentID; //评论ID
-    var isFirst = req.query.isFirst ? true : false;
+'use strict';
+
+module.exports = function(req, res) {
+    const Comment = req.model.codeComment;
+    let commentid = req.query.commentid; //评论ID
+    let first = req.query.first;
+    let div = req.query.div;
     if (req.session.name) {
-        mongoose.connect(config.mongoURL, function() {
-            if (isFirst) {
-                CommentModel.remove({
-                    commentDivID: commentID
-                }, function() {
+        if (first == "true") {
+            Comment.remove({
+                div: div
+            }, function(err) {
+                if (err) {
+                    console.log(err);
+                } else {
                     res.json({
                         code: 200
                     });
-                });
-            } else {
-                CommentModel.remove({
-                    commentID: commentID
-                }, function() {
+                }
+
+            });
+        } else if (first == "false") {
+            Comment.remove({
+                _id: commentid
+            }, function(err) {
+                if (err) {
+                    console.log(err);
+                } else {
                     res.json({
                         code: 200
                     });
-                });
-            }
-        });
+                }
+            });
+        } else {
+            res.json({
+                code: 512
+            });
+        }
     } else {
-        res.redirect("/");
+        res.json({
+            code: 501
+        });
     }
 }
