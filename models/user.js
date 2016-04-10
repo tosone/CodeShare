@@ -26,5 +26,4 @@ module.exports = (mongoose) => {
     }, {
         versionKey: false
     }));
-
 }

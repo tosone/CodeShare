@@ -4,7 +4,7 @@ module.exports = function(req, res) {
     let api = req.api;
     api.userLangs(userid).then(languages => {
         api.userTags(userid).then(tags => {
-            api.newCodeList(userid, 1).then(newCodes => {
+            api.codeList({ user: userid }, { 'timestamp': 'desc' }, 1).then(newCodes => {
                 api.pages({ user: userid }).then(page => {
                     res.render('code/list', {
                         title: '代码片段列表',

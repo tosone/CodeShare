@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title><%=title%></title>
+    <link rel="stylesheet" type="text/css" href="/src/style.css">
+    <link rel="stylesheet" href="/base/diff/styles.css">
+</head>
+
+<body>
+    <% include ../components/menu.html %>
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="pull-right">
+                <button class="btn btn-theme" style="margin-top:5px;margin-right:8px;" id="codelike">赞：<%-like%></button>
+            </div>
+            <div class="panel-heading"><span id="codesnippet">Code Snippet</span><span class="active" id="history">History</span></div>
+            <div class="panel-body">
+            	<div class="version-intro">
+            		<span class="pull-left">修改于：<%=moment(codefromtimestamp).format('YYYY-MM-DD HH:mm:ss')%></span>
+            		<span class="pull-right">修改于：<%=moment(codetotimestamp).format('YYYY-MM-DD HH:mm:ss')%></span>
+            	</div>
+            	<div id="flex-container">
+			        <div>
+			            <div id="acediff-left-editor"></div>
+			        </div>
+			        <div id="acediff-gutter"></div>
+			        <div>
+			            <div id="acediff-right-editor"></div>
+			        </div>
+			    </div>
+            </div>
+        </div>
+        <% include ../components/footer.html %>
+    </div>
+    <% include ../components/modalDialog.html %>
+    <script type="text/javascript" src="/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="/javascripts/ace/ace.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/base/diff/ace-diff.js"></script>
+    <script type="text/javascript" src="/base/diff/diff_match_patch.js"></script>
+    <script type="text/javascript">
+    	var codeid = "<%=codeid%>";
+    	var codefrom = `<%=codefrom%>`;
+    	var codeto = `<%=codeto%>`;
+    	var mode = "ace/mode/javascript";
+    </script>    
+    <script type="text/javascript" src="/js/code.js"></script>
+    <script type="text/javascript" src="/js/compare.js"></script>
+</body>
+
+</html>

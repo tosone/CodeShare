@@ -2,15 +2,15 @@
 const crypto = require('crypto');
 const config = require('webconfig');
 
-module.exports = function(request, response) {
-    const User = request.model.user;
-    const util = request.util;
-    const sendEmail = request.sendEmail;
-    let name = request.query.name,
-        pwd = request.query.pwd,
-        email = request.query.email,
-        qq = request.query.qq,
-        tel = request.query.tel;
+module.exports = function(req, response) {
+    const User = req.model.user;
+    const util = req.util;
+    const sendEmail = req.sendEmail;
+    let name = req.query.name,
+        pwd = req.query.pwd,
+        email = req.query.email,
+        qq = req.query.qq,
+        tel = req.query.tel;
     if (name.match(/[~=/*&%#%$\\<>]/gi) || !email.match(/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/)) {
         response.json({
             code: 502
@@ -42,14 +42,16 @@ module.exports = function(request, response) {
                             tel: tel
                         });
                         user.save(function() {
+                            req.session.userid = user._id;
+                            req.session.email = email;
+                            req.session.name = user.name;
+                            req.session.activeString = activeString;
+                            console.log(activeString);
+                            sendEmail(user._id, email, "active", activeString);
                             response.json({
                                 code: 200
                             });
-                            request.session.userid = user._id;
-                            request.session.email = email;
-                            request.session.name = user.name;
-                            request.session.activeString = activeString;
-                            sendEmail(user._id, email, "active", activeString);
+
                         });
                     }
                 }

@@ -1,5 +1,5 @@
 'use strict';
-
+const qr = require('qr-image');
 module.exports = function(req, res) {
     const codeid = req.query.id;
     const Code = req.model.code;
@@ -42,6 +42,7 @@ module.exports = function(req, res) {
                                 let isEdit = false;
                                 console.log(code)
                                 if (code.user._id == req.session.userid) isEdit = true;
+                                console.log(req.url)
                                 res.render('code/content', {
                                     title: '代码详情 - ' + name,
                                     code: code,
@@ -49,7 +50,8 @@ module.exports = function(req, res) {
                                     user: name,
                                     codeid: codeid,
                                     comments: comments || [],
-                                    isEdit: isEdit
+                                    isEdit: isEdit,
+                                    qr: qr.imageSync("http://115.28.87.181:8000/code/content?id=" + codeid, { type: 'png' }).toString('base64')
                                 });
                             }
                         });

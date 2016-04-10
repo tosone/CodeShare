@@ -4,20 +4,15 @@
 <head>
     <meta charset="utf-8" />
     <title><%=title%></title>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.tagsinput.min.css">
-    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+    <link rel="stylesheet" type="text/css" href="/src/style.css">
 </head>
 
 <body>
     <% include ../components/menu.html %>
     <div class="container">
-        <div class="jumbotron">
-            <div class="input-group input-group-lg">
-                <input type="text" class="form-control" placeholder="请填写激活码" id="activetext">
-                <span class="input-group-addon" style="cursor:pointer" id="active">激活账户</span>
-                <span class="input-group-addon" style="cursor:pointer" id="resend">重发邮件</span>
-            </div>
+        <div class="jumbotron clearfix">
+            <p><%=msg%></p>
+            <button class="btn btn-theme" id="resend">重发邮件</button>
         </div>
         <% include ../components/footer.html %>
     </div>

@@ -6,6 +6,7 @@ router.get('/content', require('./lib/content'));
 router.get('/edit', require('./lib/edit'));
 router.get('/historyList', require('./lib/historyList'));
 router.get('/history', require('./lib/history'));
+router.get('/compare', require('./lib/compare'));
 
 router.get('/like', require('./lib/like'));
 

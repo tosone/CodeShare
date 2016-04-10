@@ -1,7 +1,4 @@
 "use strict";
-const mongoose = require('mongoose');
-const config = require('webconfig');
-
 module.exports = function(req, res) {
     const User = req.model.user;
     let name = req.query.name;

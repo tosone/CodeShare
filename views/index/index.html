@@ -6,23 +6,16 @@
     <title>
         <%=title%>
     </title>
-    <!-- build:css css/index.css -->
-    <!--<link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">-->
     <link rel="stylesheet" type="text/css" href="/src/style.css">
-    <!-- endbuild -->
-    <!-- build:js js/index.js -->
     <script type="text/javascript" src="/jquery/jquery.js"></script>
     <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
-    <!--<script type="text/javascript" src="/javascripts/js.js"></script>-->
-    <!-- endbuild -->
 </head>
 
 <body>
     <% include ../components/menu.html %>
     <div class="container">
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div id="ifocus">
                     <div id="ifocus_pic">
                         <div id="ifocus_piclist">
@@ -233,38 +226,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-3">
-                <!--<div class="panel panel-default">
-                    <div class="panel-heading title_head">热门标签</div>
-                    <div class="panel-body row_la">
-                        <div class="row_label">
-                            <div class="row_label_lr">Bootstrap(20)</div>
-                            <div class="row_label_lr">Wordpress(10)</div>
-                            <div class="row_label_lr">Bootstrap(20)</div>
-                            <div class="row_label_lr">Wordpress(10)</div>
-                            <div class="row_label_lr">Bootstrap(20)</div>
-                            <div class="row_label_lr">Wordpress(10)</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading title_head">最新吐槽</div>
-                    <div class="panel-body row_la">
-                        <div class="pl_div">
-                            <a href="###" class="pl_div_a">Tosone</a>：出于性能的考标的类。把下面的代码放在任何地方都可以正常使用。注意，为了设置正确的内补（padding），务必在图标和文本之间添加一个空格。
-                            <span class="pl_div_time">3天前</span>
-                        </div>
-                        <div class="pl_div">
-                            <a href="###" class="pl_div_a">Tosone</a>：每个图标的类。把下面的代码放在任何地方都可以正常使用。注意，为了设置正确的内补（padding），务必在图标和文本之间添加一个空格。
-                            <span class="pl_div_time">3天前</span>
-                        </div>
-                        <div class="pl_div">
-                            <a href="###" class="pl_div_a">Tosone</a>：出于性能的考虑，所有码放在任何地方都可以正常使用。注意，为了设置正确的内补（padding），务必在图标和文本之间添加一个空格。
-                            <span class="pl_div_time">3天前</span>
-                        </div>
-                    </div>
-                </div>-->
             </div>
         </div>
         <% include ../components/footer.html %>

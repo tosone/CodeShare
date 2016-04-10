@@ -8,29 +8,34 @@ module.exports = function(req, res) {
     const activeString = util.uuid();
     const userid = req.session.userid;
     const email = req.query.email ? req.query.email : req.session.email;
-
-    User.findByIdAndUpdate(userid, {
-        email: {
-            email: email,
-            active: false,
-            activeString: activeString
-        }
-    }, (err, val) => {
-        if (err) {
-            res.json({
-                code: 504
-            });
-        } else {
-            if (val) {
-                sendEmail(userid, email, "reactive", activeString);
+    if (userid) {
+        User.findByIdAndUpdate(userid, {
+            email: {
+                email: email,
+                active: false,
+                activeString: activeString
+            }
+        }, (err, val) => {
+            if (err) {
                 res.json({
-                    code: 200
+                    code: 501
                 });
             } else {
-                res.json({
-                    code: 504
-                });
+                if (val) {
+                    sendEmail(userid, email, "reactive", activeString);
+                    res.json({
+                        code: 200
+                    });
+                } else {
+                    res.json({
+                        code: 504
+                    });
+                }
             }
-        }
-    });
+        });
+    } else {
+        res.json({
+            code: 501
+        });
+    }
 }

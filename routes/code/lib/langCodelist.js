@@ -3,7 +3,7 @@ module.exports = function(req, res) {
     const lang = req.query.lang;
     const api = req.api;
     const userid = req.session.userid;
-    api.langCodeList(userid, lang, req.query.page || 1).then(codelist => {
+    api.codeList({ user: userid, lang: lang }, { 'timestamp': 'desc' }, req.query.page || 1).then(codelist => {
         api.pages({
             uid: req.session.uid,
             lang: req.query.lang
