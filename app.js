@@ -67,9 +67,9 @@ require('./routes')(app);
 http.createServer(app).listen(config.PORT, function () {
   console.log('Http server listening at http://127.0.0.1:' + config.PORT + '.');
 });
-// https.createServer({
-//     key: fs.readFileSync('./pem/privatekey.pem'),
-//     cert: fs.readFileSync('./pem/certificate.pem')
-// }, app).listen(443, function() {
-//     console.log('Https server listening at https://127.0.0.1:443.');
-// });
+https.createServer({
+  key: fs.readFileSync('./pem/privatekey.pem'),
+  cert: fs.readFileSync('./pem/certificate.pem')
+}, app).listen(443, function () {
+  console.log('Https server listening at https://127.0.0.1:443.');
+});
