@@ -1,6 +1,21 @@
 $(".edit").click(function() {
     window.location.href = "/code/edit?id=" + codeid;
-})
+});
+$(".deleteCode").click(function() {
+    $.get('/code/delete', { id: codeid }, function(data) {
+        if (data.code == 200) {
+            $("#modalDialog").modal('show');
+            $("#modalDialog .modal-title").html("恭喜你！");
+            $("#modalDialog .modal-body").html("恭喜你删除成功！");
+            $("#modalDialog .modal-footer").html("<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" onclick=\"window.location.href='/code/add'\">添加代码片段</button>&nbsp;&nbsp;&nbsp;<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"commit\">确认</button > ");
+        } else {
+            $("#modalDialog").modal('show');
+            $("#modalDialog .modal-title").html("很遗憾！");
+            $("#modalDialog .modal-body").html("删除失败，请刷新后重试！");
+            $("#modalDialog .modal-footer").html("<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" onclick=\"window.location.href='/'\">添加代码片段</button>&nbsp;&nbsp;&nbsp;<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"commit\">确认</button > ");
+        }
+    });
+});
 var clipboard = new Clipboard('#copy');
 editor.$blockScrolling = Infinity;
 $(".comment-footer-delete").click(function() {
@@ -64,7 +79,7 @@ $(".comment-footer-edit").click(function() {
 });
 $(".comment-footer-reply").click(function() {
     $("#modalDialog").modal('show');
-    $("#modalDialog .modal-title").html("回复 " + $(this).data("uid") + " 的评论");
+    $("#modalDialog .modal-title").html("回复 " + $(this).data("name") + " 的评论");
     $("#modalDialog .modal-body").html("<textarea placeholder='请输入评论内容' class='form-control'></textarea>");
     $("#modalDialog .modal-footer").html("<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">取消</button>&nbsp;&nbsp;&nbsp;<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"commit\">确认</button>");
     var divid = $(this).data("divid");

@@ -78,149 +78,82 @@
                     <div class="panel-body" id="show-con">
                         <div class="week-hot">
                             <ul class="list-group">
-                                <li class="list-group-item">
-                                    <span class="label_num label_num_1">1</span>Dapibus ac facilisis in<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="label_num label_num_2">2</span>Dapibus ac facilisis in<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="label_num label_num_3">3</span>Morbi leo risus<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="label_num label_num_n">4</span>Porta ac consectetur ac<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="label_num label_num_n">5</span>Vestibulum at eros<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="label_num label_num_n">6</span>Vestibulum at eros<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="label_num label_num_n">7</span>Vestibulum at eros<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="label_num label_num_n">8</span>Vestibulum at eros<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="label_num label_num_n">9</span>Vestibulum at eros<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="label_num label_num_n">10</span>Vestibulum at eros<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                </li>
+                            <%
+                                for(var i in likeCodes) {
+                            %>
+                                    <li class="list-group-item" data-id="<%=likeCodes[i]._id%>">
+                                        <span class="label_num label_num_1"><%=(parseInt(i)+1)%></span><%=likeCodes[i].intro%><span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(<%=likeCodes[i].lookover%>)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(<%=likeCodes[i].like%>)</span>
+                                    </li>
+                            <%    
+                                }
+                            %>
                             </ul>
                         </div>
                         <div class="new-code">
                             <ul class="list-group">
-                                <li class="list-group-item">
-                                    <span class="label_num label_num_1">1</span>Dapibus ac facilisis in<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="label_num label_num_2">2</span>Dapibus ac facilisis in<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="label_num label_num_3">3</span>Morbi leo risus<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="label_num label_num_n">4</span>Porta ac consectetur ac<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="label_num label_num_n">5</span>Vestibulum at eros<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="label_num label_num_n">6</span>Vestibulum at eros<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="label_num label_num_n">7</span>Vestibulum at eros<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="label_num label_num_n">8</span>Vestibulum at eros<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="label_num label_num_n">9</span>Vestibulum at eros<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="label_num label_num_n">10</span>Vestibulum at eros<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                </li>
+                            <%
+                                for(var i in newCodes) {
+                            %>
+                                    <li class="list-group-item" data-id="<%=newCodes[i]._id%>">
+                                        <span class="label_num label_num_1"><%=(parseInt(i)+1)%></span><%=newCodes[i].intro%><span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(<%=newCodes[i].lookover%>)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(<%=newCodes[i].like%>)</span>
+                                    </li>
+                            <%    
+                                }
+                            %>
                             </ul>
                         </div>
                         <div class="classify-code">
                             <div class="code-type" id="code-type">
-                                <span class="active">全部</span>
+                                <span class="active">C/C++</span>
                                 <span>JavaScript</span>
-                                <span>Java</span>
-                                <span>C</span>
                                 <span>Python</span>
-                                <span>更多...</span>
+                                <span>Java</span>
+                                <span>Matlab</span>
                             </div>
                             <div class="classify-code-list">
                                 <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <span class="label_num label_num_1">1</span>11111111111pibus ac facilisis in<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <span class="label_num label_num_2">2</span>Dapibus ac facilisis in<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <span class="label_num label_num_3">3</span>Morbi leo risus<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <span class="label_num label_num_n">4</span>Porta ac consectetur ac<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <span class="label_num label_num_n">5</span>Vestibulum at eros<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                    </li>
+                                <%
+                                    for(var i in CCodes) {
+                                %>
+                                        <li class="list-group-item" data-id="<%=CCodes[i]._id%>">
+                                            <span class="label_num label_num_1"><%=(parseInt(i)+1)%></span><%=CCodes[i].intro%><span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(<%=CCodes[i].lookover%>)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(<%=CCodes[i].like%>)</span>
+                                        </li>
+                                <%    
+                                    }
+                                %>
                                 </ul>
                                 <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <span class="label_num label_num_1">1</span>2222222222222222c facilisis in<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <span class="label_num label_num_2">2</span>Dapibus ac facilisis in<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <span class="label_num label_num_3">3</span>Morbi leo risus<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <span class="label_num label_num_n">4</span>Porta ac consectetur ac<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <span class="label_num label_num_n">5</span>Vestibulum at eros<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                    </li>
+                                <%
+                                    for(var i in JSCodes) {
+                                %>
+                                        <li class="list-group-item" data-id="<%=JSCodes[i]._id%>">
+                                            <span class="label_num label_num_1"><%=(parseInt(i)+1)%></span><%=JSCodes[i].intro%><span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(<%=JSCodes[i].lookover%>)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(<%=JSCodes[i].like%>)</span>
+                                        </li>
+                                <%    
+                                    }
+                                %>
                                 </ul>
                                 <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <span class="label_num label_num_1">1</span>233333333222222c facilisis in<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <span class="label_num label_num_2">2</span>Dapibus ac facilisis in<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <span class="label_num label_num_3">3</span>Morbi leo risus<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <span class="label_num label_num_n">4</span>Porta ac consectetur ac<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <span class="label_num label_num_n">5</span>Vestibulum at eros<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                    </li>
+                                <%
+                                    for(var i in JavaCodes) {
+                                %>
+                                        <li class="list-group-item" data-id="<%=JavaCodes[i]._id%>">
+                                            <span class="label_num label_num_1"><%=(parseInt(i)+1)%></span><%=JavaCodes[i].intro%><span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(<%=JavaCodes[i].lookover%>)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(<%=JavaCodes[i].like%>)</span>
+                                        </li>
+                                <%    
+                                    }
+                                %>    
                                 </ul>
                                 <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <span class="label_num label_num_1">1</span>44444442222c facilisis in<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <span class="label_num label_num_2">2</span>Dapibus ac facilisis in<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <span class="label_num label_num_3">3</span>Morbi leo risus<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <span class="label_num label_num_n">4</span>Porta ac consectetur ac<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <span class="label_num label_num_n">5</span>Vestibulum at eros<span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(300)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(200)</span>
-                                    </li>
+                                <%
+                                    for(var i in MatlabCodes) {
+                                %>
+                                        <li class="list-group-item" data-id="<%=MatlabCodes[i]._id%>">
+                                            <span class="label_num label_num_1"><%=(parseInt(i)+1)%></span><%=MatlabCodes[i].intro%><span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(<%=MatlabCodes[i].lookover%>)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(<%=MatlabCodes[i].like%>)</span>
+                                        </li>
+                                <%    
+                                    }
+                                %>    
                                 </ul>
                             </div>
                         </div>
@@ -231,10 +164,15 @@
         <% include ../components/footer.html %>
     </div>
     <script type="text/javascript">
+        $(".list-group > li").click(function(){
+            window.location.href="/code/content?id=" + $(this).data('id');
+        });
         $("#code-type span").click(function () {
-            if ($(this).hasClass('active')) { } else if ($(this).index() == $(".code-type span").length - 1) {
-                window.location.href = "http://baidu.com";
-            } else {
+            if ($(this).hasClass('active')) { } 
+            //     else if ($(this).index() == $(".code-type span").length - 1) {
+            //     window.location.href = "http://baidu.com";
+            // } 
+            else {
                 $(this).addClass('active').siblings().removeClass('active');
                 $(".classify-code-list ul").eq($(this).index()).slideDown().siblings().slideUp();
             }

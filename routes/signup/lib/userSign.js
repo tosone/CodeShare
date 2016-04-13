@@ -46,7 +46,6 @@ module.exports = function(req, response) {
                             req.session.email = email;
                             req.session.name = user.name;
                             req.session.activeString = activeString;
-                            console.log(activeString);
                             sendEmail(user._id, email, "active", activeString);
                             response.json({
                                 code: 200

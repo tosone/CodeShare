@@ -2,11 +2,9 @@
 //返回用户tags列表
 module.exports = (context) => {
     let Code = context.model.code;
-    return (userid) => {
+    return (condition) => {
         return new Promise((resolve, reject) => {
-            Code.find({
-                user: userid
-            }, (err, val) => {
+            Code.find(condition, (err, val) => {
                 var tags = [];
                 for (var data of val) {
                     for (var tag of data.tags) {

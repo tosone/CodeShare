@@ -2,8 +2,9 @@
 module.exports = function(req, res) {
     let userid = req.session.userid;
     let api = req.api;
-    api.userLangs(userid).then(languages => {
-        api.userTags(userid).then(tags => {
+
+    api.langs({ user: userid }).then(languages => {
+        api.tags({ user: userid }).then(tags => {
             api.codeList({ user: userid }, { 'timestamp': 'desc' }, 1).then(newCodes => {
                 api.pages({ user: userid }).then(page => {
                     res.render('code/list', {

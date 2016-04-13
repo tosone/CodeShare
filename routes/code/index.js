@@ -9,6 +9,7 @@ router.get('/history', require('./lib/history'));
 router.get('/compare', require('./lib/compare'));
 
 router.get('/like', require('./lib/like'));
+router.get('/delete',require('./lib/delete'));
 
 router.post('/postAdd', require('./lib/postAdd'));
 router.post('/postEdit', require('./lib/postEdit'));

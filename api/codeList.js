@@ -3,6 +3,7 @@
 module.exports = (context) => {
     const Code = context.model.code;
     const config = context.config;
+    
     return function(condition,sort, page) {
         return new Promise(function(resolve, reject) {
             Code.find()

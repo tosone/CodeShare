@@ -14,3 +14,7 @@ $("#resend").click(function() {
         }
     })
 });
+
+$("#succ").click(function() {
+    window.location.href = "/";
+})
