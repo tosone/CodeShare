@@ -44,10 +44,34 @@
     	var codeid = "<%=codeid%>";
     	var codefrom = `<%=codefrom%>`;
     	var codeto = `<%=codeto%>`;
-    	var mode = "ace/mode/javascript";
+    	var mode = "ace/mode/<%=lang%>";
     </script>    
     <script type="text/javascript" src="/js/code.js"></script>
     <script type="text/javascript" src="/js/compare.js"></script>
+    <script>
+    
+        var aceDiffer = new AceDiff({
+            mode: mode,
+            showConnectors: true,
+            theme: "ace/theme/github",
+            diffGranularity: "specific",
+            left: {
+                id: "acediff-left-editor",
+                content: `<%-codefrom%>`,
+                editable: false,
+                copyLinkEnabled: false
+            },
+            right: {
+                id: "acediff-right-editor",
+                content: `<%-codeto%>`,
+                editable: false,
+                copyLinkEnabled: false
+            },
+            classes: {
+                gutterID: "acediff-gutter"
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -20,56 +20,65 @@ const app = express();
 mongoose.connect(config.mongoURL);
 require('./models')(mongoose);
 app.use(session({
-  store: new MongoStore({
-    url: config.mongoURL,
-    ttl: config.cookieMaxAge
-  }),
-  name: "sessionid",
-  secret: config.cookieSecret,
-  resave: true,
-  saveUninitialized: true,
-  cookie: {
-    path: '/',
-    httpOnly: false,
-    secure: false,
-    maxAge: config.cookieMaxAge
-  },
-  rolling: true,
-  unset: "destroy"
+    store: new MongoStore({
+        url: config.mongoURL,
+        ttl: config.cookieMaxAge
+    }),
+    name: "sessionid",
+    secret: config.cookieSecret,
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+        path: '/',
+        httpOnly: false,
+        secure: false,
+        maxAge: config.cookieMaxAge
+    },
+    rolling: true,
+    unset: "destroy"
 }));
 app.use(cookieParser());
 app.use(morgan('dev'));
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-  extended: true
+    extended: true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.html', ejs.__express);
 app.set('view engine', 'html');
 app.use((req, res, next) => {
-  req.config = config;
-  req.util = library.util;
-  req.qiniu = library.qiniu;
-  req.model = mongoose.models;
-  req.api = api({
-    util: library.util,
-    model: mongoose.models,
-    config: config,
-    valiableLang: library.valiableLang
-  });
-  req.valiableLang = library.valiableLang;
-  req.sendEmail = library.sendEmail(mongoose.models);
-  next();
+    req.config = config;
+    req.util = library.util;
+    req.qiniu = library.qiniu;
+    req.model = mongoose.models;
+    req.api = api({
+        util: library.util,
+        model: mongoose.models,
+        config: config,
+        valiableLang: library.valiableLang
+    });
+    req.valiableLang = library.valiableLang;
+    req.sendEmail = library.sendEmail(mongoose.models);
+    if (req.session.name) {
+        next();
+    } else {
+        if (req.url.indexOf("/code/") != -1) {
+            res.redirect("/");
+        } else {
+            next();
+        }
+    }
+
 });
 require('./routes')(app);
-http.createServer(app).listen(config.PORT, function () {
-  console.log('Http server listening at http://127.0.0.1:' + config.PORT + '.');
+http.createServer(app).listen(config.PORT, function() {
+    console.log('Http server listening at http://127.0.0.1:' + config.PORT + '.');
 });
 https.createServer({
-  key: fs.readFileSync('./pem/privatekey.pem'),
-  cert: fs.readFileSync('./pem/certificate.pem')
-}, app).listen(443, function () {
-  console.log('Https server listening at https://127.0.0.1:443.');
+    key: fs.readFileSync('./pem/privatekey.pem'),
+    cert: fs.readFileSync('./pem/certificate.pem')
+}, app).listen(443, function() {
+    console.log('Https server listening at https://127.0.0.1:443.');
 });

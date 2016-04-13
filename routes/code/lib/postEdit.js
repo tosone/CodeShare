@@ -33,6 +33,7 @@ module.exports = function(req, res) {
                 let icodeContent = new CodeContent({
                     content: content
                 });
+                console.log(icodeContent)
                 Code.findByIdAndUpdate(id, {
                     intro: intro,
                     tags: tags.split(','),
@@ -45,16 +46,27 @@ module.exports = function(req, res) {
                         });
                     } else {
                         code.content.push(icodeContent._id);
-                        code.save((err) => {
+                        icodeContent.save((err) => {                            
                             if (err) {
+                                console.log(err);
                                 res.json({
-                                    code: 200
+                                    code: 500
                                 });
                             } else {
-                                res.json({
-                                    code: 200
+                                code.save((err) => {
+                                    if (err) {
+                                        console.log(err);
+                                        res.json({
+                                            code: 500
+                                        });
+                                    } else {
+                                        res.json({
+                                            code: 200
+                                        });
+                                    }
                                 });
                             }
+
                         });
                     }
                 });

@@ -1,9 +1,10 @@
 $("#codelike").click(function() {
+    var _this = $(this);
     $.get("/code/like", {
         id: codeid
     }, function(data) {
         if (data.code == 200) {
-            console.log("succ")
+            _this.html("赞：" + data.msg);
         } else if (data.code == 515) {
             console.log("点赞过");
         } else if (data.code == 501) {

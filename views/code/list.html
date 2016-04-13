@@ -6,74 +6,78 @@
     <title>
         <%=title%>
     </title>
-    <!-- build:css css/addcode.css -->
     <link rel="stylesheet" type="text/css" href="/src/style.css">
-    <!-- endbuild -->
 </head>
 
 <body>    
     <% include ../components/menu.html %>
     <div class="container">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <span class="show-class active" id="newcode">最新代码</span>
-                <span class="show-class" id="welcomecode">最热代码</span>
-                <span class="dropdown" id="lang">
-                    <span class="show-class dropdown-toggle"  id="langDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Language: All</span>
-                    <ul class="dropdown-menu" aria-labelledby="langDropdown">
-                        <%
-                            for(var i in lang) {
-                                for(var j in lang[i]){
-                        %>
-                                    <li data-lang="<%=j%>"><a href="javascript:void(0);"><%=lang[i][j]%></a></li>
-                        <%
+    <div class="row">
+        <div class="col-md-3">
+            <% include ./components/userProfile.html %>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="show-class active" id="newcode">最新代码</span>
+                    <span class="show-class" id="welcomecode">最热代码</span>
+                    <span class="dropdown" id="lang">
+                        <span class="show-class dropdown-toggle"  id="langDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Language: All</span>
+                        <ul class="dropdown-menu" aria-labelledby="langDropdown">
+                            <%
+                                for(var i in lang) {
+                                    for(var j in lang[i]){
+                            %>
+                                        <li data-lang="<%=j%>"><a href="javascript:void(0);"><%=lang[i][j]%></a></li>
+                            <%
+                                    }
                                 }
+                            %>
+                        </ul>
+                    </span>
+                    <span class="dropdown" id="tags">
+                        <span class="show-class dropdown-toggle"  id="tagsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Tags: All</span>
+                        <ul class="dropdown-menu" aria-labelledby="tagsDropdown">
+                            <%
+                                for(i in tags) {
+                            %>
+                                    <li data-tag="<%=tags[i]%>"><a href="javascript:void(0);"><%=tags[i]%></a></li>
+                            <%
+                                }
+                            %>
+                        </ul>
+                    </span>
+                </div>
+                <div class="panel-body con_title_list">
+                    <ul class="list-group title_list" id="codelist">
+                        <%
+                            for(var i in newCode) {
+                        %>
+                            <li class="list-group-item" data-id="<%=newCode[i]["_id"]%>">
+                                <%=newCode[i]["intro"]%>&nbsp;
+                                <span class="small"><%=moment(newCode[i]["timestamp"]).format('YYYY-MM-DD HH:mm:ss')%></span>
+                                <span class="pull-right title_right">
+                                    <span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(<%=newCode[i]["lookover"]%>)&nbsp;&nbsp;
+                                    <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(<%=newCode[i]["like"]%>)
+                                </span>
+                            </li>
+                        <%
                             }
                         %>
                     </ul>
-                </span>
-                <span class="dropdown" id="tags">
-                    <span class="show-class dropdown-toggle"  id="tagsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Tags: All</span>
-                    <ul class="dropdown-menu" aria-labelledby="tagsDropdown">
-                        <%
-                            for(i in tags) {
-                        %>
-                                <li data-tag="<%=tags[i]%>"><a href="javascript:void(0);"><%=tags[i]%></a></li>
-                        <%
-                            }
-                        %>
-                    </ul>
-                </span>
+                </div>
             </div>
-            <div class="panel-body con_title_list">
-                <ul class="list-group title_list" id="codelist">
-                    <%
-                        for(var i in newCode) {
-                    %>
-                        <li class="list-group-item" data-id="<%=newCode[i]["_id"]%>">
-                            <%=newCode[i]["intro"]%>&nbsp;
-                            <span class="small"><%=new Date(newCode[i]["timestamp"]).getTime()%></span>
-                            <span class="pull-right title_right">
-                                <span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(<%=newCode[i]["lookover"]%>)&nbsp;&nbsp;
-                                <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(<%=newCode[i]["like"]%>)
-                            </span>
-                        </li>
-                    <%
-                        }
-                    %>
-                </ul>
+            <div class="well codelist-paging">
+                <a href="javascript:void(0);" id="page-home">首页</a>&nbsp;&nbsp;<a href="javascript:void(0);" id="page-prev">上一页</a>&nbsp;&nbsp;<span id="cPage">1</span>&nbsp;/&nbsp;<span id="tPage"><%=page%></span>&nbsp;&nbsp;<a href="javascript:void(0);" id="page-next">下一页</a>&nbsp;&nbsp;<a href="javascript:void(0);" id="page-last">尾页</a>
             </div>
         </div>
-        <div class="well codelist-paging">
-            <a href="javascript:void(0);" id="page-home">首页</a>&nbsp;&nbsp;<a href="javascript:void(0);" id="page-prev">上一页</a>&nbsp;&nbsp;<span id="cPage">1</span>&nbsp;/&nbsp;<span id="tPage"><%=page%></span>&nbsp;&nbsp;<a href="javascript:void(0);" id="page-next">下一页</a>&nbsp;&nbsp;<a href="javascript:void(0);" id="page-last">尾页</a>
-        </div>
+    </div>
+            
         <% include ../components/footer.html %>
     </div>
 
-    <!-- build:js js/addcode.js -->
     <script type="text/javascript" src="/jquery/jquery.js"></script>
     <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
-    <!-- endbuild -->
     <script type="text/javascript">
         var type = "newcode";//newcode welcomecode lang tags
         var paramsData={};
@@ -83,11 +87,10 @@
             var $codelist = $("#codelist");
             $codelist.html("");
             var codelist = data.codelist;
-            console.log(codelist)
             for(var i in codelist) {
                 $codelist.append(['<li class="list-group-item" data-id="'+codelist[i]["_id"]+'">',
                     codelist[i].intro+'&nbsp;',
-                    '<span class="small">' + (new Date(codelist[i].timestamp).getTime()).toString() + '</span>',
+                    '<span class="small">' + (new Date(codelist[i].timestamp).toISOString().replace(/(.*)T([\d:]+).*/, '$1 $2')).toString() + '</span>',
                     '<span class="pull-right title_right">',
                     '<span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看('+codelist[i]["lookover"]+')&nbsp;&nbsp;',
                     '<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞('+codelist[i]["like"]+')',

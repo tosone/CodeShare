@@ -65,7 +65,7 @@ $(function () {
                             } else if (data.code == 200) {
                                 $("#modalDialog h4").html("恭喜您");
                                 $("#modalDialog .modal-body").html("注册成功！");
-                                $("#modalDialog .modal-footer").html("<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" onclick=\"window.location.href='sign/active'\">验证邮箱</button><button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" onclick=\"window.location.href='/'\">去我们的首页</button>");
+                                $("#modalDialog .modal-footer").html("<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" onclick=\"window.location.href='/'\">去我们的首页</button>");
                                 $("#modalDialog").modal("show");
                             }
                         }, 'json');

@@ -106,8 +106,8 @@
                             <div class="code-type" id="code-type">
                                 <span class="active">C/C++</span>
                                 <span>JavaScript</span>
-                                <span>Python</span>
                                 <span>Java</span>
+                                <span>Python</span>
                                 <span>Matlab</span>
                             </div>
                             <div class="classify-code-list">
@@ -139,6 +139,17 @@
                                 %>
                                         <li class="list-group-item" data-id="<%=JavaCodes[i]._id%>">
                                             <span class="label_num label_num_1"><%=(parseInt(i)+1)%></span><%=JavaCodes[i].intro%><span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(<%=JavaCodes[i].lookover%>)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(<%=JavaCodes[i].like%>)</span>
+                                        </li>
+                                <%    
+                                    }
+                                %>    
+                                </ul>
+                                <ul class="list-group">
+                                <%
+                                    for(var i in PyCodes) {
+                                %>
+                                        <li class="list-group-item" data-id="<%=PyCodes[i]._id%>">
+                                            <span class="label_num label_num_1"><%=(parseInt(i)+1)%></span><%=PyCodes[i].intro%><span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(<%=PyCodes[i].lookover%>)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(<%=PyCodes[i].like%>)</span>
                                         </li>
                                 <%    
                                     }

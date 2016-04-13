@@ -95,10 +95,11 @@
                     intro: intro
                 },function(data){
                     if(data.code == 200){
-                        $("#modalDialog h4").html("请注意");
-                        $("#modalDialog .modal-body").html("分享成功！");
-                        $("#modalDialog .modal-footer").html("<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">我知道了</button>");
-                        $("#modalDialog").modal("show");
+                        window.location.href="/code/list";
+                        // $("#modalDialog h4").html("请注意");
+                        // $("#modalDialog .modal-body").html("分享成功！");
+                        // $("#modalDialog .modal-footer").html("<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">我知道了</button>");
+                        // $("#modalDialog").modal("show");
                     }else{
                         $("#modalDialog h4").html("请注意");
                         $("#modalDialog .modal-body").html("分享失败，参数无效！");

@@ -22,7 +22,7 @@ module.exports = function(req, res, next) {
                                     console.log(err);
                                     res.json({ code: 522 });
                                 } else {
-                                    res.json({ code: 200 });
+                                    res.json({ code: 200, msg: code.like });
                                 }
                             })
                         });

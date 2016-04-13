@@ -109,12 +109,13 @@
                             $("#modalfooter").html("<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">我知道了</button>");
                             $("#modal").modal("show");
                         } else if (data.code == 200) {
-                            $("#id_div").removeClass("has-success").addClass("has-warning");
-                            $("#id_alert").show().removeClass("alert-success").addClass("alert-danger").html("用户名已注册！");
-                            $("#modaltitle").html("恭喜您");
-                            $("#modalcontent").html("登录成功！");
-                            $("#modal").modal("show");
-                            $("#modalfooter").html("<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">我知道了</button><button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" onclick=\"window.location.href='http://baidu.com'\">去我们的首页</button>");
+                            window.location.href="/";
+                            // $("#id_div").removeClass("has-success").addClass("has-warning");
+                            // $("#id_alert").show().removeClass("alert-success").addClass("alert-danger").html("用户名已注册！");
+                            // $("#modaltitle").html("恭喜您");
+                            // $("#modalcontent").html("登录成功！");
+                            // $("#modal").modal("show");
+                            // $("#modalfooter").html("<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">我知道了</button><button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" onclick=\"window.location.href='http://baidu.com'\">去我们的首页</button>");
                         }
                     })
                 }

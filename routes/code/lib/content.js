@@ -7,6 +7,7 @@ module.exports = function(req, res) {
     const Code = req.model.code;
     const name = req.session.name;
     const Comment = req.model.codeComment;
+    const User = req.model.user;
     const valiableLang = req.valiableLang;
     if (codeid) {
         Code.findById(codeid)
@@ -44,9 +45,14 @@ module.exports = function(req, res) {
                                 if (err) {
                                     res.redirect('/');
                                 } else {
+                                    code.lookover += 1
+                                    code.save();
+                                    User.findById(code.user._id, (err, user) => {
+                                        user.score += 1;
+                                        user.save();
+                                    });
                                     let isEdit = false;
                                     if (code.user._id == req.session.userid) isEdit = true;
-                                    // console.log(comments)
                                     res.render('code/content', {
                                         title: '代码详情 - ' + name,
                                         code: code,
