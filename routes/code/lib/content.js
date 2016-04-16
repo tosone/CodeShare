@@ -56,6 +56,8 @@ module.exports = function(req, res) {
                                     res.render('code/content', {
                                         title: '代码详情 - ' + name,
                                         code: code,
+                                        codeversion: code.content[0]._id,
+                                        content: code.content[0].content,
                                         valiableLang: valiableLang,
                                         user: name,
                                         userid: req.session.userid,

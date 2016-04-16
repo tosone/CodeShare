@@ -21,4 +21,4 @@ $("#history").click(function() {
 $("#compare").click(function() {
     console.log($("#from").val() + $("#to").val());
     window.location.href = "/code/compare?id=" + codeid + "&from=" + $("#from").val() + "&to=" + $("#to").val();
-})
+});

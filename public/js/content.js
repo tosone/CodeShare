@@ -7,7 +7,7 @@ $(".deleteCode").click(function() {
             $("#modalDialog").modal('show');
             $("#modalDialog .modal-title").html("恭喜你！");
             $("#modalDialog .modal-body").html("恭喜你删除成功！");
-            $("#modalDialog .modal-footer").html("<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" onclick=\"window.location.href='/code/add'\">添加代码片段</button>&nbsp;&nbsp;&nbsp;<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"commit\">确认</button > ");
+            $("#modalDialog .modal-footer").html("<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" onclick=\"window.location.href='/code/add'\">添加代码片段</button>&nbsp;&nbsp;&nbsp;<button type=\"button\" class=\"btn btn-default\" onclick=\"window.location.href='/code/list'\" data-dismiss=\"modal\" id=\"commit\">确认</button > ");
         } else {
             $("#modalDialog").modal('show');
             $("#modalDialog .modal-title").html("很遗憾！");
@@ -107,4 +107,19 @@ $(".code-png").click(function() {
     $("#modalDialog .modal-title").html("请扫描二维码");
     $("#modalDialog .modal-body").html("<img style=\"margin: 0 auto;display: block;\" src='" + qr + "' />");
     $("#modalDialog .modal-footer").html("");
-})
+});
+$(".fork").click(function() {
+    $.get("/code/fork", { id: codeid, version: codeversion }, function(data) {
+        if (data.code == 200) {
+            $("#modalDialog").modal('show');
+            $("#modalDialog .modal-title").html("恭喜你");
+            $("#modalDialog .modal-body").html("恭喜你Fork成功。");
+            $("#modalDialog .modal-footer").html("<button onclick=\"window.location.href='/code/content?id=" + data.msg + "'\" class=\"btn btn-default\">查看我的Fork</button>&nbsp;&nbsp;&nbsp;<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"commit\">确认</button>");
+        } else {
+            $("#modalDialog").modal('show');
+            $("#modalDialog .modal-title").html("很遗憾");
+            $("#modalDialog .modal-body").html("Fork失败，请重试。");
+            $("#modalDialog .modal-footer").html("<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"commit\">确认</button>");
+        }
+    });
+});

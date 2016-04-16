@@ -36,7 +36,7 @@
                                 for(i in valiableLang){
                             %>
                                 <option value="<%=i %>"><%=valiableLang[i] %></option>
-                            <%  
+                            <%
                                 }
                             %>
                         </select>
@@ -56,12 +56,10 @@
         <% include ../components/footer.html %>
     </div>
     <% include ../components/modalDialog.html %>
-    <!-- build:js js/addcode.js -->
-    <script type="text/javascript" src="/jquery/jquery.js"></script>
-    <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
-    <script type="text/javascript" src="/javascripts/jquery.tagsinput.js"></script>
+    <script type="text/javascript" src="/jquery/jquery.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/javascripts/jquery.tagsinput.js" charset="utf-8"></script>
     <script type="text/javascript" src="/javascripts/ace/ace.js" charset="utf-8"></script>
-    <!-- endbuild -->
     <script>
         var editor = ace.edit("code_area");
         editor.setTheme("ace/theme/github");

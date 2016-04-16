@@ -61,15 +61,16 @@ app.use((req, res, next) => {
     });
     req.valiableLang = library.valiableLang;
     req.sendEmail = library.sendEmail(mongoose.models);
-    if (req.session.name) {
-        next();
-    } else {
-        if (req.url.indexOf("/code/") != -1) {
-            res.redirect("/");
-        } else {
-            next();
-        }
-    }
+    // if (req.session.name) {
+    //     next();
+    // } else {
+    //     if (req.url.indexOf("/code/") != -1) {
+    //         res.redirect("/");
+    //     } else {
+    //         next();
+    //     }
+    // }
+    next();
 
 });
 require('./routes')(app);

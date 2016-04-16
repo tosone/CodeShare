@@ -4,7 +4,9 @@
 <head>
     <meta charset="utf-8" />
     <title><%=title%></title>
+    <meta name="title" content="我正在看 <%=code.user.name%> 的代码：<%=code.intro.replace(/\n/g, '')%>" />
     <link rel="stylesheet" type="text/css" href="/src/style.css">
+    <link rel="stylesheet" type="text/css" href="/base/share/css/share.min.css">
 </head>
 
 <body>
@@ -21,14 +23,19 @@
                         <input type="text" class="share-script-input" id="shareUrl" disabled>
                         <button class="btn copy" id="copy" data-clipboard-target="#shareUrl">Copy</button>
                         <button class="btn code-png">QR</button>
-                        <button class="btn share-sina-btn">分享至Sina微博</button>
-                        <button class="btn share-qq-btn">分享至QQ空间</button>
                         <%-isEdit?"<button class=\"btn edit\">编辑</button>":""%>
-                        <%-isEdit?"<button class=\"btn deleteCode\">删除</button>":""%>                        
+                        <%-isEdit?"<button class=\"btn deleteCode\">删除</button>":""%>
+                        <%-isEdit?"":"<button class=\"btn fork\">Fork</button>"%>                     
                     </div>
+                    <div class="code-intro">
+                        <%=code.intro%>
+                    </div>                    
                     <div class="code-content-text">
-                        <pre style="min-height:300px" id="codeText"><%=code.content[0].content%></pre>
+                        <pre style="min-height:300px" id="codeText"><%=content%></pre>
                     </div>
+                    <li class="share">
+                        <div class="social-share" data-sites="weibo,qq,qzone,wechat" data-wechat-qrcode-title="请打开微信扫一扫"></div>
+                    </li>
                     <div class="comment">
                         <a class="btn btn-theme" href="javascript:void(0);" id="addComment">添加新的评论</a>
                         <%
@@ -90,15 +97,17 @@
         <% include ../components/footer.html %>
     </div>
     <% include ../components/modalDialog.html %>
-    <script type="text/javascript" src="/jquery/jquery.js"></script>
-    <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
-    <script type="text/javascript" src="/javascripts/jquery.tagsinput.js"></script>
+    <script type="text/javascript" src="/jquery/jquery.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/javascripts/jquery.tagsinput.js" charset="utf-8"></script>
     <script type="text/javascript" src="/javascripts/ace/ace.js" charset="utf-8"></script>
     <script type="text/javascript" src="/javascripts/clipboard.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/base/share/js/jquery.share.min.js"></script>
     <script>
         var qr = "data:image/png;base64,<%=qr%>";
         var codeid = "<%-codeid%>";
         var editor = ace.edit("codeText");
+        var codeversion = "<%-codeversion%>";
         editor.session.setMode("ace/mode/<%=code.lang%>");
         editor.setTheme("ace/theme/github");
         editor.setOptions({
