@@ -14,15 +14,20 @@ const config = require('./webconfig.json');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const MongoStore = require('connect-mongo')(session);
+const RedisStore = require('connect-redis')(session);
 const api = require('./api');
 const library = require('./lib');
 const app = express();
 mongoose.connect(config.mongoURL);
 require('./models')(mongoose);
 app.use(session({
-    store: new MongoStore({
-        url: config.mongoURL,
-        ttl: config.cookieMaxAge
+    store:  new RedisStore({
+        "host": "115.28.87.181",
+        "port": "6379",
+        "ttl": 60 * 60 * 20,
+        "pass": "8541539655",
+        "db": 0,
+        "prefix": "session"
     }),
     name: "sessionid",
     secret: config.cookieSecret,
