@@ -15,7 +15,7 @@
     <% include ../components/menu.html %>
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-9">
                 <div id="ifocus">
                     <div id="ifocus_pic">
                         <div id="ifocus_piclist">
@@ -171,6 +171,30 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-3">
+                <div class="panel">
+                    <div class="panel-heading right-panel" id="right-panel">
+                        <span class="active">热门标签</span>
+                        <span>语言排名</span>
+                    </div>
+                    <div class="panel-body" id="right-panel-show">
+                        <div id="tag-hot">
+                            <ul class="list-group">
+                                <li class="list-group-item">sdf</li>
+                                <li class="list-group-item">sdf</li>
+                                <li class="list-group-item">sdf</li>
+                            </ul>
+                        </div>
+                        <div id="lang-rank">
+                            <ul class="list-group">
+                                <li class="list-group-item">sdf</li>
+                                <li class="list-group-item">sdf</li>
+                                <li class="list-group-item">sdf</li>
+                            </ul>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
         </div>
         <% include ../components/footer.html %>
     </div>
@@ -180,9 +204,6 @@
         });
         $("#code-type span").click(function () {
             if ($(this).hasClass('active')) { } 
-            //     else if ($(this).index() == $(".code-type span").length - 1) {
-            //     window.location.href = "http://baidu.com";
-            // } 
             else {
                 $(this).addClass('active').siblings().removeClass('active');
                 $(".classify-code-list ul").eq($(this).index()).slideDown().siblings().slideUp();
@@ -191,6 +212,12 @@
         $("#show-type span").click(function () {
             if ($(this).hasClass('active')) { } else {
                 $("#show-con>div").eq($(this).index()).slideDown().siblings().slideUp();
+                $(this).addClass('active').siblings().removeClass('active');
+            }
+        });
+        $("#right-panel span").click(function () {
+            if ($(this).hasClass('active')) { } else {
+                $("#right-panel-show>div").eq($(this).index()).slideDown().siblings().slideUp();
                 $(this).addClass('active').siblings().removeClass('active');
             }
         });

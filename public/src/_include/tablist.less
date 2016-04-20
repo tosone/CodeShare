@@ -1,15 +1,13 @@
 .panel { border-color: #ddd; box-shadow: 0 1px 1px rgba(0, 0, 0, .05); background-color: #fff; border: 1px solid #999; border-radius: 0;
     &:before, &:after { display: table; content: " "; }
-
     .panel-heading { font-size: 1.8em; line-height: 2.3; padding-left: 10px; color: #333; background-color: #ffffff; border-bottom: 1px solid #999;
         span { padding: 0 10px; display: inline-block; cursor: pointer; }
         span:hover { background-color: #DEDEDE; }
         .active { background-color: #DEDEDE; }
     }
-
+    .right-panel { font-size: 1.6em; line-height: 2; }
     .panel-body { padding: 0;
         & > div:not(:first-child), .classify-code .classify-code-list ul:not(:first-child) { display: none; }
-
         .list-group {
             .list-group-item { cursor: pointer; font-size: 1.4em; color: #333; position: relative; display: block; padding: 10px 15px; margin-bottom: -1px; background-color: #fff; border: 1px solid #ddd;
                 span { color: #888; }

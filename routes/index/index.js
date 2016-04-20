@@ -1,8 +1,28 @@
 var express = require('express');
 var router = express.Router();
+var co = require('co');
 
 router.get('/', function(req, res) {
     const api = req.api;
+    const model = req.model;
+
+    model.code.aggregate()
+        .group({ _id: "$lang", total: { $sum: 1 } })
+        .limit(6)
+        .sort({
+            total: "desc"
+        })
+        .exec(function(err, ilangs) {
+            var codes = [];
+            for (ilang of ilangs) {
+                co(function*() {
+                    var temp = {};
+                    temp.lang = code;
+                    codes.push(temp);
+                    let code = yield api.codeList({ lang: ilang._id }, { timestamp: 'desc' }, 1);
+                });
+            }
+        });
 
     api.codeList({}, { like: 'desc' }, 1).then((likeCodes) => {
         api.codeList({}, { timestamp: 'desc' }, 1).then((newCodes) => {
