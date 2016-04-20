@@ -1,56 +1,28 @@
-var express = require('express');
-var router = express.Router();
-var co = require('co');
+"use strict";
+const express = require('express');
+const router = express.Router();
+const co = require('co');
 
-router.get('/', function(req, res) {
+router.get('/', function (req, res) {
     const api = req.api;
     const model = req.model;
 
-    model.code.aggregate()
-        .group({ _id: "$lang", total: { $sum: 1 } })
-        .limit(6)
-        .sort({
-            total: "desc"
-        })
-        .exec(function(err, ilangs) {
-            var codes = [];
-            for (ilang of ilangs) {
-                co(function*() {
-                    var temp = {};
-                    temp.lang = code;
-                    codes.push(temp);
-                    let code = yield api.codeList({ lang: ilang._id }, { timestamp: 'desc' }, 1);
-                });
-            }
-        });
+    co(function* () {
+        let likeCodes = yield api.codeList({}, { like: 'desc' }, 1);
+        let newCodes = yield api.codeList({}, { timestamp: 'desc' }, 1);
+        let hotLangContent = yield api.hotLangContent();
+        let hotLangList = yield api.hotLangList();
+        // let hotTags = yield api.hotTags();
 
-    api.codeList({}, { like: 'desc' }, 1).then((likeCodes) => {
-        api.codeList({}, { timestamp: 'desc' }, 1).then((newCodes) => {
-            api.langs({}).then((langs) => {
-                api.codeList({ lang: 'c_cpp' }, { timestamp: 'desc' }, 1).then((CCodes) => {
-                    api.codeList({ lang: 'javascript' }, { timestamp: 'desc' }, 1).then((JSCodes) => {
-                        api.codeList({ lang: 'python' }, { timestamp: 'desc' }, 1).then((PyCodes) => {
-                            api.codeList({ lang: 'java' }, { timestamp: 'desc' }, 1).then((JavaCodes) => {
-                                api.codeList({ lang: 'matlab' }, { timestamp: 'desc' }, 1).then((MatlabCodes) => {
-                                    res.render('index/index', {
-                                        title: "CodeSnippets - 首页",
-                                        user: req.session.name,
-                                        id: req.session.id,
-                                        likeCodes: likeCodes,
-                                        newCodes: newCodes,
-                                        langs: langs,
-                                        CCodes: CCodes,
-                                        JSCodes: JSCodes,
-                                        PyCodes: PyCodes,
-                                        JavaCodes: JavaCodes,
-                                        MatlabCodes: MatlabCodes
-                                    });
-                                });
-                            });
-                        });
-                    });
-                });
-            });
+        // console.log(hotTags);
+        res.render('index/index', {
+            title: "CodeSnippets - 首页",
+            user: req.session.name,
+            id: req.session.id,
+            likeCodes: likeCodes,
+            newCodes: newCodes,
+            codes: hotLangContent,
+            langs: hotLangList
         });
     });
 });

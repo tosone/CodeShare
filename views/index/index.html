@@ -82,7 +82,7 @@
                                 for(var i in likeCodes) {
                             %>
                                     <li class="list-group-item" data-id="<%=likeCodes[i]._id%>">
-                                        <span class="label_num label_num_1"><%=(parseInt(i)+1)%></span><%=likeCodes[i].intro%><span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(<%=likeCodes[i].lookover%>)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(<%=likeCodes[i].like%>)</span>
+                                        <span class="label_num label_num_<%=(i=='0')?'1':(i=='1')?'2':(i=='2')?'3':'n'%>"><%=(parseInt(i)+1)%></span><%=likeCodes[i].intro%><span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(<%=likeCodes[i].lookover%>)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(<%=likeCodes[i].like%>)</span>
                                     </li>
                             <%    
                                 }
@@ -95,7 +95,7 @@
                                 for(var i in newCodes) {
                             %>
                                     <li class="list-group-item" data-id="<%=newCodes[i]._id%>">
-                                        <span class="label_num label_num_1"><%=(parseInt(i)+1)%></span><%=newCodes[i].intro%><span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(<%=newCodes[i].lookover%>)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(<%=newCodes[i].like%>)</span>
+                                        <span class="label_num label_num_<%=(i=='0')?'1':(i=='1')?'2':(i=='2')?'3':'n'%>"><%=(parseInt(i)+1)%></span><%=newCodes[i].intro%><span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(<%=newCodes[i].lookover%>)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(<%=newCodes[i].like%>)</span>
                                     </li>
                             <%    
                                 }
@@ -104,68 +104,38 @@
                         </div>
                         <div class="classify-code">
                             <div class="code-type" id="code-type">
-                                <span class="active">C/C++</span>
-                                <span>JavaScript</span>
-                                <span>Java</span>
-                                <span>Python</span>
-                                <span>Matlab</span>
+                                <%
+                                    for(var i in langs) {
+                                        if(i == 0) {
+                                %>
+                                            <span class="active"><%=langs[i]%></span>
+                                <%    
+                                        } else {
+                                %>
+                                            <span><%=langs[i]%></span>
+                                <%
+                                        }
+                                    }
+                                %>
                             </div>
                             <div class="classify-code-list">
-                                <ul class="list-group">
                                 <%
-                                    for(var i in CCodes) {
+                                    for(var i in codes) {
                                 %>
-                                        <li class="list-group-item" data-id="<%=CCodes[i]._id%>">
-                                            <span class="label_num label_num_1"><%=(parseInt(i)+1)%></span><%=CCodes[i].intro%><span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(<%=CCodes[i].lookover%>)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(<%=CCodes[i].like%>)</span>
-                                        </li>
-                                <%    
+                                       <ul class="list-group">
+                                <%
+                                            for(var j in codes[i]) {
+                                %>
+                                                <li class="list-group-item" data-id="<%=codes[i][j]._id%>">
+                                                    <span class="label_num label_num_<%=(j=='0')?'1':(j=='1')?'2':(j=='2')?'3':'n'%>"><%=(parseInt(j)+1)%></span><%=codes[i][j].intro%><span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(<%=codes[i][j].lookover%>)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(<%=codes[i][j].like%>)</span>
+                                                </li>
+                                <%
+                                            }
+                                %>
+                                       </ul>
+                                <%
                                     }
                                 %>
-                                </ul>
-                                <ul class="list-group">
-                                <%
-                                    for(var i in JSCodes) {
-                                %>
-                                        <li class="list-group-item" data-id="<%=JSCodes[i]._id%>">
-                                            <span class="label_num label_num_1"><%=(parseInt(i)+1)%></span><%=JSCodes[i].intro%><span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(<%=JSCodes[i].lookover%>)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(<%=JSCodes[i].like%>)</span>
-                                        </li>
-                                <%    
-                                    }
-                                %>
-                                </ul>
-                                <ul class="list-group">
-                                <%
-                                    for(var i in JavaCodes) {
-                                %>
-                                        <li class="list-group-item" data-id="<%=JavaCodes[i]._id%>">
-                                            <span class="label_num label_num_1"><%=(parseInt(i)+1)%></span><%=JavaCodes[i].intro%><span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(<%=JavaCodes[i].lookover%>)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(<%=JavaCodes[i].like%>)</span>
-                                        </li>
-                                <%    
-                                    }
-                                %>    
-                                </ul>
-                                <ul class="list-group">
-                                <%
-                                    for(var i in PyCodes) {
-                                %>
-                                        <li class="list-group-item" data-id="<%=PyCodes[i]._id%>">
-                                            <span class="label_num label_num_1"><%=(parseInt(i)+1)%></span><%=PyCodes[i].intro%><span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(<%=PyCodes[i].lookover%>)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(<%=PyCodes[i].like%>)</span>
-                                        </li>
-                                <%    
-                                    }
-                                %>    
-                                </ul>
-                                <ul class="list-group">
-                                <%
-                                    for(var i in MatlabCodes) {
-                                %>
-                                        <li class="list-group-item" data-id="<%=MatlabCodes[i]._id%>">
-                                            <span class="label_num label_num_1"><%=(parseInt(i)+1)%></span><%=MatlabCodes[i].intro%><span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(<%=MatlabCodes[i].lookover%>)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(<%=MatlabCodes[i].like%>)</span>
-                                        </li>
-                                <%    
-                                    }
-                                %>    
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -173,23 +143,19 @@
             </div>
             <div class="col-md-3">
                 <div class="panel">
-                    <div class="panel-heading right-panel" id="right-panel">
-                        <span class="active">热门标签</span>
-                        <span>语言排名</span>
+                    <div class="panel-heading right-panel">
+                        <span class="active">语言排名</span>
                     </div>
-                    <div class="panel-body" id="right-panel-show">
-                        <div id="tag-hot">
-                            <ul class="list-group">
-                                <li class="list-group-item">sdf</li>
-                                <li class="list-group-item">sdf</li>
-                                <li class="list-group-item">sdf</li>
-                            </ul>
-                        </div>
+                    <div class="panel-body">
                         <div id="lang-rank">
                             <ul class="list-group">
-                                <li class="list-group-item">sdf</li>
-                                <li class="list-group-item">sdf</li>
-                                <li class="list-group-item">sdf</li>
+                                <%
+                                    for(var i in langs) {
+                                %>
+                                        <li class="list-group-item"><span class="label_num label_num_<%=(i=='0')?'1':(i=='1')?'2':(i=='2')?'3':'n'%>"><%=(parseInt(i)+1)%></span><%=langs[i]%></li>
+                                <%    
+                                    }
+                                %>
                             </ul>
                         </div>                        
                     </div>
@@ -212,12 +178,6 @@
         $("#show-type span").click(function () {
             if ($(this).hasClass('active')) { } else {
                 $("#show-con>div").eq($(this).index()).slideDown().siblings().slideUp();
-                $(this).addClass('active').siblings().removeClass('active');
-            }
-        });
-        $("#right-panel span").click(function () {
-            if ($(this).hasClass('active')) { } else {
-                $("#right-panel-show>div").eq($(this).index()).slideDown().siblings().slideUp();
                 $(this).addClass('active').siblings().removeClass('active');
             }
         });

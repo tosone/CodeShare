@@ -76,7 +76,6 @@ app.use((req, res, next) => {
     //     }
     // }
     next();
-
 });
 require('./routes')(app);
 http.createServer(app).listen(config.PORT, function() {

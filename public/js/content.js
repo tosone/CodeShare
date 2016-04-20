@@ -33,8 +33,8 @@ $(".comment-footer-delete").click(function() {
         } else {
             console.log(data);
         }
-    })
-})
+    });
+});
 $("#addComment").click(function() {
     $("#modalDialog").modal('show');
     $("#modalDialog .modal-title").html("添加评论");
@@ -115,6 +115,11 @@ $(".fork").click(function() {
             $("#modalDialog .modal-title").html("恭喜你");
             $("#modalDialog .modal-body").html("恭喜你Fork成功。");
             $("#modalDialog .modal-footer").html("<button onclick=\"window.location.href='/code/content?id=" + data.msg + "'\" class=\"btn btn-default\">查看我的Fork</button>&nbsp;&nbsp;&nbsp;<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"commit\">确认</button>");
+        }else if(data.code == 501){
+            $("#modalDialog").modal('show');
+            $("#modalDialog .modal-title").html("很遗憾");
+            $("#modalDialog .modal-body").html("Fork失败，您尚未登录。");
+            $("#modalDialog .modal-footer").html("<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"commit\">确认</button>");
         } else {
             $("#modalDialog").modal('show');
             $("#modalDialog .modal-title").html("很遗憾");
