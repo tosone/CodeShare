@@ -20,7 +20,7 @@ module.exports = (req, res) => {
                     res.render('code/historyList', {
                         title: 'Tosone',
                         valiableLang: valiableLang,
-                        user: req.session,
+                        user: req.session.name,
                         historys: code.content,
                         like: code.like,
                         moment: moment,

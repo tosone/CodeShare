@@ -59,7 +59,7 @@ module.exports = function(req, res) {
                                         codeversion: code.content[0]._id,
                                         content: code.content[0].content,
                                         valiableLang: valiableLang,
-                                        user: req.session,
+                                        user: req.session.name,
                                         userid: req.session.userid,
                                         codeid: codeid,
                                         comments: comments || [],

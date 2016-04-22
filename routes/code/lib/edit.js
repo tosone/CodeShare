@@ -19,7 +19,7 @@ module.exports = (req, res) => {
                     res.render('code/edit', {
                         title: '修改代码',
                         valiableLang: valiableLang,
-                        user: req.session,
+                        user: req.session.name,
                         content: code.content[0].content,
                         lang: code.lang,
                         intro: code.intro,

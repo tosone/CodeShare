@@ -16,7 +16,7 @@ router.get('/', function (req, res) {
         let page = yield api.pages();
         res.render('index/index', {
             title: "CodeSnippets - 首页",
-            user: req.session,
+            user: req.session.name,
             id: req.session.id,
             likeCodes: likeCodes,
             newCodes: newCodes,
@@ -40,7 +40,7 @@ router.get('/list', function (req, res) {
         let page = yield api.pages();
         res.render('index/list', {
             title: "CodeSnippets - 首页",
-            user: req.session,
+            user: req.session.name,
             id: req.session.id,
             likeCodes: likeCodes,
             newCodes: newCodes,
@@ -60,7 +60,7 @@ router.get('/listLang', function (req, res) {
         let hotLangList = yield api.hotLangList();
         res.render('index/listLang', {
             title: "CodeSnippets - 首页",
-            user: req.session,
+            user: req.session.name,
             codes: codes,
             langs: hotLangList,
             lang: valiableLang[lang]

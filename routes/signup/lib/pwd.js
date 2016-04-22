@@ -10,6 +10,6 @@ module.exports = function(req, res) {
     // const email = req.query.email ? req.query.email : req.session.email;
     res.render('signup/pwdBack', {
         title: "密码找回",
-        user: req.session
+        user: req.session.name
     });
 }
