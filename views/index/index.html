@@ -21,28 +21,28 @@
                         <div id="ifocus_piclist">
                             <ul>
                                 <li>
-                                    <a href="###"><img src="/images/1.png" alt=""></a>
+                                    <a href="###"><img src="/images/lunbo/1.jpg" alt=""></a>
                                 </li>
                                 <li>
-                                    <a href="###"><img src="/images/1.png" alt=""></a>
+                                    <a href="###"><img src="/images/lunbo/2.jpg" alt=""></a>
                                 </li>
                                 <li>
-                                    <a href="###"><img src="/images/1.png" alt=""></a>
+                                    <a href="###"><img src="/images/lunbo/3.jpg" alt=""></a>
                                 </li>
                                 <li>
-                                    <a href="###"><img src="/images/1.png" alt=""></a>
+                                    <a href="###"><img src="/images/lunbo/4.jpg" alt=""></a>
                                 </li>
                                 <li>
-                                    <a href="###"><img src="/images/1.png" alt=""></a>
+                                    <a href="###"><img src="/images/lunbo/1.jpg" alt=""></a>
                                 </li>
                                 <li>
-                                    <a href="###"><img src="/images/1.png" alt=""></a>
+                                    <a href="###"><img src="/images/lunbo/2.jpg" alt=""></a>
                                 </li>
                                 <li>
-                                    <a href="###"><img src="/images/1.png" alt=""></a>
+                                    <a href="###"><img src="/images/lunbo/3.jpg" alt=""></a>
                                 </li>
                                 <li>
-                                    <a href="###"><img src="/images/1.png" alt=""></a>
+                                    <a href="###"><img src="/images/lunbo/4.jpg" alt=""></a>
                                 </li>
                             </ul>
                         </div>
@@ -62,14 +62,14 @@
                     </div>
                     <div id="ifocus_btn">
                         <ul>
-                            <li class="current"><img src="/images/1.png" alt=""></li>
-                            <li class="normal"><img src="/images/1.png" alt=""></li>
-                            <li class="normal"><img src="/images/1.png" alt=""></li>
-                            <li class="normal"><img src="/images/1.png" alt=""></li>
-                            <li class="normal"><img src="/images/1.png" alt=""></li>
-                            <li class="normal"><img src="/images/1.png" alt=""></li>
-                            <li class="normal"><img src="/images/1.png" alt=""></li>
-                            <li class="normal"><img src="/images/1.png" alt=""></li>
+                            <li class="current"><img src="/images/lunbo/1.jpg" alt=""></li>
+                            <li class="normal"><img src="/images/lunbo/2.jpg" alt=""></li>
+                            <li class="normal"><img src="/images/lunbo/3.jpg" alt=""></li>
+                            <li class="normal"><img src="/images/lunbo/4.jpg" alt=""></li>
+                            <li class="current"><img src="/images/lunbo/1.jpg" alt=""></li>
+                            <li class="normal"><img src="/images/lunbo/2.jpg" alt=""></li>
+                            <li class="normal"><img src="/images/lunbo/3.jpg" alt=""></li>
+                            <li class="normal"><img src="/images/lunbo/4.jpg" alt=""></li>
                         </ul>
                     </div>
                 </div>
@@ -142,7 +142,18 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="panel">
+                <%
+                    if(user) {
+                %>
+                        <div class="user-profile">
+                            <img src="/images/head/1.png" alt="">
+                            <div class="nickname"><a href="/code/list?id=<%=userinfo._id%>"><%=userinfo.name%></a></div>
+                            <div class="score"><span class="intro">Score：</span><span class="num"><%=userinfo.score%></span></div>
+                        </div>
+                <%    
+                    }
+                %>                
+                <div class="panel" style="margin-top:10px;">
                     <div class="panel-heading right-panel">
                         <span class="active">语言排名</span>
                     </div>
@@ -153,7 +164,7 @@
                                     for(var i in langs) {
                                 %>
                                         <li class="list-group-item"><span class="label_num label_num_<%=(i=='0')?'1':(i=='1')?'2':(i=='2')?'3':'n'%>"><%=(parseInt(i)+1)%></span><%=langs[i]%></li>
-                                <%    
+                                <%
                                     }
                                 %>
                             </ul>

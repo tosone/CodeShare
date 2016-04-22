@@ -3,7 +3,7 @@
         <div class="collapse navbar-collapse" id="nav_bar">
             <ul class="nav navbar-nav" id="nav">
                 <li class="active" id="fontPage"><a href="/">首页</a></li>
-                <li id="snippetRepo"><a href="/code/list">Snippets Repo</a></li>
+                <li id="snippetRepo"><a href="/list">Snippets Repo</a></li>
             </ul>
             <%
                 if (user) {
@@ -33,21 +33,21 @@
     </nav>
 </div>
 <script>
-        function hasClass(obj, cls) {
-            return obj.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
-        }
+    function hasClass(obj, cls) {
+        return obj.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
+    }
 
-        function addClass(obj, cls) {
-            if (!this.hasClass(obj, cls)) obj.className += " " + cls;
-        }
+    function addClass(obj, cls) {
+        if (!this.hasClass(obj, cls)) obj.className += " " + cls;
+    }
 
-        function removeClass(obj, cls) {
-            if (hasClass(obj, cls)) {
-                var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
-                obj.className = obj.className.replace(reg, ' ');
-            }
+    function removeClass(obj, cls) {
+        if (hasClass(obj, cls)) {
+            var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
+            obj.className = obj.className.replace(reg, ' ');
         }
-    if(window.location.pathname.indexOf("code")==1){
+    }
+    if(window.location.pathname.indexOf("code") == 1 || window.location.pathname.indexOf("list")) {
         addClass(document.getElementById("snippetRepo"),"active");
         removeClass(document.getElementById("fontPage"),"active");
     }

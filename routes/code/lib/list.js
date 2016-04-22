@@ -2,7 +2,7 @@
 const moment = require('moment');
 
 module.exports = function(req, res) {
-    const userid = req.query.id ? req.query.id : req.session.userid;
+    const userid = req.query.id;
     const api = req.api;
     const User = req.model.user;
 

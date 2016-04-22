@@ -14,7 +14,11 @@
     <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <% include ./components/userProfile.html %>
+            <div class="user-profile">
+                <img src="/images/head/1.png" alt="">
+                <div class="nickname"><%=userinfo.name%></div>
+                <div class="score"><span class="intro">Score：</span><span class="num"><%=userinfo.score%></span></div>
+            </div>
         </div>
         <div class="col-md-9">
             <div class="panel panel-default">
@@ -26,7 +30,7 @@
                         <ul class="dropdown-menu" aria-labelledby="langDropdown">
                             <%
                                 for(var i in lang) {
-                                    for(var j in lang[i]){
+                                    for(var j in lang[i]) {
                             %>
                                         <li data-lang="<%=j%>"><a href="javascript:void(0);"><%=lang[i][j]%></a></li>
                             <%

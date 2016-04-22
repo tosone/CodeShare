@@ -12,9 +12,7 @@ router.get('/', function (req, res) {
         let newCodes = yield api.codeList({}, { timestamp: 'desc' }, 1);
         let hotLangContent = yield api.hotLangContent();
         let hotLangList = yield api.hotLangList();
-        // let hotTags = yield api.hotTags();
-
-        // console.log(hotTags);
+        let userinfo = req.session.name ? (yield model.user.findById(req.session.userid)) : null;
         res.render('index/index', {
             title: "CodeSnippets - 首页",
             user: req.session.name,
@@ -22,12 +20,13 @@ router.get('/', function (req, res) {
             likeCodes: likeCodes,
             newCodes: newCodes,
             codes: hotLangContent,
-            langs: hotLangList
+            langs: hotLangList,
+            userinfo: userinfo
         });
     });
 });
 
-router.get('/list',function(req, res) {
+router.get('/list', function (req, res) {
     const api = req.api;
     const model = req.model;
 
@@ -36,9 +35,6 @@ router.get('/list',function(req, res) {
         let newCodes = yield api.codeList({}, { timestamp: 'desc' }, 1);
         let hotLangContent = yield api.hotLangContent();
         let hotLangList = yield api.hotLangList();
-        // let hotTags = yield api.hotTags();
-
-        // console.log(hotTags);
         res.render('index/list', {
             title: "CodeSnippets - 首页",
             user: req.session.name,
