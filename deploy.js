@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const child_process = require('child_process');
 const PORT = 8800; //端口
+const Token = "8541539655";
 // pm2 stop CodeShare
 // git reset --hard origin/master
 // git clean -f 
@@ -18,7 +19,7 @@ const server = http.createServer((request, response) => {
     request.on('end', () => {
         let msg = eval("(" + body + ")");
         console.log(msg)
-        if (msg.token == "8541539655") {
+        if (msg.token == Token || msg.secret == Token) {
             new Promise((resolve, reject) => {
                 let spawn = child_process.spawn('sh', ['./deploy.sh']);
                 spawn.stdout.on('data', (data) => {
