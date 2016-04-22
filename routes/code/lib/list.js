@@ -14,7 +14,7 @@ module.exports = function(req, res) {
                         res.render('code/list', {
                             title: '代码片段列表',
                             lang: languages,
-                            user: req.session.name,
+                            user: req.session,
                             newCode: newCodes,
                             tags: tags,
                             page: page,

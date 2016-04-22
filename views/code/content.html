@@ -44,7 +44,7 @@
                         %>
                                     <div class="comment-div" data-commentwrapdiv="<%=comment._id%>">
                                         <div class="comment-wrap">
-                                            <div><a href="/user/profile?id=<%=comment.user._id%>" class="comment-user"><%=comment.user.name%></a><span class="comment-user-timestamp"> (<%=moment(comment.timestamp).format('YYYY/MM/DD HH:mm:ss')%>) </span>:</div>
+                                            <div><a href="/code/list?id=<%=comment.user._id%>" class="comment-user"><%=comment.user.name%></a><span class="comment-user-timestamp"> (<%=moment(comment.timestamp).format('YYYY/MM/DD HH:mm:ss')%>) </span>:</div>
                                             <div class="comment-content" id="<%=comment._id%>"><%=comment.content%></div>
                                             <div class="comment-footer">
                                                 <a href="javascript:void(0);" class="comment-footer-reply" data-commentid="<%=comment._id%>" data-uid="<%=comment.user._id%>" data-divid="<%=comment.div%>" data-name="<%=comment.user.name%>">回复</a>
@@ -63,7 +63,7 @@
                                         if(!cmt.first && cmt.div == comment.div) {
                         %>
                                             <div class="comment-wrap" data-commentdiv="<%=cmt._id%>">
-                                                <div><a href="/user/profile?id=<%=cmt.user._id%>" class="comment-user"><%=cmt.user.name%></a> 回复 <a href="/user/profile?id=<%=cmt.reply._id%>" class="comment-user"><%=cmt.reply.name%></a><span class="comment-user-timestamp"> (<%=moment(cmt.timestamp).format('YYYY/MM/DD HH:mm:ss')%>) </span>:</div>
+                                                <div><a href="/code/list?id=<%=cmt.user._id%>" class="comment-user"><%=cmt.user.name%></a> 回复 <a href="/code/list?id=<%=cmt.reply._id%>" class="comment-user"><%=cmt.reply.name%></a><span class="comment-user-timestamp"> (<%=moment(cmt.timestamp).format('YYYY/MM/DD HH:mm:ss')%>) </span>:</div>
                                                 <div class="comment-content" id="<%=cmt._id%>"><%=cmt.content%></div>
                                                 <div class="comment-footer">
                                                     <a href="javascript:void(0);" class="comment-footer-reply" data-commentid="<%=cmt._id%>" data-uid="<%=cmt.user._id%>" data-divid="<%=comment.div%>" data-name="<%=cmt.user.name%>">回复</a>

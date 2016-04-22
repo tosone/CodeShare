@@ -4,6 +4,6 @@ module.exports = (req, res) => {
     res.render('code/add', {
         title: 'Tosone',
         valiableLang: valiableLang,
-        user: req.session.name
+        user: req.session
     });
 }

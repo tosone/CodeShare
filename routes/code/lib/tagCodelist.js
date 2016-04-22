@@ -3,12 +3,10 @@
 module.exports = function(req, res) {
     const tag = req.query.tag;
     const api = req.api;
-    const userid = req.session.userid;
+    const userid = req.query.id;
+    const condition = userid ? { user: userid, tags: tag }:{tags: tag};
     api.codeList({ user: userid, tags: tag }, { 'timestamp': 'desc' }, req.query.page || 1).then(codelist => {
-        api.pages({
-            tags: tag,
-            user: userid
-        }).then(page => {
+        api.pages(condition).then(page => {
             res.json({
                 codelist: codelist,
                 page: page

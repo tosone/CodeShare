@@ -9,6 +9,6 @@
     "mailApiUser": "tosone",
     "ACCESS_KEY": "cIwkggzjgQA6wWAQw0pGt3N97452rBctOaxV5TG1",
     "SECRET_KEY": "yXN59L0e1BZoj_oHqw9uWVJ9-J6Lk0Ntp_1PGwWi",
-    "codepaging": 20,
+    "codepaging": 10,
     "jsonwebtoken": "8541539655"
 }

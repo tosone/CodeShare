@@ -11,7 +11,7 @@ module.exports = (req, res) => {
         req.api.codeByVersion(codeid, historyid).then((code) => {
             res.render('code/history', {
                 title: 'Tosone',
-                user: req.session.name,
+                user: req.session,
                 content: code.content[0].content,
                 like: code.like,
                 codeid: codeid,

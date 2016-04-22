@@ -17,10 +17,10 @@
         <div class="row">
             <div class="col-md-9">
                 <div class="panel">
-                    <div class="panel-heading" id="show-type"><span class="active">一周热门排行</span><span>最新代码</span><span>分类代码</span></div>
+                    <div class="panel-heading" id="show-type"><span class="active" data-type="welcomecode">一周热门排行</span><span data-type="newcode">最新代码</span><span data-type="lang">分类代码</span></div>
                     <div class="panel-body" id="show-con">
                         <div class="week-hot">
-                            <ul class="list-group">
+                            <ul class="list-group" id="welcomecode">
                             <%
                                 for(var i in likeCodes) {
                             %>
@@ -33,7 +33,7 @@
                             </ul>
                         </div>
                         <div class="new-code">
-                            <ul class="list-group">
+                            <ul class="list-group" id="newcode">
                             <%
                                 for(var i in newCodes) {
                             %>
@@ -51,11 +51,11 @@
                                     for(var i in langs) {
                                         if(i == 0) {
                                 %>
-                                            <span class="active"><%=langs[i]%></span>
+                                            <span class="active" data-lang="<%=langs[i].langname%>"><%=langs[i].lang%></span>
                                 <%    
                                         } else {
                                 %>
-                                            <span><%=langs[i]%></span>
+                                            <span data-lang="<%=langs[i].langname%>"><%=langs[i].lang%></span>
                                 <%
                                         }
                                     }
@@ -65,7 +65,7 @@
                                 <%
                                     for(var i in codes) {
                                 %>
-                                       <ul class="list-group">
+                                       <ul class="list-group" id="lang">
                                 <%
                                             for(var j in codes[i]) {
                                 %>
@@ -83,6 +83,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="well codelist-paging">
+                    <a href="javascript:void(0);" id="page-home">首页</a>&nbsp;&nbsp;<a href="javascript:void(0);" id="page-prev">上一页</a>&nbsp;&nbsp;<span id="cPage">1</span>&nbsp;/&nbsp;<span id="tPage"><%=page%></span>&nbsp;&nbsp;<a href="javascript:void(0);" id="page-next">下一页</a>&nbsp;&nbsp;<a href="javascript:void(0);" id="page-last">尾页</a>
+                </div>
             </div>
             <div class="col-md-3">
                 <div class="panel">
@@ -95,7 +98,7 @@
                                 <%
                                     for(var i in langs) {
                                 %>
-                                        <li class="list-group-item"><span class="label_num label_num_<%=(i=='0')?'1':(i=='1')?'2':(i=='2')?'3':'n'%>"><%=(parseInt(i)+1)%></span><%=langs[i]%></li>
+                                        <li class="list-group-item" data-name="<%=langs[i].langname%>"><span class="label_num label_num_<%=(i=='0')?'1':(i=='1')?'2':(i=='2')?'3':'n'%>"><%=(parseInt(i)+1)%></span><%=langs[i].lang%></li>
                                 <%    
                                     }
                                 %>
@@ -103,15 +106,21 @@
                         </div>                        
                     </div>
                 </div>
-            </div>
+            </div>            
         </div>
         <% include ../components/footer.html %>
     </div>
     <script type="text/javascript">
+        var type = "welcomecode";//newcode welcomecode lang tags
+        var currpage = 1;
+        var totalpage = <%=page%>;
+        var paramsData = {};
+        var lang = "<%=langs[0].lang%>";
         $(".list-group > li").click(function(){
             window.location.href="/code/content?id=" + $(this).data('id');
         });
         $("#code-type span").click(function () {
+            lang = $(this).data("lang");
             if ($(this).hasClass('active')) { } 
             else {
                 $(this).addClass('active').siblings().removeClass('active');
@@ -119,40 +128,77 @@
             }
         });
         $("#show-type span").click(function () {
+            type = $(this).data("type");
+            if(type == "lang") paramsData = {lang:lang}; 
             if ($(this).hasClass('active')) { } else {
                 $("#show-con>div").eq($(this).index()).slideDown().siblings().slideUp();
                 $(this).addClass('active').siblings().removeClass('active');
             }
         });
-        var index = 0, intval;
-        $("#ifocus_btn>ul>li").hover(function () {
-            window.clearInterval(intval);
-            if ($(this).hasClass("current")) { } else {
-                if ($("#ifocus_piclist").is(":animated")) { } else {
-                    index = $(this).index();
-                    $("#ifocus_piclist").animate({
-                        top: -(320 * $(this).index()) + "px"
-                    }, 300);
-                    $(this).removeClass("normal").addClass("current").siblings().removeClass('current').addClass("normal");
-                    $("#ifocus_tx ul li").eq($(this).index()).removeClass("normal").addClass("current").siblings().removeClass('current').addClass("normal");
-                }
-            }
-        }, function () {
-            autoscroll(index);
+        $("#lang-rank>ul>li").click(function(){
+            window.location.href="/listLang?lang="+$(this).data("name");
         });
-
-        function autoscroll(index) {
-            intval = window.setInterval(function () {
-                $("#ifocus_piclist").animate({
-                    top: -(320 * index) + "px"
-                }, 300);
-                $("#ifocus_btn>ul>li").eq(index).removeClass("normal").addClass("current").siblings().removeClass('current').addClass("normal");
-                $("#ifocus_tx ul li").eq(index).removeClass("normal").addClass("current").siblings().removeClass('current').addClass("normal");
-                if (index == 7) index = 0;
-                else index = index + 1;
-            }, 2200);
-        }
-        autoscroll(index);
+        
+        
+        function codelistHandler(data,dom){
+            dom.html("");
+            var codelist = data.codelist;
+            for(var i in codelist) {
+                dom.append([
+                    '<li class="list-group-item" data-id="'+codelist[i]["_id"]+'">',
+                    '<span class="label_num label_num_'+((i=="0")?"1":(i=="1")?"2":(i=="2")?"3":"n")+'">'+(parseInt(i)+1)+'</span>',
+                    codelist[i].intro+'&nbsp;',
+                    '<span class="small">' + (new Date(codelist[i].timestamp).toISOString().replace(/(.*)T([\d:]+).*/, '$1 $2')).toString() + '</span>',
+                    '<span class="pull-right title_right">',
+                    '<span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看('+codelist[i]["lookover"]+')&nbsp;&nbsp;',
+                    '<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞('+codelist[i]["like"]+')',
+                    '</span></li>'
+                ].join(''));
+            }
+            $("#tPage").html(data.page);
+            totalpage = data.page;
+            $("#codelist>li").click(function(){
+                window.location.href = "/code/content?id=" + $(this).data("id");
+            });
+        };
+        $("#page-home").click(function(){
+            if(totalpage == 1)return;
+            if(currpage == 1)return;
+            currpage = 1;
+            paramsData.page=currpage;
+            $.get("/code/"+type,paramsData,function(data){
+                codelistHandler(data,$("#"+type));
+                $("#cPage").text(currpage);
+            });
+        });
+        $("#page-prev").click(function(){
+            if(totalpage == 1)return;
+            if(currpage == 1)return;
+            currpage = currpage - 1;
+            paramsData.page=currpage;
+            $.get("/code/"+type,paramsData,function(data){
+                codelistHandler(data,$("#"+type));
+                $("#cPage").text(currpage);
+            });
+        });
+        $("#page-next").click(function(){
+            if(currpage == totalpage)return;
+            currpage = currpage + 1;
+            paramsData.page=currpage;
+            $.get("/code/"+type,paramsData,function(data){
+                codelistHandler(data,$("#"+type));
+                $("#cPage").text(currpage)
+            });
+        });
+        $("#page-last").click(function(){
+            if(currpage == totalpage) return;
+            currpage = totalpage;
+            paramsData.page=currpage;
+            $.get("/code/"+type,paramsData,function(data){
+                codelistHandler(data);
+                $("#cPage").text(currpage)
+            });
+        });
     </script>
 </body>
 

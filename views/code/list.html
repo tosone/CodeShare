@@ -15,8 +15,8 @@
     <div class="row">
         <div class="col-md-3">
             <div class="user-profile">
-                <img src="/images/head/1.png" alt="">
-                <div class="nickname"><%=userinfo.name%></div>
+                <img src="http://7xotcu.com1.z0.glb.clouddn.com/<%=userinfo.headFace%>" alt="">
+                <div class="nickname"><a href="/code/list?id=<%=userinfo._id%>"><%=userinfo.name%></a></div>
                 <div class="score"><span class="intro">Score：</span><span class="num"><%=userinfo.score%></span></div>
             </div>
         </div>
@@ -87,6 +87,7 @@
         var paramsData={};
         var currpage = 1;
         var totalpage = <%=page%>;
+        var userid = "<%=userinfo._id%>";
         function codelistHandler(data){
             var $codelist = $("#codelist");
             $codelist.html("");
@@ -114,13 +115,13 @@
             currpage = 1;
             $("#cPage").text(currpage)
             type="newcode";
-            paramsData={};
+            paramsData={id:userid};
             if(!$(this).hasClass("active")){
                 $(this).addClass('active').siblings().removeClass('active');
                 $("#lang>span").removeClass('active');
                 $("#tags>span").removeClass('active');
             }
-            $.get("/code/newcode",function(data){
+            $.get("/code/newcode",paramsData,function(data){
                 codelistHandler(data);
             });
         });
@@ -128,21 +129,21 @@
             currpage = 1;
             $("#cPage").text(currpage)
             type="welcomecode";
-            paramsData={};
+            paramsData={id:userid};
             if(!$(this).hasClass("active")){
                 $(this).addClass('active').siblings().removeClass('active');
                 $("#lang>span").removeClass('active');
                 $("#tags>span").removeClass('active');
             }
-            $.get("/code/welcomecode",function(data) {
+            $.get("/code/welcomecode",paramsData, function(data) {
                 codelistHandler(data);
             });
         });
         $("#lang>ul>li").click(function(){
             currpage = 1;
-            $("#cPage").text(currpage)
+            $("#cPage").text(currpage);
             type="lang";
-            paramsData={lang:$(this).data("lang")};
+            paramsData={lang:$(this).data("lang"),id:userid};
             if(!$("#lang>span").hasClass("active")){
                 $("#lang>span").addClass('active');
                 $("#lang").siblings().removeClass('active');
@@ -158,7 +159,7 @@
             currpage = 1;
             $("#cPage").text(currpage);
             type="tags";
-            paramsData={tag:$(this).data("tag")};
+            paramsData={tag:$(this).data("tag"),id:userid};
             if(!$("#tags>span").hasClass("active")) {
                 $("#tags>span").addClass('active');
                 $("#tags").siblings().removeClass('active');

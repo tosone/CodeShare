@@ -1,8 +1,9 @@
 'use strict';
 const crypto = require('crypto');
-const config = require('webconfig');
+const _ = require('lodash');
 
-module.exports = function(req, response) {
+module.exports = function (req, response) {
+    const config = req.config;
     const User = req.model.user;
     const util = req.util;
     const sendEmail = req.sendEmail;
@@ -39,9 +40,10 @@ module.exports = function(req, response) {
                                 activeString: activeString
                             },
                             qq: qq,
-                            tel: tel
+                            tel: tel,
+                            headFace: _.random(1, 8).toString() + ".png"
                         });
-                        user.save(function() {
+                        user.save(function () {
                             req.session.userid = user._id;
                             req.session.email = email;
                             req.session.name = user.name;

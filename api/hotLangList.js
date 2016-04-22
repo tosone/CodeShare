@@ -6,7 +6,7 @@ module.exports = (context) => {
     const config = context.config;
     const valiableLang = context.valiableLang;
     let retLangs = [];
-    
+
     return () => {
         return new Promise(function (resolve, reject) {
             Code.aggregate()
@@ -17,7 +17,7 @@ module.exports = (context) => {
                 })
                 .exec(function (err, langs) {
                     langs.map((lang) => {
-                        retLangs.push(valiableLang[lang._id]);
+                        retLangs.push({ lang: valiableLang[lang._id], langname: lang._id });
                     });
                     resolve(retLangs);
                 });

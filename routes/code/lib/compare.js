@@ -11,7 +11,7 @@ module.exports = (req, res) => {
             console.log(codefrom);
             res.render('code/compare', {
                 title: 'Tosone',
-                user: req.session.name,
+                user: req.session,
                 codefrom: codefrom.content[0].content,
                 codeto: codeto.content[0].content,
                 lang: codeto.lang,

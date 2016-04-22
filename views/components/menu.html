@@ -11,10 +11,10 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/code/add"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></li>
                 <li>
-                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=user%></a>
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=user.name%></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/user/profile">Profile</a></li>
-                        <li><a href="/user/setting">Setting</a></li>
+                        <li><a href="/code/list?id=<%=user.userid%>">Snippets</a></li>
+                        <li><a href="/user/user">Setting</a></li>
                         <li><a href="/signin/logout">Logout</a></li>
                     </ul>
                 </li>
@@ -47,7 +47,7 @@
             obj.className = obj.className.replace(reg, ' ');
         }
     }
-    if(window.location.pathname.indexOf("code") == 1 || window.location.pathname.indexOf("list")) {
+    if(window.location.pathname.indexOf("code") == 1 || window.location.pathname.indexOf("list") == 1) {
         addClass(document.getElementById("snippetRepo"),"active");
         removeClass(document.getElementById("fontPage"),"active");
     }

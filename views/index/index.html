@@ -108,11 +108,11 @@
                                     for(var i in langs) {
                                         if(i == 0) {
                                 %>
-                                            <span class="active"><%=langs[i]%></span>
+                                            <span class="active"><%=langs[i].lang%></span>
                                 <%    
                                         } else {
                                 %>
-                                            <span><%=langs[i]%></span>
+                                            <span><%=langs[i].lang%></span>
                                 <%
                                         }
                                     }
@@ -138,7 +138,7 @@
                                 %>
                             </div>
                         </div>
-                    </div>
+                    </div>                    
                 </div>
             </div>
             <div class="col-md-3">
@@ -146,7 +146,7 @@
                     if(user) {
                 %>
                         <div class="user-profile">
-                            <img src="/images/head/1.png" alt="">
+                            <img src="http://7xotcu.com1.z0.glb.clouddn.com/<%=userinfo.headFace%>" alt="">
                             <div class="nickname"><a href="/code/list?id=<%=userinfo._id%>"><%=userinfo.name%></a></div>
                             <div class="score"><span class="intro">Score：</span><span class="num"><%=userinfo.score%></span></div>
                         </div>
@@ -163,7 +163,7 @@
                                 <%
                                     for(var i in langs) {
                                 %>
-                                        <li class="list-group-item"><span class="label_num label_num_<%=(i=='0')?'1':(i=='1')?'2':(i=='2')?'3':'n'%>"><%=(parseInt(i)+1)%></span><%=langs[i]%></li>
+                                        <li class="list-group-item" data-name="<%=langs[i].langname%>"><span class="label_num label_num_<%=(i=='0')?'1':(i=='1')?'2':(i=='2')?'3':'n'%>"><%=(parseInt(i)+1)%></span><%=langs[i].lang%></li>
                                 <%
                                     }
                                 %>
@@ -221,6 +221,9 @@
             }, 2200);
         }
         autoscroll(index);
+        $("#lang-rank>ul>li").click(function(){
+            window.location.href="/listLang?lang="+$(this).data("name");
+        });
     </script>
 </body>
 

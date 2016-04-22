@@ -4,6 +4,6 @@ module.exports = function (req, res, next) {
     res.render('artical/add', {
         title: 'Tosone',
         valiableType: valiableType,
-        user: req.session.name
+        user: req.session
     });
 }
