@@ -1,5 +1,5 @@
 {
-    "PORT": 8000,
+    "PORT": 80,
     "pwdHmacMethod": "sha256",
     "mongoURL": "mongodb://sone:8541539655@115.28.87.181:27017/CodeShare",
     "cookieSecret": "8541539655",
