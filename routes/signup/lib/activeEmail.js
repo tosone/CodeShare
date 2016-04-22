@@ -21,7 +21,6 @@ module.exports = function(req, res) {
                         code: 500
                     });
                 } else {
-                    console.log(user);
                     if (user.email.activeString && user.email.activeString === decode.activeString) {
                         user.email.active = true;
                         user.save((err) => {
@@ -33,11 +32,10 @@ module.exports = function(req, res) {
                                 req.session.userid = user._id;
                                 req.session.email = user.email.email;
                                 req.session.name = user.name;
-                                if (!user.email.active) req.session.activeString = user.email.activeString;
                                 if (user.headFace) req.session.headFace = user.headFace;
                                 res.render("signup/mailCheck", {
                                     title: "邮箱激活成功",
-                                    user: null,
+                                    user: user.name,
                                     msg: "邮箱激活成功",
                                     active: true
                                 });

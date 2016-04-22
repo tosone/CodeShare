@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title>
+        <%=title%>
+    </title>
+    <link rel="stylesheet" type="text/css" href="/src/style.css">
+    <script type="text/javascript" src="/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+</head>
+
+<body>
+    <% include ../components/menu.html %>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="panel">
+                    <div class="panel-heading" id="show-type"><span class="active">一周热门排行</span><span>最新代码</span><span>分类代码</span></div>
+                    <div class="panel-body" id="show-con">
+                        <div class="week-hot">
+                            <ul class="list-group">
+                            <%
+                                for(var i in likeCodes) {
+                            %>
+                                    <li class="list-group-item" data-id="<%=likeCodes[i]._id%>">
+                                        <span class="label_num label_num_<%=(i=='0')?'1':(i=='1')?'2':(i=='2')?'3':'n'%>"><%=(parseInt(i)+1)%></span><%=likeCodes[i].intro%><span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(<%=likeCodes[i].lookover%>)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(<%=likeCodes[i].like%>)</span>
+                                    </li>
+                            <%    
+                                }
+                            %>
+                            </ul>
+                        </div>
+                        <div class="new-code">
+                            <ul class="list-group">
+                            <%
+                                for(var i in newCodes) {
+                            %>
+                                    <li class="list-group-item" data-id="<%=newCodes[i]._id%>">
+                                        <span class="label_num label_num_<%=(i=='0')?'1':(i=='1')?'2':(i=='2')?'3':'n'%>"><%=(parseInt(i)+1)%></span><%=newCodes[i].intro%><span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(<%=newCodes[i].lookover%>)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(<%=newCodes[i].like%>)</span>
+                                    </li>
+                            <%    
+                                }
+                            %>
+                            </ul>
+                        </div>
+                        <div class="classify-code">
+                            <div class="code-type" id="code-type">
+                                <%
+                                    for(var i in langs) {
+                                        if(i == 0) {
+                                %>
+                                            <span class="active"><%=langs[i]%></span>
+                                <%    
+                                        } else {
+                                %>
+                                            <span><%=langs[i]%></span>
+                                <%
+                                        }
+                                    }
+                                %>
+                            </div>
+                            <div class="classify-code-list">
+                                <%
+                                    for(var i in codes) {
+                                %>
+                                       <ul class="list-group">
+                                <%
+                                            for(var j in codes[i]) {
+                                %>
+                                                <li class="list-group-item" data-id="<%=codes[i][j]._id%>">
+                                                    <span class="label_num label_num_<%=(j=='0')?'1':(j=='1')?'2':(j=='2')?'3':'n'%>"><%=(parseInt(j)+1)%></span><%=codes[i][j].intro%><span class="pull-right title_right"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;查看(<%=codes[i][j].lookover%>)&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;赞(<%=codes[i][j].like%>)</span>
+                                                </li>
+                                <%
+                                            }
+                                %>
+                                       </ul>
+                                <%
+                                    }
+                                %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="panel">
+                    <div class="panel-heading right-panel">
+                        <span class="active">语言排名</span>
+                    </div>
+                    <div class="panel-body">
+                        <div id="lang-rank">
+                            <ul class="list-group">
+                                <%
+                                    for(var i in langs) {
+                                %>
+                                        <li class="list-group-item"><span class="label_num label_num_<%=(i=='0')?'1':(i=='1')?'2':(i=='2')?'3':'n'%>"><%=(parseInt(i)+1)%></span><%=langs[i]%></li>
+                                <%    
+                                    }
+                                %>
+                            </ul>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% include ../components/footer.html %>
+    </div>
+    <script type="text/javascript">
+        $(".list-group > li").click(function(){
+            window.location.href="/code/content?id=" + $(this).data('id');
+        });
+        $("#code-type span").click(function () {
+            if ($(this).hasClass('active')) { } 
+            else {
+                $(this).addClass('active').siblings().removeClass('active');
+                $(".classify-code-list ul").eq($(this).index()).slideDown().siblings().slideUp();
+            }
+        });
+        $("#show-type span").click(function () {
+            if ($(this).hasClass('active')) { } else {
+                $("#show-con>div").eq($(this).index()).slideDown().siblings().slideUp();
+                $(this).addClass('active').siblings().removeClass('active');
+            }
+        });
+        var index = 0, intval;
+        $("#ifocus_btn>ul>li").hover(function () {
+            window.clearInterval(intval);
+            if ($(this).hasClass("current")) { } else {
+                if ($("#ifocus_piclist").is(":animated")) { } else {
+                    index = $(this).index();
+                    $("#ifocus_piclist").animate({
+                        top: -(320 * $(this).index()) + "px"
+                    }, 300);
+                    $(this).removeClass("normal").addClass("current").siblings().removeClass('current').addClass("normal");
+                    $("#ifocus_tx ul li").eq($(this).index()).removeClass("normal").addClass("current").siblings().removeClass('current').addClass("normal");
+                }
+            }
+        }, function () {
+            autoscroll(index);
+        });
+
+        function autoscroll(index) {
+            intval = window.setInterval(function () {
+                $("#ifocus_piclist").animate({
+                    top: -(320 * index) + "px"
+                }, 300);
+                $("#ifocus_btn>ul>li").eq(index).removeClass("normal").addClass("current").siblings().removeClass('current').addClass("normal");
+                $("#ifocus_tx ul li").eq(index).removeClass("normal").addClass("current").siblings().removeClass('current').addClass("normal");
+                if (index == 7) index = 0;
+                else index = index + 1;
+            }, 2200);
+        }
+        autoscroll(index);
+    </script>
+</body>
+
+</html>

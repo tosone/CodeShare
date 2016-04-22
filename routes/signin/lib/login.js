@@ -1,8 +1,8 @@
 "use strict";
-const config = require('webconfig');
 const crypto = require('crypto');
 
 module.exports = function(req, res) {
+    const config = req.config;
     const model = req.model;
     var name = req.query.name,
         pwd = req.query.pwd;
