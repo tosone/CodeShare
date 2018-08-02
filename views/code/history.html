@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8" />
+  <title>
+    <%=title%>
+  </title>
+  <link rel="stylesheet" type="text/css" href="/src/style.css">
+</head>
+
+<body>
+  <% include ../components/menu.html %>
+    <div class="container">
+      <div class="panel panel-default">
+        <div class="pull-right">
+          <button class="btn btn-theme" style="margin-top:5px;margin-right:8px;" id="codelike">赞：<%=like%></button>
+        </div>
+        <div class="panel-heading"><span id="codesnippet">Code Snippet</span><span class="active" id="history">History</span></div>
+        <div class="panel-body">
+          <div class="code-content">
+            <div class="code-content-text">
+              <pre style="height:500px" id="codeText"><%=content%></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% include ../components/footer.html %>
+    </div>
+    <% include ../components/modalDialog.html %>
+      <!-- build:js js/addcode.js -->
+      <script type="text/javascript" src="/jquery/jquery.js"></script>
+      <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+      <script type="text/javascript" src="/javascripts/jquery.tagsinput.js"></script>
+      <script type="text/javascript" src="/javascripts/ace/ace.js" charset="utf-8"></script>
+      <script type="text/javascript" src="/javascripts/clipboard.min.js" charset="utf-8"></script>
+      <!-- endbuild -->
+      <script>
+        var codeid = "<%=codeid%>";
+        var editor = ace.edit("codeText");
+        editor.session.setMode("ace/mode/<%=lang%>");
+        editor.setTheme("ace/theme/github");
+        editor.setOptions({
+          readOnly: true
+        });
+      </script>
+      <script type="text/javascript" src="/js/code.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+version: '3.2'
+services:
+  database:
+    image: mongo:latest
+    restart: always
+    command: mongod --auth --directoryperdb
+    hostname: mongodb
+    environment:
+      - MONGO_INITDB_DATABASE=CodeShare
+      - MONGO_INITDB_ROOT_USERNAME=tosone
+      - MONGO_INITDB_ROOT_PASSWORD=8541539655
+    volumes:
+      - /data/mongo:/data/db
+      - ./init:/docker-entrypoint-initdb.d/
+    ports:
+      - 27017:27017

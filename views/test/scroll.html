@@ -1,0 +1,116 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8" />
+  <title>test</title>
+  <!-- build:css css/index.css -->
+  <!--<link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css">-->
+  <!--<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">-->
+  <link rel="stylesheet" type="text/css" href="/src/style.css">
+  <!-- endbuild -->
+  <!-- build:js js/index.js -->
+  <script type="text/javascript" src="/jquery/jquery.js"></script>
+  <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+  <!--<script type="text/javascript" src="/javascripts/js.js"></script>-->
+  <!-- endbuild -->
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <div id="ifocus">
+          <div id="ifocus_pic">
+            <div id="ifocus_piclist">
+              <ul>
+                <li>
+                  <a href="###"><img src="/images/1.png" alt=""></a>
+                </li>
+                <li>
+                  <a href="###"><img src="/images/1.png" alt=""></a>
+                </li>
+                <li>
+                  <a href="###"><img src="/images/1.png" alt=""></a>
+                </li>
+                <li>
+                  <a href="###"><img src="/images/1.png" alt=""></a>
+                </li>
+                <li>
+                  <a href="###"><img src="/images/1.png" alt=""></a>
+                </li>
+                <li>
+                  <a href="###"><img src="/images/1.png" alt=""></a>
+                </li>
+                <li>
+                  <a href="###"><img src="/images/1.png" alt=""></a>
+                </li>
+                <li>
+                  <a href="###"><img src="/images/1.png" alt=""></a>
+                </li>
+              </ul>
+            </div>
+            <div id="ifocus_opdiv"></div>
+            <div id="ifocus_tx">
+              <ul>
+                <li class="current">忧伤在我心中沉静下来，宛如降临在寂静山林中的夜色</li>
+                <li class="normal">我就像一只停泊在海滩上的小船，聆听着晚潮奏</li>
+                <li class="normal">生命是上天赋予的，我们惟有献出生命，才能真正得到它</li>
+                <li class="normal">今天大地在阳光下向我细语，用一种已被遗忘的语言</li>
+                <li class="normal">生命是上天赋予的，我们惟有献出生命，才能真正得到它</li>
+                <li class="normal">今天大地在阳光下向我细语，用一种已被遗忘的语言</li>
+                <li class="normal">今天大地在阳光下向我细语，用一种已被遗忘的语言</li>
+                <li class="normal">今天大地在阳光下向我细语，用一种已被遗忘的语言</li>
+              </ul>
+            </div>
+          </div>
+          <div id="ifocus_btn">
+            <ul>
+              <li class="current"><img src="/images/1.png" alt=""></li>
+              <li class="normal"><img src="/images/1.png" alt=""></li>
+              <li class="normal"><img src="/images/1.png" alt=""></li>
+              <li class="normal"><img src="/images/1.png" alt=""></li>
+              <li class="normal"><img src="/images/1.png" alt=""></li>
+              <li class="normal"><img src="/images/1.png" alt=""></li>
+              <li class="normal"><img src="/images/1.png" alt=""></li>
+              <li class="normal"><img src="/images/1.png" alt=""></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    var index = 0,
+      intval;
+    $("#ifocus_btn>ul>li").hover(function() {
+      window.clearInterval(intval);
+      if ($(this).hasClass("current")) {} else {
+        if ($("#ifocus_piclist").is(":animated")) {} else {
+          index = $(this).index();
+          $("#ifocus_piclist").animate({
+            top: -(320 * $(this).index()) + "px"
+          }, 300);
+          $(this).removeClass("normal").addClass("current").siblings().removeClass('current').addClass("normal");
+          $("#ifocus_tx ul li").eq($(this).index()).removeClass("normal").addClass("current").siblings().removeClass('current').addClass("normal");
+        }
+      }
+    }, function() {
+      autoscroll(index);
+    });
+
+    function autoscroll(index) {
+      intval = window.setInterval(function() {
+        $("#ifocus_piclist").animate({
+          top: -(320 * index) + "px"
+        }, 300);
+        $("#ifocus_btn>ul>li").eq(index).removeClass("normal").addClass("current").siblings().removeClass('current').addClass("normal");
+        $("#ifocus_tx ul li").eq(index).removeClass("normal").addClass("current").siblings().removeClass('current').addClass("normal");
+        if (index == 7) index = 0;
+        else index = index + 1;
+      }, 2200);
+    }
+    autoscroll(index);
+  </script>
+</body>
+
+</html>

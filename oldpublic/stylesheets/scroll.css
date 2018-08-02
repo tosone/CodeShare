@@ -1,0 +1,79 @@
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#ifocus {
+  height: 342px;
+  border: 1px solid #DEDEDE;
+  background: #F8F8F8;
+  margin-bottom: 10px;
+  border: 1px #999999 solid;
+  box-sizing: border-box;
+}
+#ifocus_pic {
+  display: inline;
+  position: relative;
+  float: left;
+  width: 720px;
+  height: 320px;
+  overflow: hidden;
+  margin: 10px 0 0 10px;
+}
+#ifocus_piclist {
+  position: absolute;
+}
+#ifocus_piclist li {
+  width: 720px;
+  height: 320px;
+  overflow: hidden;
+}
+#ifocus_piclist img {
+  width: 720px;
+  height: 320px;
+}
+#ifocus_btn {
+  display: inline;
+  float: right;
+  margin: 10px 10px 0 0;
+}
+#ifocus_btn li {
+  cursor: pointer;
+  opacity: 0.5;
+  padding: 4.57142857px 10px;
+}
+#ifocus_btn li:hover {
+  opacity: 1;
+}
+#ifocus_btn li:first-child {
+  padding-top: 0;
+}
+#ifocus_btn li:last-child {
+  padding-bottom: 0;
+}
+#ifocus_btn img {
+  width: 72px;
+  height: 32px;
+}
+#ifocus_btn .current {
+  opacity: 1;
+}
+#ifocus_opdiv {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 720px;
+  height: 35px;
+  background: #000;
+  opacity: 0.5;
+}
+#ifocus_tx {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  color: #FFF;
+}
+#ifocus_tx .normal {
+  display: none;
+}

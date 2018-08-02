@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8" />
+  <title>
+    <%=title%>
+  </title>
+  <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/croppie.css">
+  <script type="text/javascript" src="/jquery/jquery.js"></script>
+  <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+  <script type="text/javascript" src="/javascripts/croppie.js"></script>
+</head>
+
+<body>
+  <% include ../components/menu.html %>
+    <div class="container">
+      <div class="row">
+        <% include ./components/list.html %>
+          <div class="col-md-10">
+            <div class="jumbotron">
+              <form class="form-horizontal userinfo">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">头像：</label>
+                  <div class="col-sm-10">
+                    <img src="/images/head/1.png" alt="用户头像" id="head_face">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">邮箱：</label>
+                  <div class="col-sm-10">
+                    <p>
+                      <span id="email">tosone@qq.com</span>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" id="change_email">修改</a>
+                    </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">个性签名：</label>
+                  <div class="col-sm-10">
+                    <p>
+                      <span id="personal_sig">永不放弃，坚持不懈。</span>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" id="change_personal_sig">修改</a>
+                    </p>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+      </div>
+      <% include ../components/footer.html %>
+    </div>
+    <script type="text/javascript">
+      $("#head_face").click(function() {
+        window.location.href = "userheadface";
+      });
+      var mc = $('#cropper-1');
+      var inmc = mc.croppie({
+        viewport: {
+          width: 250,
+          height: 250,
+          type: 'circle'
+        },
+        mouseWheelZoom: true,
+        boundary: {
+          width: 300,
+          height: 300
+        }
+      });
+      mc.croppie('bind', '/images/head/1.png');
+      $('#jscong').on('click', function(ev) {
+        mc.croppie('result', 'canvas').then(function(resp) {
+          console.log(resp);
+        });
+      });
+    </script>
+    <% include ./components/script.html %>
+</body>
+
+</html>

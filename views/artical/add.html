@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8" />
+  <title>
+    <%=title%>
+  </title>
+  <!-- build:css css/addcode.css -->
+  <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.tagsinput.min.css">
+  <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+  <!-- endbuild -->
+  <!-- build:js js/addcode.js -->
+  <script type="text/javascript" src="/jquery/jquery.js"></script>
+  <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+  <script type="text/javascript" src="/javascripts/jquery.tagsinput.js"></script>
+  <script type="text/javascript" src="/javascripts/ace/ace.js" charset="utf-8"></script>
+  <!-- endbuild -->
+</head>
+
+<body>
+  <% include ../conponents/menu.html %>
+    <div class="container">
+      <div class="jumbotron">
+        <form class="form-horizontal userinfo">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">简介：</label>
+            <div class="col-sm-10">
+              <textarea rows="3" class="form-control"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Tags：</label>
+            <div class="col-sm-10">
+              <input rows="3" type="text" class="form-control" id="tags" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Type：</label>
+            <div class="col-sm-10">
+              <select class="form-control" id="code_type">
+                            <option value="plain_text" selected>No syntax highlighting</option>
+                            <option value="actionscript">ActionScript3</option>
+                            <option value="sh">Bash/shell</option>
+                            <option value="csharp">C#</option>
+                            <option value="c_cpp">C/C++</option>
+                            <option value="css">CSS</option>
+                            <option value="coffee">Coffee</option>
+                            <option value="delphi">Delphi</option>
+                            <option value="erl">Erlang</option>
+                            <option value="golang">GO</option>
+                            <option value="html">HTML</option>
+                            <option value="javascript">JavaScript</option>
+                            <option value="json">Json</option>
+                            <option value="lua">Lua</option>
+                            <option value="less">Less</option>
+                            <option value="matlab">Matlab</option>
+                            <option value="markdown">Markdown</option>
+                            <option value="io">NodeJs</option>
+                            <option value="java">Java</option>
+                            <option value="perl">Perl</option>
+                            <option value="php">PHP</option>
+                            <option value="powershell">PowerShell</option>
+                            <option value="pytyhon">Python</option>
+                            <option value="ruby">Ruby</option>
+                            <option value="sass">Sass</option>
+                            <option value="sql">SQL</option>
+                            <option value="svg">SVG</option>
+                            <option value="objectivec">Object-C</option>
+                        </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Code：</label>
+            <div class="col-sm-10 code_area">
+              <pre id="code_area" style="height: 500px;"></pre>
+            </div>
+          </div>
+          <div class="form-group">
+            <a class="btn btn-lg btn-default pull-right" href="javascript:void(0);">提交</a>
+          </div>
+        </form>
+      </div>
+      <% include ../conponents/footer.html %>
+    </div>
+
+    <script>
+      var editor = ace.edit("code_area");
+      editor.setTheme("ace/theme/github");
+      editor.session.setMode("ace/mode/plain_text");
+      editor.$blockScrolling = Infinity;
+      $("#code_type").change(function() {
+        editor.session.setMode("ace/mode/" + $(this).val());
+      });
+      $('#tags').tagsInput({
+        width: 'auto',
+        height: '40px',
+        onChange: function(elem, elem_tags) {}
+      });
+    </script>
+</body>
+
+</html>

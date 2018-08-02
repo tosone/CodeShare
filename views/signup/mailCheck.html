@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8" />
+  <title>
+    <%=title%>
+  </title>
+  <link rel="stylesheet" type="text/css" href="/src/style.css">
+</head>
+
+<body>
+  <% include ../components/menu.html %>
+    <div class="container">
+      <div class="jumbotron clearfix">
+        <p>
+          <%=msg%>
+        </p>
+        <button class="btn btn-theme" id="<%=active?" succ ":"resend "%>"><%=active?"去首页":"重发邮件"%></button>
+      </div>
+      <% include ../components/footer.html %>
+    </div>
+    <% include ../components/modalDialog.html %>
+      <script type="text/javascript" src="/jquery/jquery.js"></script>
+      <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+      <script type="text/javascript" src="/javascripts/sign/mailCheck.js" charset="utf-8"></script>
+</body>
+
+</html>

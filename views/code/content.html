@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8" />
+  <title>
+    <%=title%>
+  </title>
+  <meta name="title" content="我正在看 <%=code.user.name%> 的代码：<%=code.intro.replace(/\n/g, '')%>" />
+  <link rel="stylesheet" type="text/css" href="/src/style.css">
+  <link rel="stylesheet" type="text/css" href="/base/share/css/share.min.css">
+</head>
+
+<body>
+  <% include ../components/menu.html %>
+    <div class="container">
+      <div class="panel panel-default">
+        <div class="pull-right">
+          <button class="btn btn-theme" style="margin-top:5px;margin-right:8px;" id="codelike">赞：<%=code.like%></button>
+        </div>
+        <div class="panel-heading"><span id="codesnippet" class="active">Code Snippet</span><span id="history">History</span></div>
+        <div class="panel-body">
+          <div class="code-content">
+            <div class="code-content-btn-group">
+              <input type="text" class="share-script-input" id="shareUrl" disabled>
+              <button class="btn copy" id="copy" data-clipboard-target="#shareUrl">Copy</button>
+              <button class="btn code-png">QR</button>
+              <%-isEdit?"<button class=\"btn edit\">编辑</button>":""%>
+                <%-isEdit?"<button class=\"btn deleteCode\">删除</button>":""%>
+                  <%-isEdit?"":"<button class=\"btn fork\">Fork</button>"%>
+            </div>
+            <div class="code-intro">
+              <%=code.intro%>
+            </div>
+            <div class="code-content-text">
+              <pre style="min-height:300px" id="codeText"><%=content%></pre>
+            </div>
+            <li class="share">
+              <div class="social-share" data-sites="weibo,qq,qzone,wechat" data-wechat-qrcode-title="请打开微信扫一扫"></div>
+            </li>
+            <div class="comment">
+              <a class="btn btn-theme" href="javascript:void(0);" id="addComment">添加新的评论</a>
+              <%
+                            comments.forEach(function(comment){
+                                if(comment.first) {
+                        %>
+                <div class="comment-div" data-commentwrapdiv="<%=comment._id%>">
+                  <div class="comment-wrap">
+                    <div>
+                      <a href="/code/list?id=<%=comment.user._id%>" class="comment-user">
+                        <%=comment.user.name%>
+                      </a><span class="comment-user-timestamp"> (<%=moment(comment.timestamp).format('YYYY/MM/DD HH:mm:ss')%>) </span>:</div>
+                    <div class="comment-content" id="<%=comment._id%>">
+                      <%=comment.content%>
+                    </div>
+                    <div class="comment-footer">
+                      <a href="javascript:void(0);" class="comment-footer-reply" data-commentid="<%=comment._id%>" data-uid="<%=comment.user._id%>" data-divid="<%=comment.div%>" data-name="<%=comment.user.name%>">回复</a>
+                      <%
+                                                    if(comment.user._id === userid) {
+                                                %>
+                        <a href="javascript:void(0);" class="comment-footer-edit" data-commentid="<%=comment._id%>" data-content="<%=comment.content%>">编辑</a>
+                        <a href="javascript:void(0);" class="comment-footer-delete" data-commentid="<%=comment._id%>" data-first="true" data-div="<%=comment.div%>">删除</a>
+                        <%
+                                                    }
+                                                %>
+                    </div>
+                  </div>
+                  <%
+                                    comments.forEach(function(cmt) {
+                                        if(!cmt.first && cmt.div == comment.div) {
+                        %>
+                    <div class="comment-wrap" data-commentdiv="<%=cmt._id%>">
+                      <div>
+                        <a href="/code/list?id=<%=cmt.user._id%>" class="comment-user">
+                          <%=cmt.user.name%>
+                        </a> 回复
+                        <a href="/code/list?id=<%=cmt.reply._id%>" class="comment-user">
+                          <%=cmt.reply.name%>
+                        </a><span class="comment-user-timestamp"> (<%=moment(cmt.timestamp).format('YYYY/MM/DD HH:mm:ss')%>) </span>:</div>
+                      <div class="comment-content" id="<%=cmt._id%>">
+                        <%=cmt.content%>
+                      </div>
+                      <div class="comment-footer">
+                        <a href="javascript:void(0);" class="comment-footer-reply" data-commentid="<%=cmt._id%>" data-uid="<%=cmt.user._id%>" data-divid="<%=comment.div%>" data-name="<%=cmt.user.name%>">回复</a>
+                        <%
+                                                        if(cmt.user._id === userid) {
+                                                    %>
+                          <a href="javascript:void(0);" class="comment-footer-edit" data-commentid="<%=cmt._id%>" data-content="<%=cmt.content%>">编辑</a>
+                          <a href="javascript:void(0);" class="comment-footer-delete" data-commentid="<%=cmt._id%>" data-first="false" data-div="<%=cmt.div%>">删除</a>
+                          <%
+                                                        }
+                                                    %>
+                      </div>
+                    </div>
+                    <%
+                                        }
+                                    });
+                        %>
+                </div>
+                <%
+                                }
+                        %>
+
+
+                  <%
+                            });
+                        %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% include ../components/footer.html %>
+    </div>
+    <% include ../components/modalDialog.html %>
+      <script type="text/javascript" src="/jquery/jquery.js" charset="utf-8"></script>
+      <script type="text/javascript" src="/bootstrap/js/bootstrap.js" charset="utf-8"></script>
+      <script type="text/javascript" src="/javascripts/jquery.tagsinput.js" charset="utf-8"></script>
+      <script type="text/javascript" src="/javascripts/ace/ace.js" charset="utf-8"></script>
+      <script type="text/javascript" src="/javascripts/clipboard.min.js" charset="utf-8"></script>
+      <script type="text/javascript" src="/base/share/js/jquery.share.min.js"></script>
+      <script>
+        var qr = "data:image/png;base64,<%=qr%>";
+        var codeid = "<%-codeid%>";
+        var editor = ace.edit("codeText");
+        var codeversion = "<%-codeversion%>";
+        editor.session.setMode("ace/mode/<%=code.lang%>");
+        editor.setTheme("ace/theme/github");
+        editor.setOptions({
+          readOnly: true
+        });
+      </script>
+      <script type="text/javascript" src="/js/content.js"></script>
+      <script type="text/javascript" src="/js/code.js"></script>
+</body>
+
+</html>

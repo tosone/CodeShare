@@ -1,0 +1,57 @@
+
+<div class="container">
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="collapse navbar-collapse" id="nav_bar">
+      <ul class="nav navbar-nav" id="nav">
+        <li class="active" id="fontPage"><a href="/">首页</a></li>
+        <li id="snippetRepo"><a href="/list">Snippets Repo</a></li>
+      </ul>
+      <%
+                if (user) {
+            %>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/code/add"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></li>
+          <li>
+            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <%=user%>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="/code/list?id=<%=user.userid%>">Snippets</a></li>
+              <li><a href="/user/user">Setting</a></li>
+              <li><a href="/signin/logout">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+        <%
+                } else {
+            %>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/signin">登陆</a></li>
+            <li><a href="/signup">注册</a></li>
+          </ul>
+          <%
+                }
+            %>
+    </div>
+  </nav>
+</div>
+<script>
+  function hasClass(obj, cls) {
+    return obj.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
+  }
+
+  function addClass(obj, cls) {
+    if (!this.hasClass(obj, cls)) obj.className += " " + cls;
+  }
+
+  function removeClass(obj, cls) {
+    if (hasClass(obj, cls)) {
+      var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
+      obj.className = obj.className.replace(reg, ' ');
+    }
+  }
+  if (window.location.pathname.indexOf("code") == 1 || window.location.pathname.indexOf("list") == 1) {
+    addClass(document.getElementById("snippetRepo"), "active");
+    removeClass(document.getElementById("fontPage"), "active");
+  }
+</script>

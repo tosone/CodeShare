@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8" />
+  <title>
+    <%=title%>
+  </title>
+  <link rel="stylesheet" type="text/css" href="/src/style.css">
+</head>
+
+<body>
+  <% include ../components/menu.html %>
+    <div class="container">
+      <div class="panel panel-default">
+        <div class="pull-right">
+          <button class="btn btn-theme" style="margin-top:5px;margin-right:8px;" id="codelike">赞：<%=like%></button>
+        </div>
+        <div class="panel-heading"><span id="codesnippet">Code Snippet</span><span class="active" id="history">History</span></div>
+        <div class="panel-body">
+          <div class="compare">
+            <span class="intro">比较两个版本：</span>
+            <select id="from" class="from">
+            		<%
+            			for(var i in historys) {
+            		%>
+            				<option value="<%=historys[i]._id%>"><%=moment(historys[i].timestamp).format('YYYY-MM-DD HH:mm:ss')%></option>
+            		<%
+            			}
+            		%>
+            		</select>
+            <select id="to" class="to">
+            		<%
+            			for(var i in historys) {
+            		%>
+            				<option value="<%=historys[i]._id%>"><%=moment(historys[i].timestamp).format('YYYY-MM-DD HH:mm:ss')%></option>
+            		<%
+            			}
+            		%>
+            		</select>
+            <button class="btn btn-theme" id="compare">比较</button>
+          </div>
+          <ul class="list-group" id="historyList">
+            <%
+                		for(var i in historys) {
+                			if(i == historys.length - 1) {
+        			%>
+              <li class="list-group-item" data-id="<%=historys[i]._id%>">
+                创建于
+                <%=moment(historys[i].timestamp).format('YYYY-MM-DD HH:mm:ss')%>
+              </li>
+              <%
+                			} else {
+        			%>
+                <li class="list-group-item" data-id="<%=historys[i]._id%>">
+                  修改于
+                  <%=moment(historys[i].timestamp).format('YYYY-MM-DD HH:mm:ss')%>
+                </li>
+                <%
+                			}
+                		}
+                	%>
+          </ul>
+        </div>
+      </div>
+      <% include ../components/footer.html %>
+    </div>
+    <% include ../components/modalDialog.html %>
+      <!-- build:js js/addcode.js -->
+      <script type="text/javascript" src="/jquery/jquery.js"></script>
+      <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+      <!-- endbuild -->
+      <script type="text/javascript">
+        var codeid = "<%=codeid%>";
+        $("#historyList > li").click(function() {
+          window.location.href = "/code/history?id=" + codeid + "&historyid=" + $(this).data("id");
+        });
+      </script>
+      <script type="text/javascript" src="/js/code.js"></script>
+</body>
+
+</html>

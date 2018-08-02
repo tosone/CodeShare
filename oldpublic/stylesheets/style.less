@@ -1,0 +1,93 @@
+@nav-background-color: #1D964F;
+@nav-hover-background-color: #18773F;
+@nav-color: #fff;
+@panel-backgound-color: #fff;
+@panel-color: #333;
+@panel-boder-color: #999999;
+::selection { background-color: @nav-background-color; color: #fff; }
+body { background-image: url(../images/bg.png); font-family: 'Microsoft YaHei'; }
+.modal-dialog { z-index: 9999; }
+.navbar-default { border-color: @nav-background-color; background-color: @nav-background-color; background-image: none; }
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .open > a { background-image: none; -webkit-box-shadow: none; box-shadow: none; background-color: @nav-hover-background-color; color: @nav-color; }
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover { color: @nav-color; background-color: @nav-hover-background-color; }
+.navbar-default .navbar-nav > li > a, .navbar-default .navbar-text { color: @nav-color; font-size: 16px; }
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus { color: @nav-color; background-color: @nav-hover-background-color; }
+.navbar-default .navbar-brand { color: @nav-color; }
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus { color: @nav-color; }
+.navbar-default .navbar-toggle { border-color: @nav-hover-background-color; }
+.navbar-toggle:hover { background-color: @nav-background-color; }
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover { background-color: @nav-background-color; }
+.navbar-default .navbar-collapse, .navbar-default .navbar-form { border-color: @nav-hover-background-color; }
+.navbar-default .navbar-toggle .icon-bar { background-color: @nav-hover-background-color; }
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover { color: #fff; background-color: #18773f; }
+.panel { border-radius: 0; }
+.panel-default { border-color: @panel-boder-color; }
+.panel-default > .panel-heading { color: @panel-color; border-color: @panel-boder-color; background-color: @panel-backgound-color; }
+.panel-default > .panel-heading { background-image: none; }
+.panel-heading { padding: 0; }
+#sign_form .form-group .alert { margin-bottom: 0; padding: 6px 15px; }
+.panel-heading { font-size: 18px; line-height: 2.3; padding-left: 10px; }
+.panel-heading .show-class { padding: 0 10px; display: inline-block; cursor: pointer;
+    &:hover { background-color: #DEDEDE; }
+}
+.panel-heading .active { background-color: #DEDEDE; }
+.panel-body { padding: 0; }
+.con_title_list { padding: 0px; }
+.con_title_list > div:not(:first-child), .classify-code #tab_con ul:not(:first-child) { display: none; }
+.con_title_list ul li { border-left: 0; border-right: 0; cursor: pointer; }
+.con_title_list ul li:first-child { border-radius: 0; border-top: 0; }
+.con_title_list ul li:last-child { border-radius: 0; border-bottom: 0; }
+.title_list { margin-bottom: 0px; }
+.label_num { padding: 0px 6px; color: #fff; margin-right: 5px; }
+.label_num_1 { background-color: #FD8C84; }
+.label_num_2 { background-color: #7FD75A; }
+.label_num_3 { background-color: #60C4FD; }
+.label_num_n { background-color: #999999; }
+.code-type { background-color: #DEDEDE; }
+.code-type span { padding: 0 10px; cursor: pointer; font-size: 16px; line-height: 2.0; display: inline-block;
+    &:hover { background-color: #A0A0A0; color: #fff; }
+}
+.code-type span.active { background-color: #A0A0A0; color: #fff; }
+.title_right { color: #888; font-size: 13px; }
+.row_la { padding: 0; }
+.row_label { margin: 0; padding: 0; width: 100%; }
+.row_label::after { clear: both; }
+.row_label_lr { background-color: #FAFAFA; overflow-x: hidden; float: left; width: 50%; line-height: 2.5; text-align: center; }
+.row_label_lr:hover { background-color: #60B7E1; color: #fff; cursor: pointer; }
+.n_con { border-bottom: 1px solid #aaa; }
+.n_con:last-child { border-bottom: 0; }
+.n_con_title { line-height: 2.5; }
+.n_con_title_type { background-color: #60B7E1; color: #fff; padding: 5px 10px; position: relative; top: -5px; }
+.n_con_title_title { font-size: 26px; }
+.n_con_title_title_a { color: #444; }
+.n_con_title_title_a:hover { color: #257BC5; }
+.n_con_info { color: #888; font-size: 13px; padding-left: 10px; }
+.n_con_intro { font-size: 15px; line-height: 1.8; padding: 10px; color: #555; }
+.n_con_binfo { padding-left: 10px; padding-bottom: 10px; color: #888; font-size: 13px; }
+.n_con_binfo_label { color: #888; }
+.n_con_binfo_label:hover { text-decoration: underline; color: #555; }
+.pl_div { padding: 10px; border-bottom: 1px solid #aaa; }
+.pl_div:last-child { border-bottom: 0; }
+.pl_div_a { color: #60B7E1; }
+.pl_div_a:hover { color: #60B7E1; text-decoration: none; }
+.pl_div_time { padding-left: 10px; color: #888; }
+hr { margin-top: 0px; margin-bottom: 10px; border: 0; border-top: 1px solid #eee; }
+.bottom_div { background-color: #fff; border-top-left-radius: 5px; border-top-right-radius: 5px; }
+.bottom_div p { text-align: center; padding: 10px; margin: 0; color: #666; }
+/*博客首页*/
+.admin_con_title_list { background-color: rgba(255, 255, 255, 0.9); border-radius: 4px; }
+.admin_con_title_list tr td { text-align: center; }
+.admin_con_title_list .admin_con_title_list_title { text-align: left; }
+.admin_con_title_list_title a { color: #666; }
+.admin_con_title_list_title a:hover { color: #660; text-decoration: underline; }
+.form_login { margin: 10px; }
+#code_area { font-size: 14px; font-family: Consolas,'Microsoft YaHei';  }
+.codelist-paging{padding-top:10px;padding-bottom:10px;text-align:center;
+	a{color:#0D7538;}
+}
+.like-btn{background-image: none;background-color: #fff;color: #1d964f;border: 1px solid #1d964f;top: 4px;right: 4px;position: relative;
+&:hover,&:active{background-image: none;background-color: #1d964f;color:#fff;}
+&:focus{outline: none;}
+}
+@import "scroll";
+@import "user";
