@@ -1,5 +1,5 @@
 {
-  "name": "CodeShare",
+  "name": "codeshare",
   "version": "1.0.0",
   "description": "CodeShare",
   "main": "index.js",
@@ -10,9 +10,11 @@
     "snyk-protect": "snyk protect",
     "prepublish": "npm run snyk-protect",
     "client-start": "react-scripts start",
-    "client-build": "react-scripts build",
+    "build": "react-scripts build",
     "client-test": "react-scripts test --env=jsdom",
-    "client-analyze": "source-map-explorer build/static/js/main.*"
+    "client-analyze": "source-map-explorer build/static/js/main.*",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "antd": "^3.7.3",
@@ -50,6 +52,7 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "^1.1.4",
     "serve-favicon": "^2.5.0",
+    "snyk": "^1.90.0",
     "source-map-explorer": "^1.5.0",
     "uuid": "^3.3.2"
   },
@@ -68,7 +71,7 @@
     "Code",
     "Share"
   ],
-  "homepage": "https://tosone.github.io/CodeShare",
+  "homepage": "https://tosiney.com/CodeShare/",
   "author": "tosone",
   "license": "MIT"
 }

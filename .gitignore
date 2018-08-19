@@ -4,3 +4,4 @@ build/
 
 *.log
 *.zip
+.DS_Store
