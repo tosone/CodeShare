@@ -1,7 +1,4 @@
-public/font/5.woff2 filter=lfs diff=lfs merge=lfs -text
-public/font/1.woff2 filter=lfs diff=lfs merge=lfs -text
-public/font/2.woff2 filter=lfs diff=lfs merge=lfs -text
-public/font/3.woff2 filter=lfs diff=lfs merge=lfs -text
-public/font/4.woff2 filter=lfs diff=lfs merge=lfs -text
 public/img/face.png filter=lfs diff=lfs merge=lfs -text
 public/favicon.ico filter=lfs diff=lfs merge=lfs -text
+public/font/dancing_script.woff2 filter=lfs diff=lfs merge=lfs -text
+public/font/news_cycle.woff2 filter=lfs diff=lfs merge=lfs -text
