@@ -1,7 +1,14 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom'
 import { Layout, Menu, Icon } from 'antd';
 
 class Navbar extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.handleClick = this.handleClick.bind(this)
+  }
+
   state = {
     current: 'mail',
   };
@@ -11,6 +18,7 @@ class Navbar extends React.Component {
     this.setState({
       current: e.key,
     });
+    this.props.history.push('/');
   };
 
   render() {
@@ -21,7 +29,7 @@ class Navbar extends React.Component {
           selectedKeys={[this.state.current]}
           mode="horizontal"
           theme="dark"
-          defaultSelectedKeys={['1']}
+          defaultSelectedKeys={['home']}
           style={{ lineHeight: '64px' }}>
           <Menu.Item key="home">
             <Icon type="home" />首页
@@ -32,10 +40,16 @@ class Navbar extends React.Component {
           <Menu.Item key="ranking">
             <Icon type="line-chart" />排行榜
           </Menu.Item>
+          <Menu.Item key="signin" style={{ float: 'right' }}>
+            登录
+          </Menu.Item>
+          <Menu.Item key="signup" style={{ float: 'right' }}>
+            注册
+          </Menu.Item>
         </Menu>
       </Layout.Header>
     );
   }
 }
 
-export default Navbar;
+export default withRouter(Navbar);
