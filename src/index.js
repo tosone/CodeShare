@@ -15,6 +15,7 @@ ReactDOM.render(
   <BrowserRouter basename="/CodeShare">
     <Switch>
       <Route path="/" exact component={Home} />
+      <Route path="/home" exact component={Home} />
       <Route path="/signin" component={Signin} />
       {/* <Redirect from="/old-match" to="/will-match" />
       <Route path="/will-match" component={WillMatch} />

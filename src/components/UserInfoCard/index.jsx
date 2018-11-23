@@ -9,7 +9,7 @@ class UserInfoCard extends React.Component {
         <div className="UserInfoCard-bg" />
         <img
           alt="face"
-          src="./img/face.png"
+          src="/img/face.png"
           className="UserInfoCard-face-img"
         />
         <div className="UserInfoCard-username">Tosone</div>
