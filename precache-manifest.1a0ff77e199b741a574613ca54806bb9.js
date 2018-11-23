@@ -8,15 +8,15 @@ self.__precacheManifest = [
     "url": "/CodeShare/static/js/runtime~main.7061d26b.js"
   },
   {
-    "revision": "8207e3cb42e7618169c5",
-    "url": "/CodeShare/static/js/main.8207e3cb.chunk.js"
+    "revision": "e8531e0b5d6d187e0406",
+    "url": "/CodeShare/static/js/main.e8531e0b.chunk.js"
   },
   {
     "revision": "9a188fa8d37357afd1fb",
     "url": "/CodeShare/static/js/1.9a188fa8.chunk.js"
   },
   {
-    "revision": "8207e3cb42e7618169c5",
+    "revision": "e8531e0b5d6d187e0406",
     "url": "/CodeShare/static/css/main.8fbf5b13.chunk.css"
   },
   {
@@ -24,7 +24,7 @@ self.__precacheManifest = [
     "url": "/CodeShare/static/css/1.7c9f795c.chunk.css"
   },
   {
-    "revision": "66bdf1d740f81dd16df7ae05dbc46141",
+    "revision": "552654345cd0b0d5e585300184f37c05",
     "url": "/CodeShare/index.html"
   }
 ];

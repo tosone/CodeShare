@@ -1,7 +1,7 @@
 {
   "main.css": "/CodeShare/static/css/main.8fbf5b13.chunk.css",
-  "main.js": "/CodeShare/static/js/main.8207e3cb.chunk.js",
-  "main.js.map": "/CodeShare/static/js/main.8207e3cb.chunk.js.map",
+  "main.js": "/CodeShare/static/js/main.e8531e0b.chunk.js",
+  "main.js.map": "/CodeShare/static/js/main.e8531e0b.chunk.js.map",
   "static/css/1.7c9f795c.chunk.css": "/CodeShare/static/css/1.7c9f795c.chunk.css",
   "static/js/1.9a188fa8.chunk.js": "/CodeShare/static/js/1.9a188fa8.chunk.js",
   "static/js/1.9a188fa8.chunk.js.map": "/CodeShare/static/js/1.9a188fa8.chunk.js.map",
@@ -11,6 +11,6 @@
   "static/media/index.css": "/CodeShare/static/media/card-bg.49adb432.png",
   "static/css/1.7c9f795c.chunk.css.map": "/CodeShare/static/css/1.7c9f795c.chunk.css.map",
   "index.html": "/CodeShare/index.html",
-  "precache-manifest.67260cc2d1fd3cb815491e2dd3993495.js": "/CodeShare/precache-manifest.67260cc2d1fd3cb815491e2dd3993495.js",
+  "precache-manifest.1a0ff77e199b741a574613ca54806bb9.js": "/CodeShare/precache-manifest.1a0ff77e199b741a574613ca54806bb9.js",
   "service-worker.js": "/CodeShare/service-worker.js"
 }
